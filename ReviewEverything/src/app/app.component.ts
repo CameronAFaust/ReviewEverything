@@ -18,3 +18,6 @@ export class AppComponent {
   // trendingMovies = getTrendingMovies();
   // takeSearch = getSearchInput;
 }
+
+
+// 
