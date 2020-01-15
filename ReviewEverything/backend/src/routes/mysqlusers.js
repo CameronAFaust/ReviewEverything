@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
   if (err) throw err;
 
-  connection.query("INSERT INTO users(fname,lname,street,city,state,zip_code,email,password,phone) VALUES('Chew','Bacca','9 Space St.','Matmata','CA',90052,'chewie@starwars.com','$2b$10$UCWt20G.HaOH4sbvPG5gGeStj9boyonl22pvsu/1YmVi/Tw3Jipr6','(111)222-3333')", function (err, result, fields) {
+  connection.query("INSERT INTO users(fname,lname,street,city,state,zip_code,email,password,phone) VALUES()", function (err, result, fields) {
     // if any error while executing above query, throw error
     if (err) throw err;
     // if there is no error, you have the result
