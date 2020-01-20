@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+
 // declare function init(): any;
 // declare function getTrendingMovies(): any;
 // declare function getSearchInput(): any;
@@ -9,15 +10,10 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+  constructor() { }
   title = "ReviewEverything";
-  // init = init();
-  // getSearchInput(input);
   getSearchInput(formData) {
     alert(formData);
+    
   }
-  // trendingMovies = getTrendingMovies();
-  // takeSearch = getSearchInput;
 }
-
-
-// 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-page',
@@ -11,7 +13,7 @@ export class MoviePageComponent implements OnInit {
   movies;
   isLoaded = false;
   movieId;
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -27,7 +29,10 @@ export class MoviePageComponent implements OnInit {
   }
 
   onReviewSubmit(formData) {
-    console.log(formData);
+    let data = formData;
+    this.http.post('http://localhost:3000/review', data).subscribe((res) => {
+      console.log("done")
+    })
   }
 
 }
