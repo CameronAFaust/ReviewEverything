@@ -18,9 +18,9 @@ export class MoviePageComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.apiService.getMovieIdByName(params.get('id')).subscribe((data)=>{
-        // console.log(data.results[0].id)
+        this.movieId = data;
         this.apiService.getMovieDetailsById(data).subscribe((movie)=>{
-          // console.log(movie);
+          console.log(movie);
           this.movies = movie;
           this.isLoaded = true
         });
@@ -30,6 +30,7 @@ export class MoviePageComponent implements OnInit {
 
   onReviewSubmit(formData) {
     let data = formData;
+    data['movieId'] = this.movies.id;
     this.http.post('http://localhost:3000/review', data).subscribe((res) => {
       console.log("done")
     })
