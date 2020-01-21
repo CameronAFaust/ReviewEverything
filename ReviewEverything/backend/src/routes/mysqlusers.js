@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
     connection.connect(function (err) {
        if (err) throw err;
       
-         connection.query("SELECT * FROM users WHERE(username = '" + req.body.username + "' AND password = '" + req.body.password + "')", function (err, result, fields) {
+         connection.query("SELECT * FROM users WHERE(email = '" + req.body.email + "' AND password = '" + req.body.password + "')", function (err, result, fields) {
   
            if (err) throw err;
   
