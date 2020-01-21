@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
   connection.connect(function (err) {
      if (err) throw err;
     
-       connection.query("INSERT INTO reviews_and_ratings(review_title,review_text,movie_id) VALUES('" + req.body.review_title + "','" + req.body.review_text + "','" + req.body.movieID + "')", function (err, result, fields) {
+       connection.query("INSERT INTO reviews_and_ratings(review_title,review_text,rating,movie_id) VALUES('" + req.body.review_title + "','" + req.body.review_text + "','" + req.body.rating + "','" + req.body.movieID + "')", function (err, result, fields) {
 
          if (err) throw err;
 
