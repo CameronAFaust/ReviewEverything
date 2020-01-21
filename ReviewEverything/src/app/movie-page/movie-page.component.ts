@@ -30,8 +30,13 @@ export class MoviePageComponent implements OnInit {
 
   onReviewSubmit(formData) {
     let data = formData;
+<<<<<<< Updated upstream
     data['movieId'] = this.movies.id;
     this.http.post('http://localhost:3000/review', data).subscribe((res) => {
+=======
+    console.log(data);
+    this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText  }).subscribe((res) => {
+>>>>>>> Stashed changes
       console.log("done")
     })
   }
