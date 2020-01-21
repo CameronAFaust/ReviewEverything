@@ -23,7 +23,7 @@
         <h1>Loading</h1>
     </ng-template>
 
-    <div id="">
+    <div id="reviewForm">
         <form #review = "ngForm" (ngSubmit) = "onReviewSubmit(review.value)" >
             <label for="reviewTitle">Title: </label>
             <input type="text" name="reviewTitle" maxlength="100" ngModel>
@@ -43,5 +43,15 @@
             <br/>
             <input type = "submit" value = "submit">
         </form>
+    </div>
+    <hr>
+    <div id="allReviews">
+        <h3>User Reviews</h3>
+        <hr>
+        <div id="reviewCard" *ngFor="let review of reviews">
+            <p>{{review.reviewTitle}} - {{review.reviewRating}} / 5</p>
+            <p>by {{review.userName}}</p>
+            <p>{{review.reviewText}}</p>
+        </div>
     </div>
 </div>

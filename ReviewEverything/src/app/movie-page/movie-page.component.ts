@@ -13,6 +13,7 @@ export class MoviePageComponent implements OnInit {
   movies;
   isLoaded = false;
   movieId;
+  reviews;
   constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
@@ -20,20 +21,25 @@ export class MoviePageComponent implements OnInit {
       this.apiService.getMovieIdByName(params.get('id')).subscribe((data)=>{
         this.movieId = data;
         this.apiService.getMovieDetailsById(data).subscribe((movie)=>{
-          console.log(movie);
           this.movies = movie;
           this.isLoaded = true
         });
       });
     });
+    // Get user review data from the database
+    // this.http.get('http://localhost:3000/reviews').subscribe((res) => {
+    //   reviews = res
+    // })
+    this.reviews = [{reviewTitle: "This sucks", reviewText: "i hate this movie so much", reviewRating: "5", movieId: 9836, userName: "Cameron_Faust"}]
   }
 
   onReviewSubmit(formData) {
     let data = formData;
     data['movieId'] = this.movies.id;
-    this.http.post('http://localhost:3000/review', data).subscribe((res) => {
-      console.log("done")
-    })
+    console.log(data)
+    // this.http.post('http://localhost:3000/review', data).subscribe((res) => {
+    //   console.log("done")
+    // })
   }
 
 }
