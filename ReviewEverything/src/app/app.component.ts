@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-
+import {Router} from "@angular/router"
+import { HttpClient } from '@angular/common/http';
 // declare function init(): any;
 // declare function getTrendingMovies(): any;
 // declare function getSearchInput(): any;
@@ -10,10 +11,14 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  constructor() { }
+  constructor(private router: Router, private http: HttpClient) { }
   title = "ReviewEverything";
   getSearchInput(formData) {
     alert(formData);
     
+  }
+  onSearchSubmit(formData) {
+    console.log(formData.movieSearch);
+    this.router.navigate(['/movie', formData.movieSearch])
   }
 }

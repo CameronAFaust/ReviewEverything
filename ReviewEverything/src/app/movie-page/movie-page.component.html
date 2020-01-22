@@ -1,19 +1,28 @@
 <div id="holder">
-    <div *ngIf="isLoaded">
-        <h1 id="movie_title">{{movies.original_title}}</h1>
-        <p id="movie_description">{{movies.overview}}</p>
-        <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="Movie Poster">
-        
+    <div id="movieHolder" *ngIf="isLoaded">
+        <img id="movie_backImg" src="https://image.tmdb.org/t/p/original/{{movies.backdrop_path}}" alt="">
+        <div id="movie_details">
+            <div id="details_holder">
+                <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="Movie Poster">
+                <div id="text_holder">
+                    <div id="title_holder">
+                        <h1 id="title">{{movies.original_title}}</h1>
+                        <p id="release_date">({{movies.release_date}})</p>
+                    </div>
+                    <p id="tagline">{{movies.tagline}}</p>
+                    <p id="description">{{movies.overview}}</p>
+
+                    <div id="more_details">
+                        <h2>More details</h2>
+                        <p id="runtime"><b>Runtime: </b>{{movies.runtime}} minutes</p>
+                        <p id="budget"><b>Budget: </b>${{movies.budget}}</p>
+                        <p id="revenue"><b>Revenue: </b>${{movies.revenue}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- 
-        title
-        backdrop_path
-        tagline
         genres
-        overview
-        poster_path
-        runtime
-        Budget
-        revenue
         vote_average/ vote_count
         homepage?
         production_companies? 
@@ -23,35 +32,37 @@
         <h1>Loading</h1>
     </ng-template>
 
-    <div id="reviewForm">
-        <form #review = "ngForm" (ngSubmit) = "onReviewSubmit(review.value)" >
-            <label for="reviewTitle">Title: </label>
-            <input type="text" name="reviewTitle" maxlength="100" ngModel>
-            <br/>
-            <label for="reviewText">Description: </label>
-            <input type="text" name="reviewText" maxlength="500" ngModel>
-            <br/>
-            <label for="reviewRating">Rating: </label>
-            <select name="reviewRating" ngModel>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select> / 5
-            <br/>
-            <input type = "submit" value = "submit">
-        </form>
-    </div>
-    <hr>
-    <div id="allReviews">
-        <h3>User Reviews</h3>
+    <div id="review_section">
+        <div id="reviewForm">
+            <form #review = "ngForm" (ngSubmit) = "onReviewSubmit(review.value)" >
+                <label for="reviewTitle">Title: </label>
+                <input type="text" name="reviewTitle" maxlength="100" ngModel>
+                <br/>
+                <label for="reviewText">Description: </label>
+                <input type="text" name="reviewText" maxlength="500" ngModel>
+                <br/>
+                <label for="reviewRating">Rating: </label>
+                <select name="reviewRating" ngModel>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select> / 5
+                <br/>
+                <input type = "submit" value = "submit">
+            </form>
+        </div>
         <hr>
-        <div id="reviewCard" *ngFor="let review of reviews">
-            <p>{{review.reviewTitle}} - {{review.reviewRating}} / 5</p>
-            <p>by {{review.userName}}</p>
-            <p>{{review.reviewText}}</p>
+        <div id="allReviews">
+            <h3>User Reviews</h3>
+            <hr>
+            <div id="reviewCard" *ngFor="let review of reviews">
+                <p>{{review.reviewTitle}} - {{review.reviewRating}} / 5</p>
+                <p>by {{review.userName}}</p>
+                <p>{{review.reviewText}}</p>
+            </div>
         </div>
     </div>
 </div>

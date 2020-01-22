@@ -21,6 +21,9 @@ export class MoviePageComponent implements OnInit {
       this.apiService.getMovieIdByName(params.get('id')).subscribe((data)=>{
         this.movieId = data;
         this.apiService.getMovieDetailsById(data).subscribe((movie)=>{
+          console.log(movie)
+          movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           this.movies = movie;
           this.isLoaded = true
         });
@@ -36,7 +39,6 @@ export class MoviePageComponent implements OnInit {
   onReviewSubmit(formData) {
     let data = formData;
     data['movieId'] = this.movies.id;
-    console.log(data);
     this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating  }).subscribe((res) => {
       console.log("done")
     })
