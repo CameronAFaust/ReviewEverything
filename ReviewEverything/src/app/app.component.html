@@ -1,8 +1,12 @@
 
 <div id="nav">
-    <!-- <div id="navHome"> -->
         <p id="navHome"><a [routerLink]="['/home']">Review Everything!</a></p>
-    <!-- </div> -->
+        <form id="search" #search = "ngForm" (ngSubmit) = "onSearchSubmit(search.value)" >
+            <input id="searchInput" type="text" name="movieSearch" placeholder="Search for movie" ngModel>
+            <br/>
+            <input id="searchButton" type="image" src="../assets/search.png" alt="Submit">
+        </form>
+        <div id="spacer"></div>
 </div>
 
 <router-outlet></router-outlet>

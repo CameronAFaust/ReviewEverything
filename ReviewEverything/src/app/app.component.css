@@ -1,15 +1,46 @@
 #nav {
+    display: flex;
+    justify-content: center;
     padding: 5px 1; 
     width: 100%;
-    background-color: darkorange;
+    background-color: #08496d;
+    height: 50px;
+}
+
+#spacer {
+    flex: 2;
 }
 
 #navHome {
+    flex: 2;
     font-size: 20px;
     margin: 0;
     padding: 10px;
+    color: #ee9129;
+    margin: auto;
 }
 
-a:link, a:visited {
-    text-decoration: none;
+#search {
+    display: flex;
+    height: 35px;
+    margin: auto;
 }
+
+#searchInput {
+    width: 300px;
+    padding-left: 10px;
+    border-radius: 25px;
+}
+
+#searchButton {
+    width: 15px;
+    height: 15px;
+    margin: auto;
+    margin-left: -30px;
+}
+
+a {
+    text-decoration: none;
+    color: #ee9129;
+}
+
