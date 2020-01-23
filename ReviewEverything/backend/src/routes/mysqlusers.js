@@ -36,12 +36,6 @@ router.get('/', (req, res) => {
 
           if (err) throw err;
 
-          console.log(result);
-          console.log("Number of rows affected : " + result.affectedRows);
-          console.log("Number of records affected with warning : " + result.warningCount);
-          console.log("Message from MySQL Server : " + result.message);
-
-
           return result;
         });
 
