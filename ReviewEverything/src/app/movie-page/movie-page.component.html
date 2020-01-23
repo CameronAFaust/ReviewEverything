@@ -1,7 +1,6 @@
 <div id="holder">
     <div id="movieHolder" *ngIf="isLoaded">
-        <img id="movie_backImg" src="https://image.tmdb.org/t/p/original/{{movies.backdrop_path}}" alt="">
-        <div id="movie_details">
+        <div id="movie_details" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/original/' + movies.backdrop_path + ')'}">
             <div id="details_holder">
                 <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="Movie Poster">
                 <div id="text_holder">
@@ -66,3 +65,5 @@
         </div>
     </div>
 </div>
+
+<!-- text readability -->
