@@ -1,0 +1,30 @@
+<div *ngIf="searchType == 'title' || searchType == 'actors_movies' || searchType == 'actors_movies' || searchType == 'genre'">
+    <div *ngFor="let result of searchList">
+        <a [routerLink]="['/movie', result.id]">
+            <div id="movie_card">
+                <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" alt="Movie Poster">
+                <div id="movie_text">
+                    <p id="movie_title">{{ result.title }}</p>
+                    <p id="release_date">({{ result.release_date }})</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div *ngIf="searchType == 'actor'">
+    <div *ngFor="let result of searchList">
+        <a [routerLink]="['/search/actors_movies', result.id]">
+            <div id="movie_card">
+                <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.profile_path}}" alt="Actor image">
+                <div id="movie_text">
+                    <p id="movie_title">{{ result.name }}</p>
+                    <p *ngIf="result.gender == 1" id="release_date">Female</p>
+                    <p *ngIf="result.gender == 2" id="release_date">Male</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- if -->

@@ -1,9 +1,6 @@
 import { Component } from "@angular/core";
 import {Router} from "@angular/router"
 import { HttpClient } from '@angular/common/http';
-// declare function init(): any;
-// declare function getTrendingMovies(): any;
-// declare function getSearchInput(): any;
 
 @Component({
   selector: "app-root",
@@ -15,10 +12,8 @@ export class AppComponent {
   title = "ReviewEverything";
   getSearchInput(formData) {
     alert(formData);
-    
   }
   onSearchSubmit(formData) {
-    console.log(formData.movieSearch);
-    this.router.navigate(['/movie', formData.movieSearch])
+    this.router.navigate(['/search', formData.typeOfSearch, formData.movieSearch])
   }
 }

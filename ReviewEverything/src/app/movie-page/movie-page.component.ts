@@ -18,29 +18,25 @@ export class MoviePageComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.apiService.getMovieIdByName(params.get('id')).subscribe((data)=>{
-        this.movieId = data;
-        this.apiService.getMovieDetailsById(data).subscribe((movie)=>{
-          console.log(movie)
+      this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie)=>{
           movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           this.movies = movie;
           this.isLoaded = true
-        });
       });
     });
+
     // Get user review data from the database
-    // this.http.get('http://localhost:3000/reviews').subscribe((res) => {
-    //   reviews = res
-    // })
-    this.reviews = [{reviewTitle: "This sucks", reviewText: "i hate this movie so much", reviewRating: "5", movieId: 9836, userName: "Cameron_Faust"}]
+    this.http.get('http://localhost:3000/reviews').subscribe((res) => {
+      this.reviews = res
+    })
   }
 
   onReviewSubmit(formData) {
     let data = formData;
     data['movieId'] = this.movies.id;
     this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating  }).subscribe((res) => {
-      console.log("done")
+      // Do something here?
     })
   }
 

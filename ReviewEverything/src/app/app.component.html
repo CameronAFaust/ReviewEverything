@@ -1,12 +1,17 @@
 
 <div id="nav">
-        <p id="navHome"><a [routerLink]="['/home']">Review Everything!</a></p>
-        <form id="search" #search = "ngForm" (ngSubmit) = "onSearchSubmit(search.value)" >
-            <input id="searchInput" type="text" name="movieSearch" placeholder="Search for movie" ngModel>
-            <br/>
-            <input id="searchButton" type="image" src="../assets/search.png" alt="Submit">
-        </form>
-        <div id="spacer"></div>
+    <p id="navHome"><a [routerLink]="['/home']">Review Everything!</a></p>
+    <form id="search" #search = "ngForm" (ngSubmit) = "onSearchSubmit(search.value, search.typeOfSearch)" >
+        <select name="typeOfSearch" ngModel>
+            <option value="title">Movie Name</option>
+            <option value="actor">Actor</option>
+            <option value="genre">Genre</option>
+        </select>
+        <input id="searchInput" type="text" name="movieSearch" placeholder="Search for movie" ngModel>
+        <br/>
+        <input id="searchButton" type="image" src="../assets/search.png" alt="Submit">
+    </form>
+    <div id="spacer"></div>
 </div>
 
 <router-outlet></router-outlet>

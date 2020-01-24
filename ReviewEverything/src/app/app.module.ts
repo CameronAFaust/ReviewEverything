@@ -9,13 +9,15 @@ import { HomeComponent } from './home/home.component';
 import { MoviePageComponent } from './movie-page/movie-page.component';
 import { AboutComponent } from './about/about.component';
 import { FormsModule } from '@angular/forms';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MoviePageComponent,
-    AboutComponent
+    AboutComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
