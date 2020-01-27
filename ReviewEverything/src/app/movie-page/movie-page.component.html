@@ -1,5 +1,5 @@
-<div id="holder">
-    <div id="movieHolder" *ngIf="isLoaded">
+<div id="holder" *ngIf="isLoaded">
+    <div id="movieHolder">
         <div id="movie_details" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/original/' + movies.backdrop_path + ')'}">
             <div id="details_holder">
                 <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="Movie Poster">
@@ -27,18 +27,16 @@
         production_companies? 
         -->
     </div>
-    <ng-template #elseBlock>
-        <h1>Loading</h1>
-    </ng-template>
 
-    <div id="review_section">
-        <div id="reviewForm">
-            <form #review = "ngForm" (ngSubmit) = "onReviewSubmit(review.value)" >
+    <div id="reviewSection">
+        <div>
+            <h1>{{movies.original_title}}'s Reviews</h1>
+            <form id="reviewForm" #review = "ngForm" (ngSubmit) = "onReviewSubmit(review.value)" >
                 <label for="reviewTitle">Title: </label>
                 <input type="text" name="reviewTitle" maxlength="100" ngModel>
                 <br/>
                 <label for="reviewText">Description: </label>
-                <input type="text" name="reviewText" maxlength="500" ngModel>
+                <input type="text" id="reviewText" name="reviewText" maxlength="500" ngModel>
                 <br/>
                 <label for="reviewRating">Rating: </label>
                 <select name="reviewRating" ngModel>
@@ -58,10 +56,17 @@
             <h3>User Reviews</h3>
             <hr>
             <div id="reviewCard" *ngFor="let review of reviews">
+                <button  *ngIf="currentUserId == review.userId" (click) = "populateEditForm({reviewTitle: review.reviewTitle, reviewText: review.reviewText, reviewRating: review.reviewRating, userName: review.userName, userId: review.userId})">edit</button>
                 <p>{{review.reviewTitle}} - {{review.reviewRating}} / 5</p>
                 <p>by {{review.userName}}</p>
                 <p>{{review.reviewText}}</p>
+                <hr>
             </div>
         </div>
     </div>
+
 </div>
+
+<ng-template #elseBlock>
+    <h1>Loading</h1>
+</ng-template>

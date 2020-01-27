@@ -25,6 +25,7 @@ var connection = mysql.createConnection({
 
 // });
 
+// get all reviews for a single movie
 router.get('/', (req, res) => {
   connection.connect(function (err) {
      if (err) throw err;
@@ -43,7 +44,13 @@ router.get('/', (req, res) => {
     //  connection.end();
 });
 
+// create review
 router.post('/', (req, res) => {
+  // if(req.isAuthenticated()) {
+  //   res.send('you hit the authentication endpoint\n')
+  // } else {
+  //   res.redirect('/')
+  // }
   connection.connect(function (err) {
      if (err) throw err;
     

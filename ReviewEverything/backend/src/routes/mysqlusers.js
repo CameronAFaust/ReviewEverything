@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
   user: 'root',
   password: '',
   database: 'review_everything'
-})
+});
 
 // connection.connect(function (err) {
 //   if (err) throw err;
@@ -25,6 +25,7 @@ var connection = mysql.createConnection({
 
 // });
 
+// login
 router.get('/', (req, res) => {
   connection.connect(function (err) {
     if (err) throw err;
@@ -36,6 +37,9 @@ router.get('/', (req, res) => {
 
           if (err) throw err;
 
+          req.session.user = result;
+          console.log(result);
+
           return result;
         });
 
@@ -45,6 +49,7 @@ router.get('/', (req, res) => {
   });
 });
 
+// signup
 router.post('/', (req, res) => {
   connection.connect(function (err) {
     if (err) throw err;
@@ -55,6 +60,8 @@ router.post('/', (req, res) => {
         connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + " " + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
 
           if (err) throw err;
+
+          req.session.user = result;
 
           console.log(result);
           console.log("Number of rows affected : " + result.affectedRows);

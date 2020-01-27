@@ -14,9 +14,10 @@ export class MoviePageComponent implements OnInit {
   isLoaded = false;
   movieId;
   reviews;
+  editTitle = "test"
   constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.route.paramMap.subscribe(params => {
       this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie)=>{
           movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -27,9 +28,19 @@ export class MoviePageComponent implements OnInit {
     });
 
     // Get user review data from the database
-    this.http.get('http://localhost:3000/reviews').subscribe((res) => {
-      this.reviews = res
-    })
+    // this.http.get('http://localhost:3000/reviews').subscribe((res) => {
+    //   this.reviews = res
+    // })
+    this.reviews = [
+      {reviewTitle: "This sucks", reviewText: "test text", reviewRating: "5", userName: "Cameron Faust", userId:"1"},
+      {reviewTitle: "This sucks", reviewText: "test text", reviewRating: "5", userName: "Cameron Faust", userId:"2"},
+      {reviewTitle: "This sucks", reviewText: "test text", reviewRating: "5", userName: "Cameron Faust", userId:"3"}
+    ];
+  }
+
+  populateEditForm(data) {
+    console.log(data);
+    
   }
 
   onReviewSubmit(formData) {

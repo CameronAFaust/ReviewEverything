@@ -53,6 +53,20 @@
     font-style: italic;
 }
 
+#reviewSection {
+    padding: 30px;
+}
+
+#reviewForm {
+    display: grid;
+    margin: auto;
+    width: 300px;
+}
+
+#reviewText {
+    height: 100px;
+}
+
 p {
     font-size: 17px;
     margin: 5px;

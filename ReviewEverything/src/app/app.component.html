@@ -2,7 +2,10 @@
 <div id="nav">
     <p id="navHome"><a [routerLink]="['/home']">Review Everything!</a></p>
     <form id="search" #search = "ngForm" (ngSubmit) = "onSearchSubmit(search.value, search.typeOfSearch)" >
-        <select name="typeOfSearch" ngModel>
+        <select name="typeOfSearch" value="title" ngModel>
+            <option value="" selected disabled hidden> 
+                Select an Option 
+            </option>
             <option value="title">Movie Name</option>
             <option value="actor">Actor</option>
             <option value="genre">Genre</option>

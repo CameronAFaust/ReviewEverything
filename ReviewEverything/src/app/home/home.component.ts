@@ -15,21 +15,18 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
   onLogin(formData) {
-    console.log(formData);
-    // this.http.post('http://localhost:3000/login', { 'username': data.username, 'password': data.password }).subscribe((res) => {
-    //   console.log("done")
-    // })
+    // console.log(formData);
+    this.http.post('http://localhost:3000/login', { 'username': data.username, 'password': data.password }).subscribe((res) => {
+      console.log("done")
+    })
   }
   onSignup(formData){
     console.log(formData);
-    // this.http.post('http://localhost:3000/signup', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating  }).subscribe((res) => {
-    //   console.log("done")
-    //   // if (res ! error) {
-    //   //   this.http.post('http://localhost:3000/login', { 'username': data.username, 'password': data.password }).subscribe((res) => {
-    //   //     console.log("done")
-    //   //   })    
-    //   // }
-    // })
+    this.http.post('http://localhost:3000/signup', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating  }).subscribe((res) => {
+    })
+  }
+  onLogout(){
+    // req.logout();
   }
   onSearchSubmit(formData) {
     console.log(formData.movieSearch);
