@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -57,7 +58,7 @@ router.post('/', (req, res) => {
     bcrypt.genSalt(10, function (err, salt) {
       bcrypt.hash(req.body.password, salt, function (err, hash) {
 
-        connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + " " + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
+        connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + "_" + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
 
           if (err) throw err;
 

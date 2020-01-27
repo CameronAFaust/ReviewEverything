@@ -16,13 +16,13 @@ export class HomeComponent implements OnInit {
   }
   onLogin(formData) {
     // console.log(formData);
-    this.http.post('http://localhost:3000/login', { 'username': data.username, 'password': data.password }).subscribe((res) => {
+    this.http.post('http://localhost:3000/user', { 'email': formData.email, 'password': formData.password }).subscribe((res) => {
       console.log("done")
     })
   }
   onSignup(formData){
     console.log(formData);
-    this.http.post('http://localhost:3000/signup', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating  }).subscribe((res) => {
+    this.http.post('http://localhost:3000/user', { 'fname': formData.fname, 'lname': formData.lname, 'email': formData.email, 'password': formData.password }).subscribe((res) => {
     })
   }
   onLogout(){
