@@ -54,7 +54,25 @@ router.post('/', (req, res) => {
   connection.connect(function (err) {
      if (err) throw err;
     
-        connection.query("INSERT INTO reviews_and_ratings(review_title,review_text,rating,movie_id) VALUES('" + req.body.review_title + "','" + req.body.review_text + "','" + req.body.rating + "','" + req.body.movieID + "')", function (err, result, fields) {
+        connection.query("INSERT INTO reviews_and_ratings(review_title,review_text,rating,movie_id,username, user_id) VALUES('" + req.body.review_title + "','" + req.body.review_text + "','" + req.body.rating + "','" + req.body.movieID + "','" + req.body.username + "','" + req.body.userID + "')", function (err, result, fields) {
+
+          if (err) throw err;
+
+          console.log(result);
+          console.log("Number of rows affected : " + result.affectedRows);
+          console.log("Number of records affected with warning : " + result.warningCount);
+          console.log("Message from MySQL Server : " + result.message);
+        });
+
+      });
+     
+});
+
+router.put('/', (req, res) => {
+  connection.connect(function (err) {
+     if (err) throw err;
+    
+        connection.query("UPDATE reviews_and_ratings SET review_title = '" + req.body.review_title + "', review_text = '" + req.body.review_text + "', rating = '" + req.body.movieID + "', username = '" + req.body.username + "', user_id = '" + req.body.userID + "' WHERE reviews_ratings.id = '" + req.body.revID + "'", function (err, result, fields) {
 
           if (err) throw err;
 
