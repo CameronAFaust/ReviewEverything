@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     })
   }
   onLogout(){
-    // req.logout();
+    localStorage.clear();
   }
   onSearchSubmit(formData) {
     console.log(formData.movieSearch);
