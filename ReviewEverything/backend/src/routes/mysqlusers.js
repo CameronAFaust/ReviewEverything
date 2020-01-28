@@ -38,7 +38,9 @@ router.get('/', (req, res) => {
 
           if (err) throw err;
 
-          req.session.user = result;
+          localStorage.setItem('username', res.username);
+          localStorage.setItem('userId', res.userId);
+          // req.session.user = result;
           console.log(result);
 
           return result;
@@ -62,7 +64,7 @@ router.post('/', (req, res) => {
 
           if (err) throw err;
 
-          req.session.user = result;
+          // req.session.user = result;
 
           console.log(result);
           console.log("Number of rows affected : " + result.affectedRows);

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Inject }  from '@angular/core';
+import { DOCUMENT } from '@angular/common'; 
 // import { Router } from '@angular/router';
 
 @Component({
@@ -14,10 +16,11 @@ export class MoviePageComponent implements OnInit {
   isLoaded = false;
   movieId;
   reviews;
-  editTitle = "test"
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient) { }
+  currentUserId;
+  isEditing = false;
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient, @Inject(DOCUMENT) document) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie)=>{
           movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -25,30 +28,38 @@ export class MoviePageComponent implements OnInit {
           this.movies = movie;
           this.isLoaded = true
       });
+      // Get user review data from the database
+      // this.http.get('http://localhost:3000/reviews', {'movieID': params.get('id')}).subscribe((res) => {
+      //   this.reviews = res
+      // })
     });
-
-    // Get user review data from the database
-    // this.http.get('http://localhost:3000/reviews').subscribe((res) => {
-    //   this.reviews = res
-    // })
+    this.currentUserId = "1";
     this.reviews = [
-      {reviewTitle: "This sucks", reviewText: "test text", reviewRating: "5", userName: "Cameron Faust", userId:"1"},
-      {reviewTitle: "This sucks", reviewText: "test text", reviewRating: "5", userName: "Cameron Faust", userId:"2"},
-      {reviewTitle: "This sucks", reviewText: "test text", reviewRating: "5", userName: "Cameron Faust", userId:"3"}
+      {review_title: "This sucks", review_text: "test text", rating: "5", movie_id: "499701", userName: "Cameron Faust", userId:"1", id: "4"},
+      // {review_title: "This really sucks", review_text: "tes", rating: "3", movie_id: "48311", userName: "Cameron Faust", userId:"1", id: "5"}
     ];
   }
 
   populateEditForm(data) {
-    console.log(data);
-    
+    console.log(document);
+    document.getElementById("reviewTitle").value = data.reviewTitle;
+    document.getElementById("reviewText").value = data.reviewText;
+    this.isEditing = true;
   }
 
   onReviewSubmit(formData) {
     let data = formData;
     data['movieId'] = this.movies.id;
-    this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating  }).subscribe((res) => {
-      // Do something here?
-    })
+    if (this.isEditing) {
+      this.http.post('http://localhost:3000/editReview', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating }).subscribe((res) => {
+        // Do something here?
+      })
+    } else {
+      this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating  }).subscribe((res) => {
+        // Do something here?
+      })
+    }
+    this.isEditing = false;
   }
 
 }
