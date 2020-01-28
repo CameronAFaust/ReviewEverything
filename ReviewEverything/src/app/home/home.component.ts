@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   onLogin(formData) {
     // console.log(formData);
     this.http.post('http://localhost:3000/user', { 'email': formData.email, 'password': formData.password }).subscribe((res) => {
+      localStorage.setItem('username', res.username);
+      localStorage.setItem('userId', res.userId);
       console.log("done")
     })
   }
