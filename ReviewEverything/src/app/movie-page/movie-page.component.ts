@@ -51,11 +51,11 @@ export class MoviePageComponent implements OnInit {
     let data = formData;
     data['movieId'] = this.movies.id;
     if (this.isEditing) {
-      this.http.post('http://localhost:3000/editReview', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating }).subscribe((res) => {
+      this.http.post('http://localhost:3000/editReview', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'user_id': localStorage.getItem('userId')}).subscribe((res) => {
         // Do something here?
       })
     } else {
-      this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating  }).subscribe((res) => {
+      this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'user_id': localStorage.getItem('userId')}).subscribe((res) => {
         // Do something here?
       })
     }
