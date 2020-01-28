@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router"
 import { HttpClient } from '@angular/common/http';
+import { from } from 'rxjs';
 
 
 @Component({
@@ -16,9 +17,9 @@ export class HomeComponent implements OnInit {
   }
   onLogin(formData) {
     // console.log(formData);
-    this.http.post('http://localhost:3000/user', { 'email': formData.email, 'password': formData.password }).subscribe((res) => {
+    this.http.get('http://localhost:3000/user/' + formData.email + '/' + formData.password + '').subscribe((res) => {
+      localStorage.setItem('userId', res.id);
       localStorage.setItem('username', res.username);
-      localStorage.setItem('userId', res.userId);
       console.log("done")
     })
   }

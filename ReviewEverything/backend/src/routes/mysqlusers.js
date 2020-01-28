@@ -27,24 +27,34 @@ var connection = mysql.createConnection({
 // });
 
 // login
-router.get('/', (req, res) => {
+router.get('/:email/:password', (req, res) => {
   connection.connect(function (err) {
     if (err) throw err;
 
-    bcrypt.genSalt(10, function (err, salt) {
-      bcrypt.hash(req.body.password, salt, function (err, hash) {
+        console.log(req)
 
-        connection.query("SELECT * FROM users WHERE(email = '" + req.body.email + "' AND password = '" + hash + "')", function (err, result, fields) {
+        connection.query("SELECT * FROM users WHERE email = '" + req.params.email + "'", function (err, results, fields) {
+
+          results.forEach((result) => {
+
+            console.log(result);
+
+            bcrypt.compare(req.params.password, result.password, function (err, corr) {
+
+              if(corr == true) {
+                console.log(result);
+
+              res.send(result);
+              }
+
+            });
+
+          });
 
           if (err) throw err;
 
           // req.session.user = result;
-          console.log(result);
 
-          return result;
-        });
-
-      });
     });
 
   });

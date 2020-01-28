@@ -29,7 +29,7 @@ export class MoviePageComponent implements OnInit {
           this.isLoaded = true
       });
       // Get user review data from the database
-      this.http.get('http://localhost:3000/reviews', {'movieID': params.get('id')}).subscribe((res) => {
+      this.http.get('http://localhost:3000/review/' + params.get('id') + '').subscribe((res) => {
         this.reviews = res
       })
     });
@@ -51,11 +51,11 @@ export class MoviePageComponent implements OnInit {
     let data = formData;
     data['movieId'] = this.movies.id;
     if (this.isEditing) {
-      this.http.post('http://localhost:3000/editReview', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'user_id': localStorage.getItem('userId')}).subscribe((res) => {
+      this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'user_id': localStorage.getItem('userId')}).subscribe((res) => {
         // Do something here?
       })
     } else {
-      this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'user_id': localStorage.getItem('userId')}).subscribe((res) => {
+      this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
         // Do something here?
       })
     }

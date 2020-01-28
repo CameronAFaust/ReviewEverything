@@ -26,17 +26,17 @@ var connection = mysql.createConnection({
 // });
 
 // get all reviews for a single movie
-router.get('/', (req, res) => {
+router.get('/:movieID', (req, res) => {
   connection.connect(function (err) {
      if (err) throw err;
     
-      connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = '"+ req.body.movieID +"'", function (err, result, fields) {
+      connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = '"+ req.params.movieID +"'", function (err, result, fields) {
 
       if (err) throw err;
 
       console.log(result);
 
-      return result;
+      res.send(result);
        });
     
      });
@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
   connection.connect(function (err) {
      if (err) throw err;
     
-        connection.query("INSERT INTO reviews_and_ratings(review_title,review_text,rating,movie_id,username, user_id) VALUES('" + req.body.review_title + "','" + req.body.review_text + "','" + req.body.rating + "','" + req.body.movieID + "','" + req.body.username + "','" + req.body.userID + "')", function (err, result, fields) {
+        connection.query("INSERT INTO reviews_and_ratings(review_title,review_text,rating,movie_id,username,user_id) VALUES('" + req.body.review_title + "','" + req.body.review_text + "','" + req.body.rating + "','" + req.body.movieID + "','" + req.body.username + "','" + req.body.userID + "')", function (err, result, fields) {
 
           if (err) throw err;
 
@@ -72,7 +72,7 @@ router.put('/', (req, res) => {
   connection.connect(function (err) {
      if (err) throw err;
     
-        connection.query("UPDATE reviews_and_ratings SET review_title = '" + req.body.review_title + "', review_text = '" + req.body.review_text + "', rating = '" + req.body.movieID + "', username = '" + req.body.username + "', user_id = '" + req.body.userID + "' WHERE reviews_ratings.id = '" + req.body.revID + "'", function (err, result, fields) {
+        connection.query("UPDATE reviews_and_ratings SET review_title = '" + req.body.review_title + "', review_text = '" + req.body.review_text + "'", function (err, result, fields) {
 
           if (err) throw err;
 
