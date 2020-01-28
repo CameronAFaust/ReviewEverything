@@ -28,14 +28,14 @@ export class MoviePageComponent implements OnInit {
           this.movies = movie;
           this.isLoaded = true
       });
-      // Get user review data from the database
-      // this.http.get('http://localhost:3000/reviews', {'movieID': params.get('id')}).subscribe((res) => {
-      //   this.reviews = res
-      // })
+      Get user review data from the database
+      this.http.get('http://localhost:3000/reviews', {'movieID': params.get('id')}).subscribe((res) => {
+        this.reviews = res
+      })
     });
     this.currentUserId = "1";
     this.reviews = [
-      {review_title: "This sucks", review_text: "test text", rating: "5", movie_id: "499701", userName: "Cameron Faust", userId:"1", id: "4"},
+      // {review_title: "This sucks", review_text: "test text", rating: "5", movie_id: "499701", userName: "Cameron Faust", userId:"1", id: "4"},
       // {review_title: "This really sucks", review_text: "tes", rating: "3", movie_id: "48311", userName: "Cameron Faust", userId:"1", id: "5"}
     ];
   }
