@@ -38,8 +38,6 @@ router.get('/', (req, res) => {
 
           if (err) throw err;
 
-          localStorage.setItem('username', res.username);
-          localStorage.setItem('userId', res.userId);
           // req.session.user = result;
           console.log(result);
 
