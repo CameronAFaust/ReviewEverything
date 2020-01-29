@@ -28,7 +28,6 @@ var connection = mysql.createConnection({
 
 // login
 router.get('/:email/:password', (req, res) => {
-  connection.connect(function (err) {
     if (err) throw err;
 
         console.log(req)
@@ -57,12 +56,10 @@ router.get('/:email/:password', (req, res) => {
 
     });
 
-  });
 });
 
 // signup
 router.post('/', (req, res) => {
-  connection.connect(function (err) {
     if (err) throw err;
 
     bcrypt.genSalt(10, function (err, salt) {
@@ -83,7 +80,7 @@ router.post('/', (req, res) => {
       });
     });
 
-  });
 });
+
 
 module.exports = router;

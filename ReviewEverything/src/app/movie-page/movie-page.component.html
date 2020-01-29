@@ -39,7 +39,7 @@
                 <textarea id="reviewText" name="reviewText" maxlength="500" ngModel></textarea>
                 <br/>
                 <label for="reviewRating">Rating: </label>
-                <select name="reviewRating" ngModel>
+                <select id="rating" name="reviewRating" ngModel>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -56,9 +56,9 @@
             <h3>User Reviews</h3>
             <hr>
             <div id="reviewCard" *ngFor="let review of reviews">
-                <button  *ngIf="currentUserId == review.userId" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, userName: review.userName, userId: review.userId, id: id})">edit</button>
+                <button  *ngIf="currentUserId == review.userId" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, userName: review.userName, userId: review.userId, id: review.id})">edit</button>
                 <p>{{review.review_title}} - {{review.rating}} / 5</p>
-                <p>by {{review.userName}}</p>
+                <p>by {{review.username}}</p>
                 <p>{{review.review_text}}</p>
                 <hr>
             </div>

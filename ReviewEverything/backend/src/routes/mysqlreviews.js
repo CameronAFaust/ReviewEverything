@@ -27,8 +27,6 @@ var connection = mysql.createConnection({
 
 // get all reviews for a single movie
 router.get('/:movieID', (req, res) => {
-  connection.connect(function (err) {
-     if (err) throw err;
     
       connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = '"+ req.params.movieID +"'", function (err, result, fields) {
 
@@ -38,8 +36,6 @@ router.get('/:movieID', (req, res) => {
 
       res.send(result);
        });
-    
-     });
 
     //  connection.end();
 });
@@ -51,8 +47,6 @@ router.post('/', (req, res) => {
   // } else {
   //   res.redirect('/')
   // }
-  connection.connect(function (err) {
-     if (err) throw err;
     
         connection.query("INSERT INTO reviews_and_ratings(review_title,review_text,rating,movie_id,username,user_id) VALUES('" + req.body.review_title + "','" + req.body.review_text + "','" + req.body.rating + "','" + req.body.movieID + "','" + req.body.username + "','" + req.body.userID + "')", function (err, result, fields) {
 
@@ -63,16 +57,14 @@ router.post('/', (req, res) => {
           console.log("Number of records affected with warning : " + result.warningCount);
           console.log("Message from MySQL Server : " + result.message);
         });
-
-      });
      
 });
 
 router.put('/', (req, res) => {
-  connection.connect(function (err) {
-     if (err) throw err;
-    
-        connection.query("UPDATE reviews_and_ratings SET review_title = '" + req.body.review_title + "', review_text = '" + req.body.review_text + "'", function (err, result, fields) {
+  
+      console.log(req.reviewID);
+
+        connection.query("UPDATE reviews_and_ratings SET review_title = '" + req.body.review_title + "', review_text = '" + req.body.review_text + "', rating = '" + req.body.rating + "' WHERE id = '" + req.body.reviewID + "'", function (err, result, fields) {
 
           if (err) throw err;
 
@@ -82,8 +74,6 @@ router.put('/', (req, res) => {
           console.log("Message from MySQL Server : " + result.message);
         });
 
-      });
-     
 });
 
 module.exports = router;
