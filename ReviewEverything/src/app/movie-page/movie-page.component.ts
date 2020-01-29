@@ -17,7 +17,7 @@ export class MoviePageComponent implements OnInit {
   movieId;
   reviews;
   reviewId;
-  currentUserId;
+  currentUserId = localStorage.getItem('userId');
   isEditing = false;
   constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient, @Inject(DOCUMENT) document) { }
 
@@ -34,11 +34,6 @@ export class MoviePageComponent implements OnInit {
         this.reviews = res;
       })
     });
-    // this.currentUserId = "1";
-    // this.reviews = [
-    //   // {review_title: "This sucks", review_text: "test text", rating: "5", movie_id: "499701", userName: "Cameron Faust", userId:"1", id: "4"},
-    //   // {review_title: "This really sucks", review_text: "tes", rating: "3", movie_id: "48311", userName: "Cameron Faust", userId:"1", id: "5"}
-    // ];
   }
 
   populateEditForm(data) {
