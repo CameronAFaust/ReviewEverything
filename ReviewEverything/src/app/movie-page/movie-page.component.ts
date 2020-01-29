@@ -17,6 +17,8 @@ export class MoviePageComponent implements OnInit {
   movieId;
   reviews;
   reviewId;
+  reviewTitle;
+  reviewText;
   currentUserId = localStorage.getItem('userId');
   isEditing = false;
   constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient, @Inject(DOCUMENT) document) { }
@@ -24,8 +26,8 @@ export class MoviePageComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie)=>{
-          //  movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          //  movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           this.movies = movie;
           this.isLoaded = true
       });
@@ -38,19 +40,23 @@ export class MoviePageComponent implements OnInit {
 
   populateEditForm(data) {
     console.log(document);
-    document.getElementById("reviewTitle").value = data.reviewTitle;
-    document.getElementById("reviewText").value = data.reviewText;
+    // document.getElementById("reviewTitle").value = data.reviewTitle;
+    // document.getElementById("reviewText").value = data.reviewText;
+    this.reviewTitle = data.reviewTitle;
+    this.reviewText = data.reviewText;
     this.reviewId = data.id;
     this.isEditing = true;
   }
 
   onReviewSubmit(formData) {
     let data = formData;
-    data[reviewTitle] = document.getElementById("reviewTitle").value
-    data[reviewText] = document.getElementById("reviewText").value
-    // console.log(data)
-    data['movieId'] = this.movies.id;
     if (this.isEditing) {
+      if(data.reviewTitle == "") {
+        data.reviewTitle = this.reviewTitle;
+      }
+      if(data.reviewText == ""){
+        data.reviewText = this.reviewText;
+      }
       this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
         // Do something here?
       })
