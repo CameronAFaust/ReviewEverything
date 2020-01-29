@@ -51,6 +51,9 @@ export class MoviePageComponent implements OnInit {
 
   onReviewSubmit(formData) {
     let data = formData;
+    data[reviewTitle] = document.getElementById("reviewTitle").value
+    data[reviewText] = document.getElementById("reviewText").value
+    // console.log(data)
     data['movieId'] = this.movies.id;
     if (this.isEditing) {
       this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
