@@ -42,8 +42,9 @@ export class HomeComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
-    this.http.get('http://localhost:3000/user/' + this.loginForm.value.email + '/' + this.loginForm.value.password + '').subscribe((res :any) => {
+    // console.log(this.loginForm);
+    
+    this.http.get('http://localhost:3000/user/' + this.loginForm.value.loginEmail + '/' + this.loginForm.value.loginPassword + '').subscribe((res :any) => {
       localStorage.setItem('userId', res.id);
       localStorage.setItem('username', res.username);
       console.log("done")
@@ -55,7 +56,7 @@ export class HomeComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
     }
-
+    
     this.http.post('http://localhost:3000/user', { 'fname': this.signupForm.value.fname, 'lname': this.signupForm.value.lname, 'email': this.signupForm.value.email, 'password': this.signupForm.value.password }).subscribe((res) => {
     })
   }
