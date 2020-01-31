@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
-var mysql = require('mysql')
+var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -30,10 +30,13 @@ var connection = mysql.createConnection({
 router.get('/:email/:password', (req, res) => {
     if (err) throw err;
 
-        console.log(req)
+        console.log(req);
 
-        connection.query("SELECT * FROM users WHERE email = '" + req.params.email + "'", function (err, results, fields) {
-
+        // This is a way to prevent SQL injection
+        // "SELECT * FROM users WHERE email = '" + req.params.email + "'",
+        connection.query("SELECT * FROM users WHERE email = ?",
+        [ req.params.email ],
+        function (err, results, fields) {
           results.forEach((result) => {
 
             console.log(result);
@@ -64,8 +67,10 @@ router.post('/', (req, res) => {
 
     bcrypt.genSalt(10, function (err, salt) {
       bcrypt.hash(req.body.password, salt, function (err, hash) {
+        let newUser = {username: req.body.fname + "_" + req.body.lname, fname: req.body.fname, lname: req.body.lname, email: req.body.email, password: hash};
 
-        connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + "_" + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
+        // connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + "_" + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
+        connection.query("INSERT INTO users SET ?", newUser, function (err, result, fields) {
 
           if (err) throw err;
 

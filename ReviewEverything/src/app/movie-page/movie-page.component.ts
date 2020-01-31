@@ -61,21 +61,21 @@ export class MoviePageComponent implements OnInit {
       return;
     }
 
-    // let data = formData;
-    // data[reviewTitle] = document.getElementById("reviewTitle").value
-    // data[reviewText] = document.getElementById("reviewText").value
-    // // console.log(data)
-    // data['movieId'] = this.movies.id;
-    // if (this.isEditing) {
-    //   this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
-    //     // Do something here?
-    //   })
-    // } else {
-    //   this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
-    //     // Do something here?
-    //   })
-    // }
-    // this.isEditing = false;
+    let data = formData;
+    data[reviewTitle] = document.getElementById("reviewTitle").value
+    data[reviewText] = document.getElementById("reviewText").value
+    // console.log(data)
+    data['movieId'] = this.movies.id;
+    if (this.isEditing) {
+      this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
+        // Do something here?
+      })
+    } else {
+      this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
+        // Do something here?
+      })
+    }
+    this.isEditing = false;
   }
 
 }
