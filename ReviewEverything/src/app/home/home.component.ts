@@ -56,11 +56,6 @@ export class HomeComponent implements OnInit {
     // console.log(formData);
     // this.http.post('http://localhost:3000/user', { 'fname': formData.fname, 'lname': formData.lname, 'email': formData.email, 'password': formData.password }).subscribe((res) => {
     // })
-    this.http.get('http://localhost:3000/user/get/' + formData.email + '/' + formData.password + '').subscribe((res) => {
-      localStorage.setItem('userId', res.id);
-      localStorage.setItem('username', res.username);
-      console.log("done")
-    })
   }
 
   onLogout(){

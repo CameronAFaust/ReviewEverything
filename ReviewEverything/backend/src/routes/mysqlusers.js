@@ -80,16 +80,15 @@ router.post('/', (req, res) => {
 
     bcrypt.genSalt(10, function (err, salt) {
       bcrypt.hash(req.body.password, salt, function (err, hash) {
-        let newUser = {username: req.body.fname + "_" + req.body.lname, fname: req.body.fname, lname: req.body.lname, email: req.body.email, password: hash};
+        
+        const subfname = req.body.fname.substring(0, 3).toLowerCase();
+        const sublname = req.body.lname.substring(0, 1).toLowerCase();
+        const username = subfname + sublname;
+        console.log(username);
 
-      const subfname = req.body.fname.substring(0, 3).toLowerCase();
-      const sublname = req.body.lname.substring(0, 1).toLowerCase();
-      const username = subfname + sublname;
-      console.log(username);
+        let newUser = {username: username, fname: req.body.fname, lname: req.body.lname, email: req.body.email, password: hash};
         // connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + "_" + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
         connection.query("INSERT INTO users SET ?", newUser, function (err, result, fields) {
-
-      connection.query("INSERT INTO users(username,fname,lname,email,password,is_admin) VALUES('" + username + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "','" + 0 + "')", function (err, result, fields) {
 
         if (err) throw err;
 
