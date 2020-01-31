@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   }
   onLogin(formData) {
     // console.log(formData);
-    this.http.get('http://localhost:3000/user/' + formData.email + '/' + formData.password + '').subscribe((res) => {
+    this.http.get('http://localhost:3000/user/get/' + formData.email + '/' + formData.password + '').subscribe((res) => {
       localStorage.setItem('userId', res.id);
       localStorage.setItem('username', res.username);
       console.log("done")

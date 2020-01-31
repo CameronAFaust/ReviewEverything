@@ -19,6 +19,7 @@ export class MoviePageComponent implements OnInit {
   reviewId;
   reviewTitle;
   reviewText;
+  user;
   currentUserId = localStorage.getItem('userId');
   isEditing = false;
   constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient, @Inject(DOCUMENT) document) { }
@@ -29,8 +30,14 @@ export class MoviePageComponent implements OnInit {
           movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           this.movies = movie;
-          this.isLoaded = true
+          this.isLoaded = true;
+          console.log(this.currentUserId);
       });
+      //Check to see if the user is an Admin
+      this.http.get('http://localhost:3000/user/admin/' + this.currentUserId + '').subscribe((res) => {
+        this.user = res;
+        console.log(this.user);
+      })
       // Get user review data from the database
       this.http.get('http://localhost:3000/review/' + params.get('id') + '').subscribe((res) => {
         this.reviews = res;
@@ -40,8 +47,8 @@ export class MoviePageComponent implements OnInit {
 
   populateEditForm(data) {
     console.log(document);
-    // document.getElementById("reviewTitle").value = data.reviewTitle;
-    // document.getElementById("reviewText").value = data.reviewText;
+    document.getElementById("reviewTitle").value = data.reviewTitle;
+    document.getElementById("reviewText").value = data.reviewText;
     this.reviewTitle = data.reviewTitle;
     this.reviewText = data.reviewText;
     this.reviewId = data.id;
@@ -50,6 +57,7 @@ export class MoviePageComponent implements OnInit {
 
   onReviewSubmit(formData) {
     let data = formData;
+    data.movieId = this.movies.id;
     if (this.isEditing) {
       if(data.reviewTitle == "") {
         data.reviewTitle = this.reviewTitle;

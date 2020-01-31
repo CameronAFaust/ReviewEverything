@@ -56,7 +56,8 @@
             <h3>User Reviews</h3>
             <hr>
             <div id="reviewCard" *ngFor="let review of reviews">
-                <button  *ngIf="currentUserId == review.userId" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, userName: review.userName, userId: review.userId, id: review.id})">edit</button>
+                <button *ngIf="user[0].is_admin == 1" (click) = "deleteReview({ id: review.id  })">Delete</button>
+                <button  *ngIf="currentUserId == review.user_id" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, id: review.id})">edit</button>
                 <p>{{review.review_title}} - {{review.rating}} / 5</p>
                 <p>by {{review.username}}</p>
                 <p>{{review.review_text}}</p>
