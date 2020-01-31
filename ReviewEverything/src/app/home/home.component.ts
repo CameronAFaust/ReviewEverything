@@ -42,8 +42,6 @@ export class HomeComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    // console.log(this.loginForm);
-    
     this.http.get('http://localhost:3000/user/' + this.loginForm.value.loginEmail + '/' + this.loginForm.value.loginPassword + '').subscribe((res :any) => {
       localStorage.setItem('userId', res.id);
       localStorage.setItem('username', res.username);
