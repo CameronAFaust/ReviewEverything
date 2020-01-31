@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
-// import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-movie-page',
@@ -12,6 +12,8 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./movie-page.component.css']
 })
 export class MoviePageComponent implements OnInit {
+  reviewForm: FormGroup;
+  reviewSubmitted = false;
   movies;
   isLoaded = false;
   movieId;
@@ -22,9 +24,14 @@ export class MoviePageComponent implements OnInit {
   user;
   currentUserId = localStorage.getItem('userId');
   isEditing = false;
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient, @Inject(DOCUMENT) document) { }
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient, @Inject(DOCUMENT) document) { }
 
   ngOnInit() {
+    this.reviewForm = this.formBuilder.group({
+      reviewTitle: ['', [Validators.required]],
+      reviewText: ['', [Validators.required]],
+      reviewRating: ['', [Validators.required]]
+    })
     this.route.paramMap.subscribe(params => {
       this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie)=>{
           movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -43,7 +50,11 @@ export class MoviePageComponent implements OnInit {
         this.reviews = res;
       })
     });
+
   }
+
+  get reviewEr() { return this.reviewForm.controls; }
+
 
   populateEditForm(data) {
     console.log(document);
@@ -55,7 +66,12 @@ export class MoviePageComponent implements OnInit {
     this.isEditing = true;
   }
 
-  onReviewSubmit(formData) {
+  onReviewSubmit() {
+    this.reviewSubmitted = true;
+    if (this.reviewForm.invalid) {
+      return;
+    }
+
     let data = formData;
     data.movieId = this.movies.id;
     if (this.isEditing) {

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
-var mysql = require('mysql')
+var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -30,11 +30,14 @@ var connection = mysql.createConnection({
 router.get('/get/:email/:password', (req, res) => {
   console.log(req)
 
-  connection.query("SELECT * FROM users WHERE email = '" + req.params.email + "'", function (err, results, fields) {
+        console.log(req);
 
-    results.forEach((result) => {
-
-      console.log(result);
+        // This is a way to prevent SQL injection
+        // "SELECT * FROM users WHERE email = '" + req.params.email + "'",
+        connection.query("SELECT * FROM users WHERE email = ?",
+        [ req.params.email ],
+        function (err, results, fields) {
+          results.forEach((result) => {
 
       bcrypt.compare(req.params.password, result.password, function (err, corr) {
 
@@ -75,13 +78,16 @@ router.get('/admin/:id', (req, res) => {
 // signup
 router.post('/', (req, res) => {
 
-  bcrypt.genSalt(10, function (err, salt) {
-    bcrypt.hash(req.body.password, salt, function (err, hash) {
+    bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.hash(req.body.password, salt, function (err, hash) {
+        let newUser = {username: req.body.fname + "_" + req.body.lname, fname: req.body.fname, lname: req.body.lname, email: req.body.email, password: hash};
 
       const subfname = req.body.fname.substring(0, 3).toLowerCase();
       const sublname = req.body.lname.substring(0, 1).toLowerCase();
       const username = subfname + sublname;
       console.log(username);
+        // connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + "_" + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
+        connection.query("INSERT INTO users SET ?", newUser, function (err, result, fields) {
 
       connection.query("INSERT INTO users(username,fname,lname,email,password,is_admin) VALUES('" + username + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "','" + 0 + "')", function (err, result, fields) {
 
