@@ -24,6 +24,9 @@ export class MoviePageComponent implements OnInit {
   user;
   currentUserId = localStorage.getItem('userId');
   isEditing = false;
+
+  HTMLElement : any;
+
   constructor(private formBuilder: FormBuilder, private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient, @Inject(DOCUMENT) document) { }
 
   ngOnInit() {
@@ -58,8 +61,8 @@ export class MoviePageComponent implements OnInit {
 
   populateEditForm(data) {
     console.log(document);
-    document.getElementById("reviewTitle").value = data.reviewTitle;
-    document.getElementById("reviewText").value = data.reviewText;
+    (<HTMLInputElement>document.getElementById("reviewTitle")).value = data.reviewTitle;
+    (<HTMLInputElement>document.getElementById("reviewText")).value = data.reviewText;
     this.reviewTitle = data.reviewTitle;
     this.reviewText = data.reviewText;
     this.reviewId = data.id;
@@ -72,8 +75,11 @@ export class MoviePageComponent implements OnInit {
       return;
     }
 
-    let data = formData;
-    data.movieId = this.movies.id;
+    let data = this.reviewForm.value;
+    data.reviewTitle = (<HTMLInputElement>document.getElementById("reviewTitle")).value
+    data.reviewText = (<HTMLInputElement>document.getElementById("reviewText")).value
+    // console.log(data)
+    data['movieId'] = this.movies.id;
     if (this.isEditing) {
       if(data.reviewTitle == "") {
         data.reviewTitle = this.reviewTitle;

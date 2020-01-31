@@ -18,19 +18,19 @@ export class SearchPageComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.searchType = params.get('type');
       if (params.get('type') == 'title') {
-        this.apiService.getMovieIdByName(params.get('id')).subscribe((data)=>{
+        this.apiService.getMovieIdByName(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
         });   
       } else if (params.get('type') == 'actor') {
-        this.apiService.getActorIdByName(params.get('id')).subscribe((data)=>{
+        this.apiService.getActorIdByName(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
         });
       } else if (params.get('type') == 'actors_movies') {
-        this.apiService.getActorMoviesById(params.get('id')).subscribe((data)=>{
+        this.apiService.getActorMoviesById(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.cast;
         });
       } else {
-        this.apiService.getGenreMoviesById(params.get('id')).subscribe((data)=>{
+        this.apiService.getGenreMoviesById(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
         });
       }

@@ -10,6 +10,8 @@ import { from } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+
   constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
   loginForm: FormGroup;
   signupForm: FormGroup;
@@ -23,12 +25,12 @@ export class HomeComponent implements OnInit {
     })
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      fname: ['', Validators.required],
-      lname: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      fname: ['', [Validators.required, Validators.minLength(6)]],
+      lname: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+      // confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     }, {
-      validator: 'password' == 'confirmPassword'
+      // validator: 'password' == 'confirmPassword'
     });
   }
 
@@ -41,11 +43,11 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    // this.http.get('http://localhost:3000/user/' + this.loginForm.value.email + '/' + this.loginForm.value.password + '').subscribe((res) => {
-    //   localStorage.setItem('userId', res.id);
-    //   localStorage.setItem('username', res.username);
-    //   console.log("done")
-    // })
+    this.http.get('http://localhost:3000/user/' + this.loginForm.value.email + '/' + this.loginForm.value.password + '').subscribe((res :any) => {
+      localStorage.setItem('userId', res.id);
+      localStorage.setItem('username', res.username);
+      console.log("done")
+    })
   }
 
   onSignup(){
@@ -53,19 +55,20 @@ export class HomeComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
     }
-    // console.log(formData);
-    // this.http.post('http://localhost:3000/user', { 'fname': formData.fname, 'lname': formData.lname, 'email': formData.email, 'password': formData.password }).subscribe((res) => {
-    // })
+
+    this.http.post('http://localhost:3000/user', { 'fname': this.signupForm.value.fname, 'lname': this.signupForm.value.lname, 'email': this.signupForm.value.email, 'password': this.signupForm.value.password }).subscribe((res) => {
+    })
   }
 
   onLogout(){
-    this.submitted = false;
-    // localStorage.clear();
+    this.loginSubmitted = false;
+    this.signupSubmitted = false;
+    localStorage.clear();
   }
 
   onSearchSubmit(formData) {
-    this.submitted = false;
-    console.log(formData.movieSearch);
+    this.loginSubmitted = false;
+    this.signupSubmitted = false;
     this.router.navigate(['/movie', formData.movieSearch])
   }
 
