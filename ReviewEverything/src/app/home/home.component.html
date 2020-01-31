@@ -40,7 +40,7 @@
         <label for="lname">Last Name: </label>
         <input formControlName='lname' type="text"  [ngClass]="{ 'is-invalid': signupSubmitted && signEr.lname.errors }">
         <div *ngIf="signupSubmitted && signEr.lname.errors" class="invalid-feedback">
-            <div *ngIf="signEr.lname.errors.required">First Name is required</div>
+            <div *ngIf="signEr.lname.errors.required">Last Name is required</div>
         </div>
         <br/>
 
