@@ -3,7 +3,7 @@ import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as Filter from 'bad-words';
 
@@ -46,7 +46,7 @@ export class MoviePageComponent implements OnInit {
         this.movies.revenue = this.movies.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       });
       //Check to see if the user is an Admin
-      this.http.get('http://localhost:3000/user/admin/' + this.currentUserId + '').subscribe((res) => {
+      this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
         this.user = res;
         console.log(this.user);
       })
@@ -98,6 +98,12 @@ export class MoviePageComponent implements OnInit {
       })
     }
     this.isEditing = false;
+  }
+
+  deleteReview(data) {
+    this.http.delete('http://localhost:3000/review/' + data.id + '').subscribe((res) => {
+
+    })
   }
 
 }

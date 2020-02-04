@@ -59,8 +59,7 @@ router.get('/get/:email/:password', (req, res) => {
 
 });
 
-// check if user is an admin
-router.get('/admin/:id', (req, res) => {
+router.get('/getUser/:id', (req, res) => {
   console.log(req)
 
   connection.query("SELECT * FROM users WHERE id = '" + req.params.id + "'", function (err, result, fields) {
@@ -73,6 +72,7 @@ router.get('/admin/:id', (req, res) => {
     // req.session.user = result;
 
   });
+
 
 });
 
@@ -140,6 +140,21 @@ router.delete('/del/:id', (req, res) => {
   });
 
 });
+
+router.delete('/:userID', (req, res) => {
+
+  connection.query("DELETE FROM users WHERE users.id = ?", [req.params.userID], function (err, result, fields) {
+
+    if (err) throw err;
+
+    console.log(result);
+    console.log("Number of rows affected : " + result.affectedRows);
+    console.log("Number of records affected with warning : " + result.warningCount);
+    console.log("Message from MySQL Server : " + result.message);
+  });
+
+});
+
 
 
 module.exports = router;
