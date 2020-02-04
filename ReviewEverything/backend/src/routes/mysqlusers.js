@@ -59,7 +59,7 @@ router.get('/get/:email/:password', (req, res) => {
 
 });
 
-router.get('/admin/:id', (req, res) => {
+router.get('/getUser/:id', (req, res) => {
   console.log(req)
 
   connection.query("SELECT * FROM users WHERE id = '" + req.params.id + "'", function (err, result, fields) {
@@ -72,6 +72,7 @@ router.get('/admin/:id', (req, res) => {
     // req.session.user = result;
 
   });
+
 
 });
 

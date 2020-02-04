@@ -47,7 +47,7 @@ export class MoviePageComponent implements OnInit {
           console.log(this.currentUserId);
       });
       //Check to see if the user is an Admin
-      this.http.get('http://localhost:3000/user/admin/' + this.currentUserId + '').subscribe((res) => {
+      this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
         this.user = res;
         console.log(this.user);
       })
