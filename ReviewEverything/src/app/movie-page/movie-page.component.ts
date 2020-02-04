@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as Filter from 'bad-words';
 
 @Component({
   selector: 'app-movie-page',
@@ -21,12 +22,14 @@ export class MoviePageComponent implements OnInit {
   reviewId;
   currentUserId = localStorage.getItem('userId');
   isEditing = false;
+  customFilter;
 
   HTMLElement : any;
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient, @Inject(DOCUMENT) document) { }
 
   ngOnInit() {
+    this.customFilter = new Filter({ placeHolder: '*'});
     this.reviewForm = this.formBuilder.group({
       reviewTitle: ['', [Validators.required]],
       reviewText: ['', [Validators.required]],
@@ -65,20 +68,20 @@ export class MoviePageComponent implements OnInit {
     }
 
     let data = this.reviewForm.value;
-    data.reviewTitle = (<HTMLInputElement>document.getElementById("reviewTitle")).value
-    data.reviewText = (<HTMLInputElement>document.getElementById("reviewText")).value
-    // console.log(data)
-    data['movieId'] = this.movies.id;
-    if (this.isEditing) {
-      this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
-        // Do something here?
-      })
-    } else {
-      this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
-        // Do something here?
-      })
-    }
-    this.isEditing = false;
+    data.reviewTitle = this.customFilter.clean((<HTMLInputElement>document.getElementById("reviewTitle")).value)
+    data.reviewText = this.customFilter.clean((<HTMLInputElement>document.getElementById("reviewText")).value)
+    console.log(data)
+    // data['movieId'] = this.movies.id;
+    // if (this.isEditing) {
+    //   this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
+    //     // Do something here?
+    //   })
+    // } else {
+    //   this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
+    //     // Do something here?
+    //   })
+    // }
+    // this.isEditing = false;
   }
 
 }
