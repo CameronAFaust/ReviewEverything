@@ -9,9 +9,14 @@ import { HttpClient } from '@angular/common/http';
     styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
+    user;
+    currentUserId = localStorage.getItem('userId');
+
+    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 
     ngOnInit() {
-        
+        this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res :any) => {
+            this.user = res;
+        });
     }
-
 }

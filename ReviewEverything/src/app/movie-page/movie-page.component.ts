@@ -40,11 +40,10 @@ export class MoviePageComponent implements OnInit {
     })
     this.route.paramMap.subscribe(params => {
       this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie)=>{
-          movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          this.movies = movie;
-          this.isLoaded = true;
-          console.log(this.currentUserId);
+        this.movies = movie;
+        this.isLoaded = true
+        this.movies.budget = this.movies.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        this.movies.revenue = this.movies.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       });
       //Check to see if the user is an Admin
       this.http.get('http://localhost:3000/user/admin/' + this.currentUserId + '').subscribe((res) => {
@@ -79,7 +78,6 @@ export class MoviePageComponent implements OnInit {
     }
 
     let data = this.reviewForm.value;
-<<<<<<< HEAD
     data.reviewTitle = (<HTMLInputElement>document.getElementById("reviewTitle")).value
     data.reviewText = (<HTMLInputElement>document.getElementById("reviewText")).value
     // console.log(data)
@@ -100,22 +98,6 @@ export class MoviePageComponent implements OnInit {
       })
     }
     this.isEditing = false;
-=======
-    data.reviewTitle = this.customFilter.clean((<HTMLInputElement>document.getElementById("reviewTitle")).value)
-    data.reviewText = this.customFilter.clean((<HTMLInputElement>document.getElementById("reviewText")).value)
-    console.log(data)
-    // data['movieId'] = this.movies.id;
-    // if (this.isEditing) {
-    //   this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
-    //     // Do something here?
-    //   })
-    // } else {
-    //   this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
-    //     // Do something here?
-    //   })
-    // }
-    // this.isEditing = false;
->>>>>>> master
   }
 
 }
