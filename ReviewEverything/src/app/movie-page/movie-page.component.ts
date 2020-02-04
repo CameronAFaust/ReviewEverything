@@ -3,7 +3,7 @@ import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as Filter from 'bad-words';
 
@@ -40,8 +40,8 @@ export class MoviePageComponent implements OnInit {
     })
     this.route.paramMap.subscribe(params => {
       this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie)=>{
-          movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          // movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          // movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           this.movies = movie;
           this.isLoaded = true;
           console.log(this.currentUserId);
@@ -79,7 +79,6 @@ export class MoviePageComponent implements OnInit {
     }
 
     let data = this.reviewForm.value;
-<<<<<<< HEAD
     data.reviewTitle = (<HTMLInputElement>document.getElementById("reviewTitle")).value
     data.reviewText = (<HTMLInputElement>document.getElementById("reviewText")).value
     // console.log(data)
@@ -100,22 +99,12 @@ export class MoviePageComponent implements OnInit {
       })
     }
     this.isEditing = false;
-=======
-    data.reviewTitle = this.customFilter.clean((<HTMLInputElement>document.getElementById("reviewTitle")).value)
-    data.reviewText = this.customFilter.clean((<HTMLInputElement>document.getElementById("reviewText")).value)
-    console.log(data)
-    // data['movieId'] = this.movies.id;
-    // if (this.isEditing) {
-    //   this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
-    //     // Do something here?
-    //   })
-    // } else {
-    //   this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
-    //     // Do something here?
-    //   })
-    // }
-    // this.isEditing = false;
->>>>>>> master
+  }
+
+  deleteReview(data) {
+    this.http.delete('http://localhost:3000/review/' + data.id + '').subscribe((res) => {
+
+    })
   }
 
 }

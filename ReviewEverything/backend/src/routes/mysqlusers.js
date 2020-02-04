@@ -138,5 +138,20 @@ router.delete('/del/:id', (req, res) => {
 
 });
 
+router.delete('/:userID', (req, res) => {
+
+  connection.query("DELETE FROM users WHERE users.id = ?", [req.params.userID], function (err, result, fields) {
+
+    if (err) throw err;
+
+    console.log(result);
+    console.log("Number of rows affected : " + result.affectedRows);
+    console.log("Number of records affected with warning : " + result.warningCount);
+    console.log("Message from MySQL Server : " + result.message);
+  });
+
+});
+
+
 
 module.exports = router;

@@ -82,4 +82,19 @@ router.put('/', (req, res) => {
 
 });
 
+router.delete('/:reviewID', (req, res) => {
+  console.log(req.params.reviewID);  
+
+  connection.query("DELETE FROM reviews_and_ratings WHERE reviews_and_ratings.id = ?", [req.params.reviewID], function (err, result, fields) {
+
+    if (err) throw err;
+
+    console.log(result);
+    console.log("Number of rows affected : " + result.affectedRows);
+    console.log("Number of records affected with warning : " + result.warningCount);
+    console.log("Message from MySQL Server : " + result.message);
+  });
+
+});
+
 module.exports = router;
