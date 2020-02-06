@@ -18,11 +18,11 @@ export class UserPageComponent implements OnInit {
     emailSubmitted = false;
     passwordSubmitted = false;
     currentUserId = localStorage.getItem('userId');
-    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+    constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
 
     ngOnInit() {
         if (!this.currentUserId) {
-            // route away or to a login
+            this.router.navigate(['/']);
         }
         this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res :any) => {
             this.user = res;
@@ -49,7 +49,7 @@ export class UserPageComponent implements OnInit {
             return;
         }
         let data = this.usernameForm.value;
-        let updatedUser = {newUsername: data.usernameInput, userid: user.id}
+        let updatedUser = {newUsername: data.usernameInput, userid: this.user.id}
         this.http.get('http://localhost:3000/user/updateUsername/' + this.updatedUser).subscribe((res :any) => {
             this.user = res;
         });
@@ -60,7 +60,7 @@ export class UserPageComponent implements OnInit {
         if (this.usernameForm.invalid) {
             return;
         }
-        let updatedUser = {newEmail: data.emailInput, userid: user.id}
+        let updatedUser = {newEmail: data.emailInput, userid: this.user.id}
         this.http.get('http://localhost:3000/user/updateEmail/' + this.updatedUser).subscribe((res :any) => {
             this.user = res;
         });
@@ -71,7 +71,7 @@ export class UserPageComponent implements OnInit {
         if (this.passwordForm.invalid) {
             return;
         }
-        let updatedUser = {newPassword: data.passwordInput, userid: user.id}
+        let updatedUser = {newPassword: data.passwordInput, userid: this.user.id}
         this.http.get('http://localhost:3000/user/updateEmail/' + this.updatedUser).subscribe((res :any) => {
             this.user = res;
         });
