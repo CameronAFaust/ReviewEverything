@@ -102,6 +102,7 @@ router.post('/', (req, res) => {
 
 });
 
+// edit username
 router.put('/', (req, res) => {
 
   const subfname = req.body.fname.substring(0, 3).toLowerCase();
@@ -121,6 +122,7 @@ router.put('/', (req, res) => {
 
 });
 
+// delete user
 router.delete('/del/:id', (req, res) => {
   console.log(req)
 

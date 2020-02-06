@@ -40,11 +40,10 @@ export class MoviePageComponent implements OnInit {
     })
     this.route.paramMap.subscribe(params => {
       this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie)=>{
-          // movie.budget = movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          // movie.revenue = movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          this.movies = movie;
-          this.isLoaded = true;
-          console.log(this.currentUserId);
+        this.movies = movie;
+        this.isLoaded = true
+        this.movies.budget = this.movies.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        this.movies.revenue = this.movies.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       });
       //Check to see if the user is an Admin
       this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
