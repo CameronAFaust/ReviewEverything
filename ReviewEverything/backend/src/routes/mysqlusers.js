@@ -28,16 +28,12 @@ var connection = mysql.createConnection({
 
 // login
 router.get('/get/:email/:password', (req, res) => {
-  console.log(req)
+  console.log(req.params.email);
 
-        console.log(req);
-
-        // This is a way to prevent SQL injection
-        // "SELECT * FROM users WHERE email = '" + req.params.email + "'",
-        connection.query("SELECT * FROM users WHERE email = ?",
-        [ req.params.email ],
-        function (err, results, fields) {
-          results.forEach((result) => {
+  // This is a way to prevent SQL injection
+  // "SELECT * FROM users WHERE email = '" + req.params.email + "'",
+  connection.query("SELECT * FROM users WHERE email = ?", [req.params.email], function (err, results, fields) {
+    results.forEach((result) => {
 
       bcrypt.compare(req.params.password, result.password, function (err, corr) {
 
@@ -79,17 +75,17 @@ router.get('/getUser/:id', (req, res) => {
 // signup
 router.post('/', (req, res) => {
 
-    bcrypt.genSalt(10, function (err, salt) {
-      bcrypt.hash(req.body.password, salt, function (err, hash) {
-        
-        const subfname = req.body.fname.substring(0, 3).toLowerCase();
-        const sublname = req.body.lname.substring(0, 1).toLowerCase();
-        const username = subfname + sublname;
-        console.log(username);
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(req.body.password, salt, function (err, hash) {
 
-        let newUser = {username: username, fname: req.body.fname, lname: req.body.lname, email: req.body.email, password: hash};
-        // connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + "_" + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
-        connection.query("INSERT INTO users SET ?", newUser, function (err, result, fields) {
+      const subfname = req.body.fname.substring(0, 3).toLowerCase();
+      const sublname = req.body.lname.substring(0, 1).toLowerCase();
+      const username = subfname + sublname;
+      console.log(username);
+
+      let newUser = { username: username, fname: req.body.fname, lname: req.body.lname, email: req.body.email, password: hash };
+      // connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + "_" + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
+      connection.query("INSERT INTO users SET ?", newUser, function (err, result, fields) {
 
         if (err) throw err;
 
