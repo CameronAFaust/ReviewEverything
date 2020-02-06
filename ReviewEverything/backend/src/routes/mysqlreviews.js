@@ -29,9 +29,7 @@ var connection = mysql.createConnection({
 router.get('/:movieID', (req, res) => {
     
       // connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = '"+ req.params.movieID +"'", function (err, result, fields) {
-      connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = ?", 
-      [ req.params.movieID ], 
-      function (err, result, fields) {
+      connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = ?", [ req.params.movieID ], function (err, result, fields) {
 
       if (err) throw err;
 
