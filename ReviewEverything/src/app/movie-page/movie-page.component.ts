@@ -82,6 +82,8 @@ export class MoviePageComponent implements OnInit {
     data.reviewText = (<HTMLInputElement>document.getElementById("reviewText")).value
     // console.log(data)
     data['movieId'] = this.movies.id;
+    data.reviewTitle = this.customFilter.clean(data.reviewTitle);
+    data.reviewText = this.customFilter.clean(data.reviewText);
     if (this.isEditing) {
       if(data.reviewTitle == "") {
         data.reviewTitle = this.reviewTitle;
