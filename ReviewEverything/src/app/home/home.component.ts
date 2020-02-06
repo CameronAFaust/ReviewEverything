@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
     this.http.get('http://localhost:3000/user/get/' + this.loginForm.value.loginEmail + '/' + this.loginForm.value.loginPassword + '').subscribe((res :any) => {
       localStorage.setItem('userId', res.id);
       localStorage.setItem('username', res.username);
-      console.log("done")
     })
   }
 
