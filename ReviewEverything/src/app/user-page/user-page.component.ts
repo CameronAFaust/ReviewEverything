@@ -15,6 +15,7 @@ export class UserPageComponent implements OnInit {
     checkUser;
     currentId;
     paramsId;
+    reviews;
     usernameForm: FormGroup;
     emailForm: FormGroup;
     passwordForm: FormGroup;
@@ -23,6 +24,7 @@ export class UserPageComponent implements OnInit {
     passwordSubmitted = false;
     currentUserId = localStorage.getItem('userId');
     constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute) { }
+    constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
 
     ngOnInit() {
         this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
@@ -34,22 +36,23 @@ export class UserPageComponent implements OnInit {
 
         });
         if (!this.currentUserId) {
-
+            this.router.navigate(['/']);
         }
-        else {
-            this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
-                this.user = res;
-            });
-            this.usernameForm = this.formBuilder.group({
-                usernameInput: ['', [Validators.required]]
-            });
-            this.emailForm = this.formBuilder.group({
-                emailInput: ['', [Validators.required]]
-            });
-            this.passwordForm = this.formBuilder.group({
-                passwordInput: ['', [Validators.required]]
-            });
-        }
+        this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res :any) => {
+            this.user = res;
+        });
+        this.http.get('http://localhost:3000/user/getUserReviews/' + this.currentUserId).subscribe((res :any) => {
+            this.reviews = res;
+        });
+        this.usernameForm = this.formBuilder.group({
+            usernameInput: ['', [Validators.required]]
+        });
+        this.emailForm = this.formBuilder.group({
+            emailInput: ['', [Validators.required]]
+        });
+        this.passwordForm = this.formBuilder.group({
+            passwordInput: ['', [Validators.required]]
+        });
     }
 
     get usernameEr() { return this.usernameForm.controls; }
@@ -98,4 +101,13 @@ export class UserPageComponent implements OnInit {
 
         })
     }
+
+    updateReview(review) {
+            this.http.get('http://localhost:3000/user/getUserReviews/' + this.currentUserId).subscribe((res :any) => {
+                this.reviews = res;
+            });
+        })
+    }
+
+        this.http.put('http://localhost:3000/review', {  'review_title': review.reviewTitle, 'review_text': review.reviewText, 'movieID': review.movieId, 'rating': review.reviewRating, 'reviewID': review.reviewId }).subscribe((res) => {
 }

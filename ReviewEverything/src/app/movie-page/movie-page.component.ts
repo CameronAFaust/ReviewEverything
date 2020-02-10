@@ -48,7 +48,7 @@ export class MoviePageComponent implements OnInit {
       //Check to see if the user is an Admin
       this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
         this.user = res;
-        console.log(this.user);
+        // console.log(this.user);
       })
       // Get user review data from the database
       this.http.get('http://localhost:3000/review/' + params.get('id') + '').subscribe((res) => {
@@ -82,6 +82,8 @@ export class MoviePageComponent implements OnInit {
     data.reviewText = (<HTMLInputElement>document.getElementById("reviewText")).value
     // console.log(data)
     data['movieId'] = this.movies.id;
+    data.reviewTitle = this.customFilter.clean(data.reviewTitle);
+    data.reviewText = this.customFilter.clean(data.reviewText);
     if (this.isEditing) {
       if(data.reviewTitle == "") {
         data.reviewTitle = this.reviewTitle;
@@ -90,11 +92,17 @@ export class MoviePageComponent implements OnInit {
         data.reviewText = this.reviewText;
       }
       this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
-        // Do something here?
+        // Get user review data from the database
+        this.http.get('http://localhost:3000/review/' + this.movies.id + '').subscribe((res) => {
+          this.reviews = res;
+        })
       })
     } else {
       this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
-        // Do something here?
+        // Get user review data from the database
+        this.http.get('http://localhost:3000/review/' + this.movies.id + '').subscribe((res) => {
+          this.reviews = res;
+        })
       })
     }
     this.isEditing = false;
