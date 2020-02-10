@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+  currentUserId = localStorage.getItem('userId');
+
   constructor(private router: Router, private http: HttpClient) { }
   title = "ReviewEverything";
   getSearchInput(formData) {

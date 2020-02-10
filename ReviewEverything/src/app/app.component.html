@@ -15,7 +15,7 @@
         <input id="searchButton" type="image" src="../assets/search.png" alt="Submit">
     </form>
     <div id="spacer"></div>
-    <div id="profileButton"><a [routerLink]="['/profile']">Profile</a></div>
+    <div id="profileButton"><a [routerLink]="['/user/', currentUserId]">Profile</a></div>
 </div>
 
 <router-outlet></router-outlet>

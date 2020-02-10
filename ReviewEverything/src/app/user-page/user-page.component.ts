@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import * as Filter from 'bad-words';
@@ -11,6 +12,9 @@ import * as Filter from 'bad-words';
 })
 export class UserPageComponent implements OnInit {
     user;
+    checkUser;
+    currentId;
+    paramsId;
     usernameForm: FormGroup;
     emailForm: FormGroup;
     passwordForm: FormGroup;
@@ -18,24 +22,34 @@ export class UserPageComponent implements OnInit {
     emailSubmitted = false;
     passwordSubmitted = false;
     currentUserId = localStorage.getItem('userId');
-    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+    constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute) { }
 
     ngOnInit() {
+        this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
+            this.checkUser = res;
+        });
+        this.route.paramMap.subscribe(params => {
+            this.currentId = this.currentUserId;
+            this.paramsId = params.get('userid')
+
+        });
         if (!this.currentUserId) {
-            // route away or to a login
+
         }
-        this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res :any) => {
-            this.user = res;
-        });
-        this.usernameForm = this.formBuilder.group({
-            usernameInput: ['', [Validators.required]]
-        });
-        this.emailForm = this.formBuilder.group({
-            emailInput: ['', [Validators.required]]
-        });
-        this.passwordForm = this.formBuilder.group({
-            passwordInput: ['', [Validators.required]]
-        });
+        else {
+            this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
+                this.user = res;
+            });
+            this.usernameForm = this.formBuilder.group({
+                usernameInput: ['', [Validators.required]]
+            });
+            this.emailForm = this.formBuilder.group({
+                emailInput: ['', [Validators.required]]
+            });
+            this.passwordForm = this.formBuilder.group({
+                passwordInput: ['', [Validators.required]]
+            });
+        }
     }
 
     get usernameEr() { return this.usernameForm.controls; }
@@ -49,8 +63,8 @@ export class UserPageComponent implements OnInit {
             return;
         }
         let data = this.usernameForm.value;
-        let updatedUser = {newUsername: data.usernameInput, userid: user.id}
-        this.http.get('http://localhost:3000/user/updateUsername/' + this.updatedUser).subscribe((res :any) => {
+        let updatedUser = { username: data.usernameInput, userid: this.user.id }
+        this.http.put('http://localhost:3000/user/', updatedUser).subscribe((res: any) => {
             this.user = res;
         });
     }
@@ -60,8 +74,9 @@ export class UserPageComponent implements OnInit {
         if (this.usernameForm.invalid) {
             return;
         }
-        let updatedUser = {newEmail: data.emailInput, userid: user.id}
-        this.http.get('http://localhost:3000/user/updateEmail/' + this.updatedUser).subscribe((res :any) => {
+        let data = this.emailForm.value;
+        let updatedUser = { email: data.emailInput, userid: this.user.id }
+        this.http.put('http://localhost:3000/user/', updatedUser).subscribe((res: any) => {
             this.user = res;
         });
     }
@@ -71,9 +86,16 @@ export class UserPageComponent implements OnInit {
         if (this.passwordForm.invalid) {
             return;
         }
-        let updatedUser = {newPassword: data.passwordInput, userid: user.id}
-        this.http.get('http://localhost:3000/user/updateEmail/' + this.updatedUser).subscribe((res :any) => {
+        let data = this.passwordForm.value;
+        let updatedUser = { password: data.passwordInput, userid: this.user.id }
+        this.http.put('http://localhost:3000/user/', updatedUser).subscribe((res: any) => {
             this.user = res;
         });
+    }
+
+    deleteUser() {
+        this.http.delete('http://localhost:3000/user/' + this.currentUserId + '').subscribe((res) => {
+
+        })
     }
 }

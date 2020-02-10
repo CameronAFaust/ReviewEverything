@@ -102,15 +102,15 @@ router.post('/', (req, res) => {
 
 });
 
-// edit username
+// edit user
 router.put('/', (req, res) => {
 
-  const subfname = req.body.fname.substring(0, 3).toLowerCase();
-  const sublname = req.body.lname.substring(0, 1).toLowerCase();
-  const username = subfname + sublname;
-  console.log(username);
+  // const subfname = req.body.fname.substring(0, 3).toLowerCase();
+  // const sublname = req.body.lname.substring(0, 1).toLowerCase();
+  // const username = subfname + sublname;
+  // console.log(username);
 
-  connection.query("UPDATE INTO users SET username = '" + username + "' WHERE id = '" + req.body.id + "'", function (err, result, fields) {
+  connection.query("UPDATE INTO users SET username = '" + req.body.username + "', email = '" + req.body.email + "', password = '" + req.body.password + "' WHERE id = '" + req.body.id + "'", function (err, result, fields) {
 
     if (err) throw err;
 
@@ -123,20 +123,6 @@ router.put('/', (req, res) => {
 });
 
 // delete user
-router.delete('/del/:id', (req, res) => {
-  console.log(req)
-
-  connection.query("DELETE FROM users WHERE id = '" + req.params.id + "'", function (err, result, fields) {
-    console.log(result);
-
-    if (err) throw err;
-
-    // req.session.user = result;
-
-  });
-
-});
-
 router.delete('/:userID', (req, res) => {
 
   connection.query("DELETE FROM users WHERE users.id = ?", [req.params.userID], function (err, result, fields) {

@@ -49,9 +49,9 @@ export class HomeComponent implements OnInit {
 
   onSignup(){
     this.signupSubmitted = true;
-    if (this.signupForm.invalid) {
-      return;
-    }
+    // if (this.signupForm.invalid) {
+    //   return;
+    // }
     
     this.http.post('http://localhost:3000/user', { 'fname': this.signupForm.value.fname, 'lname': this.signupForm.value.lname, 'email': this.signupForm.value.email, 'password': this.signupForm.value.password }).subscribe((res) => {
     })
