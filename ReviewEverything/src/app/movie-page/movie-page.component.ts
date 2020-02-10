@@ -92,7 +92,6 @@ export class MoviePageComponent implements OnInit {
         data.reviewText = this.reviewText;
       }
       this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
-        // Do something here?
         // Get user review data from the database
         this.http.get('http://localhost:3000/review/' + this.movies.id + '').subscribe((res) => {
           this.reviews = res;
@@ -100,7 +99,6 @@ export class MoviePageComponent implements OnInit {
       })
     } else {
       this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
-        // Do something here?
         // Get user review data from the database
         this.http.get('http://localhost:3000/review/' + this.movies.id + '').subscribe((res) => {
           this.reviews = res;

@@ -11,6 +11,7 @@ import * as Filter from 'bad-words';
 })
 export class UserPageComponent implements OnInit {
     user;
+    reviews;
     usernameForm: FormGroup;
     emailForm: FormGroup;
     passwordForm: FormGroup;
@@ -26,6 +27,9 @@ export class UserPageComponent implements OnInit {
         }
         this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res :any) => {
             this.user = res;
+        });
+        this.http.get('http://localhost:3000/user/getUserReviews/' + this.currentUserId).subscribe((res :any) => {
+            this.reviews = res;
         });
         this.usernameForm = this.formBuilder.group({
             usernameInput: ['', [Validators.required]]
@@ -78,4 +82,13 @@ export class UserPageComponent implements OnInit {
             this.user = res;
         });
     }
+
+    updateReview(review) {
+        this.http.put('http://localhost:3000/review', {  'review_title': review.reviewTitle, 'review_text': review.reviewText, 'movieID': review.movieId, 'rating': review.reviewRating, 'reviewID': review.reviewId }).subscribe((res) => {
+            this.http.get('http://localhost:3000/user/getUserReviews/' + this.currentUserId).subscribe((res :any) => {
+                this.reviews = res;
+            });
+        })
+    }
+
 }
