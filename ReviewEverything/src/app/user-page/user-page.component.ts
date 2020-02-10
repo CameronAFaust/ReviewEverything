@@ -50,7 +50,7 @@ export class UserPageComponent implements OnInit {
         }
         let data = this.usernameForm.value;
         let updatedUser = {newUsername: data.usernameInput, userid: this.user.id}
-        this.http.get('http://localhost:3000/user/updateUsername/' + this.updatedUser).subscribe((res :any) => {
+        this.http.get('http://localhost:3000/user/updateUsername/' + updatedUser).subscribe((res :any) => {
             this.user = res;
         });
     }
@@ -60,8 +60,9 @@ export class UserPageComponent implements OnInit {
         if (this.usernameForm.invalid) {
             return;
         }
+        let data = this.usernameForm.value;
         let updatedUser = {newEmail: data.emailInput, userid: this.user.id}
-        this.http.get('http://localhost:3000/user/updateEmail/' + this.updatedUser).subscribe((res :any) => {
+        this.http.get('http://localhost:3000/user/updateEmail/' + updatedUser).subscribe((res :any) => {
             this.user = res;
         });
     }
@@ -71,8 +72,9 @@ export class UserPageComponent implements OnInit {
         if (this.passwordForm.invalid) {
             return;
         }
+        let data = this.usernameForm.value;
         let updatedUser = {newPassword: data.passwordInput, userid: this.user.id}
-        this.http.get('http://localhost:3000/user/updateEmail/' + this.updatedUser).subscribe((res :any) => {
+        this.http.get('http://localhost:3000/user/updateEmail/' + updatedUser).subscribe((res :any) => {
             this.user = res;
         });
     }
