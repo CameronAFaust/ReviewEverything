@@ -48,10 +48,10 @@ export class MoviePageComponent implements OnInit {
       //Check to see if the user is an Admin
       this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
         this.user = res;
-        // console.log(this.user);
+        console.log(this.user);
       })
       // Get user review data from the database
-      this.http.get('http://localhost:3000/review/' + params.get('id') + '').subscribe((res) => {
+      this.http.get('http://localhost:3000/review/movie/' + params.get('id') + '').subscribe((res) => {
         this.reviews = res;
       })
     });
@@ -93,14 +93,14 @@ export class MoviePageComponent implements OnInit {
       }
       this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
         // Get user review data from the database
-        this.http.get('http://localhost:3000/review/' + this.movies.id + '').subscribe((res) => {
+        this.http.get('http://localhost:3000/review/movie/' + this.movies.id + '').subscribe((res) => {
           this.reviews = res;
         })
       })
     } else {
       this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
         // Get user review data from the database
-        this.http.get('http://localhost:3000/review/' + this.movies.id + '').subscribe((res) => {
+        this.http.get('http://localhost:3000/review/movie/' + this.movies.id + '').subscribe((res) => {
           this.reviews = res;
         })
       })

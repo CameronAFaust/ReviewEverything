@@ -26,7 +26,7 @@ var connection = mysql.createConnection({
 // });
 
 // get all reviews for a single movie
-router.get('/:movieID', (req, res) => {
+router.get('/movie/:movieID', (req, res) => {
     
       // connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = '"+ req.params.movieID +"'", function (err, result, fields) {
       connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = ?", [ req.params.movieID ], function (err, result, fields) {
@@ -39,6 +39,21 @@ router.get('/:movieID', (req, res) => {
        });
 
     //  connection.end();
+});
+
+router.get('/user/:userID', (req, res) => {
+    
+  // connection.query("SELECT * FROM reviews_and_ratings WHERE movie_id = '"+ req.params.movieID +"'", function (err, result, fields) {
+  connection.query("SELECT * FROM reviews_and_ratings WHERE user_id = ?", [ req.params.userID ], function (err, result, fields) {
+
+  if (err) throw err;
+
+  console.log(result);
+
+  res.send(result);
+   });
+
+//  connection.end();
 });
 
 // create review
@@ -63,7 +78,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   
-  console.log(req.reviewID);
+  console.log(req.body.reviewID);
 
   let updateReview = {review_title: req.body.review_title, review_text: req.body.review_text, rating: req.body.rating};
     
@@ -84,6 +99,21 @@ router.delete('/:reviewID', (req, res) => {
   console.log(req.params.reviewID);  
 
   connection.query("DELETE FROM reviews_and_ratings WHERE reviews_and_ratings.id = ?", [req.params.reviewID], function (err, result, fields) {
+
+    if (err) throw err;
+
+    console.log(result);
+    console.log("Number of rows affected : " + result.affectedRows);
+    console.log("Number of records affected with warning : " + result.warningCount);
+    console.log("Message from MySQL Server : " + result.message);
+  });
+
+});
+
+router.delete('/:userID', (req, res) => {
+  console.log(req.params.reviewID);  
+
+  connection.query("DELETE FROM reviews_and_ratings WHERE reviews_and_ratings.user_id = ?", [req.params.userID], function (err, result, fields) {
 
     if (err) throw err;
 

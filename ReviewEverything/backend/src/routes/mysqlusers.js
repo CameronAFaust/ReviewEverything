@@ -110,16 +110,44 @@ router.put('/', (req, res) => {
   // const username = subfname + sublname;
   // console.log(username);
 
-  connection.query("UPDATE INTO users SET username = '" + req.body.username + "', email = '" + req.body.email + "', password = '" + req.body.password + "' WHERE id = '" + req.body.id + "'", function (err, result, fields) {
+      let updateUser = {username: req.body.username, email: req.body.email};
 
-    if (err) throw err;
+      connection.query("UPDATE users SET ? WHERE id = '" + req.body.id + "'", updateUser, function (err, result, fields) {
 
-    console.log(result);
-    console.log("Number of rows affected : " + result.affectedRows);
-    console.log("Number of records affected with warning : " + result.warningCount);
-    console.log("Message from MySQL Server : " + result.message);
+        if (err) throw err;
+
+        console.log(result);
+        console.log("Number of rows affected : " + result.affectedRows);
+        console.log("Number of records affected with warning : " + result.warningCount);
+        console.log("Message from MySQL Server : " + result.message);
+      });
+
+});
+
+router.put('/passowrd', (req, res) => {
+
+  // const subfname = req.body.fname.substring(0, 3).toLowerCase();
+  // const sublname = req.body.lname.substring(0, 1).toLowerCase();
+  // const username = subfname + sublname;
+  // console.log(username);
+
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(req.body.password, salt, function (err, hash) {
+
+      let updateUser = {password: hash};
+
+      connection.query("UPDATE users SET ? WHERE id = '" + req.body.id + "'", updateUser, function (err, result, fields) {
+
+        if (err) throw err;
+
+        console.log(result);
+        console.log("Number of rows affected : " + result.affectedRows);
+        console.log("Number of records affected with warning : " + result.warningCount);
+        console.log("Message from MySQL Server : " + result.message);
+      });
+    });
+
   });
-
 });
 
 // delete user
