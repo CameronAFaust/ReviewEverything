@@ -75,6 +75,14 @@ export class UserPageComponent implements OnInit {
         this.http.put('http://localhost:3000/user/', updatedUser).subscribe((res: any) => {
             this.user = res;
         });
+        localStorage.setItem('username', data.usernameInput);
+        this.http.get('http://localhost:3000/review/user/' + this.currentUserId).subscribe((res: any) => {
+            res.forEach((review) => {
+                this.http.put('http://localhost:3000/review', { 'review_title': review.review_title, 'review_text': review.review_text, 'movieID': review.movie_id, 'rating': review.rating, 'username': data.usernameInput, 'reviewID': review.id }).subscribe((res) => {
+
+                });
+            });
+        });
     }
 
     updateEmail() {
@@ -112,16 +120,16 @@ export class UserPageComponent implements OnInit {
     updateReview(review) {
         console.log(review);
         let data = this.reviewForm.value;
-        if(data.reviewText == null){
+        if (data.reviewText == null) {
             data.reviewText = review.review_text;
         }
-        if(data.reviewTitle == null){
+        if (data.reviewTitle == null) {
             data.reviewTitle = review.review_title;
         }
-        if(data.reviewRating == null){
+        if (data.reviewRating == null) {
             data.reviewRating = review.rating;
         }
-        this.http.put('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': review.movie_id, 'rating': data.reviewRating, 'reviewID': review.id }).subscribe((res) => {
+        this.http.put('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': review.movie_id, 'rating': data.reviewRating, 'username': localStorage.getItem('username'), 'reviewID': review.id }).subscribe((res) => {
             this.http.get('http://localhost:3000/review/user/' + this.currentUserId).subscribe((res: any) => {
                 this.reviews = res;
             });

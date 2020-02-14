@@ -45,7 +45,7 @@
                 </div>
                 <br/>
                 <label for="reviewRating">Rating: </label>
-                <select formControlName='reviewRating' id="rating" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewRating.errors }">
+                <select formControlName='reviewRating' id="rating" (change)="updateStarRating()" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewRating.errors }">
                     <option value="0">0</option>
                     <option value="0.5">0.5</option>
                     <option value="1">1</option>
@@ -58,6 +58,7 @@
                     <option value="4.5">4.5</option>
                     <option value="5">5</option>
                 </select> / 5
+                <!-- <star-rating id="newStar" value="{{ newRating }}" totalstars="0" checkedcolor="crimson" uncheckedcolor="black" size="24px" readonly="true"></star-rating> -->
                 <div *ngIf="reviewSubmitted && reviewEr.reviewRating.errors" class="invalid-feedback">
                     <div *ngIf="reviewEr.reviewRating.errors.required">review rating is required</div>
                 </div>
@@ -73,7 +74,7 @@
                 <button *ngIf="user[0].is_admin == 1 || currentUserId == review.user_id" (click) = "deleteReview({ id: review.id  })">Delete</button>
                 <button  *ngIf="currentUserId == review.user_id" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, id: review.id})">edit</button>
                 <p>{{review.review_title}}</p>
-                <star-rating value="{{ review.rating }}" totalstars="5" checkedcolor="orange" uncheckedcolor="black" size="24px" readonly="true"></star-rating>
+                <star-rating value="{{ review.rating }}" totalstars="5" checkedcolor="crimson" uncheckedcolor="black" size="24px" readonly="true"></star-rating>
                 <p>by {{review.username}}</p>
                 <p>{{review.review_text}}</p>
                 <hr>
