@@ -86,7 +86,6 @@ export class ApiService {
   ]
   // MOVIE
   public getMovieDetailsById(MovieId){
-    console.log(MovieId);
     return this.httpClient.get(`https://api.themoviedb.org/3/movie/${MovieId}?api_key=${this.API_KEY}&language=en-US`);
   }
   public getMovieIdByName(MovieName){
@@ -108,6 +107,11 @@ export class ApiService {
       }
     });
     return this.httpClient.get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId} `);
+  }
+
+  // popular movie
+  public getPopularMovies(){
+    return this.httpClient.get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.API_KEY}&language=en-US&page=1`)
   }
 
   constructor(private httpClient: HttpClient) { }

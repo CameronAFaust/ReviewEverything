@@ -1,19 +1,43 @@
 #movie_card {
     display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 95%;
     flex-direction: row;
-    padding: 30px;
+    padding: 5px;
+    border: 2px solid burlywood;
+    background-size: cover;
+    background-position: 0px -10px;
+    height: 300px;
 }
 
 #movie_poster {
-    width: 200px;
+    height: 100%;
+    filter: drop-shadow(10px 10px 10px #000);
+}
+
+#movie_title {
+    font-size: 40px;
+    margin-left: 10px;
 }
 
 #movie_text {
-    display: inline-flex;
+    /* display: inline-flex; */
+    width: 100%;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4);
 }
 
 #release_date {
-    font-size: 15px;
+    font-size: 18px;
+    margin-left: 10px;
+    padding-top: 0px;
+}
+
+#searchText {
+    margin: 0;
+    text-align: center;
 }
 
 p {

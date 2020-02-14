@@ -1,3 +1,62 @@
-#holder {
+#loginHolder {
     margin: 10px;
+}
+
+#what_to_watch {
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.5em
+}
+
+#popularMovies {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: auto;
+    justify-content: center;
+}
+
+#movie_card {
+    display: flex;
+    margin-bottom: 90px;
+    width: 200px;
+    flex-direction: column;
+    padding: 10px;
+    height: 300px;
+    filter: drop-shadow(5px 5px 5px #000);
+}
+
+#movie_poster {
+    height: 100%;
+    /* filter: drop-shadow(10px 10px 10px #000); */
+}
+
+#movie_title {
+    font-size: 20px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+#movie_text {
+    /* display: inline-flex; */
+    min-height: 80px;
+    background-color: rgb(42, 85, 140);
+    background-color: rgba(42, 85, 140, 0.4);
+}
+
+#release_date {
+    font-size: 18px;
+    margin-left: 10px;
+    padding-top: 0px;
+}
+
+#searchText {
+    margin: 0;
+    text-align: center;
+}
+
+a {
+    text-decoration : none;
+    color: white;
 }

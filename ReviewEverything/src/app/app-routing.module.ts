@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'profile', component: UserPageComponent },
   { path: 'movie/:id', component: MoviePageComponent },
   { path: 'search/:type/:id', component: SearchPageComponent },
+  { path: 'search/:type/:id/:actorName', component: SearchPageComponent },
 ];
 
 @NgModule({

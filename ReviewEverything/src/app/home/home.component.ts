@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 import {Router} from "@angular/router"
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -9,15 +10,25 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-
-  constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private apiService: ApiService, private http: HttpClient, private formBuilder: FormBuilder) { }
   loginForm: FormGroup;
   signupForm: FormGroup;
   loginSubmitted = false;
   signupSubmitted = false;
+  popularMovies;
 
   ngOnInit() {
+    this.apiService.getPopularMovies().subscribe((data :any)=>{
+      this.popularMovies = data.results;
+      this.popularMovies.forEach(movie => {
+        if (movie.title.length > 35) {
+          movie.title = movie.title.substring(0, 35);
+          movie.title += "...";
+        }
+      });
+      this.popularMovies.length = 6;
+    });
+    
     this.loginForm = this.formBuilder.group({
       loginEmail: ['', [Validators.required, Validators.email]],
       loginPassword: ['', [Validators.required, Validators.minLength(6)]],

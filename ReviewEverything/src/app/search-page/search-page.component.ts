@@ -12,29 +12,38 @@ import { HttpClient } from '@angular/common/http';
 export class SearchPageComponent implements OnInit {
 
   constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute, private http: HttpClient) { }
-  searchList = [];
   searchType = '';
+  searchDescription = '';
+  searchList = [];
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.searchType = params.get('type');
       if (params.get('type') == 'title') {
         this.apiService.getMovieIdByName(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
-        });   
+          this.searchDescription = 'Movies search results for: "' + params.get('id') + '"';
+        });
+
       } else if (params.get('type') == 'actor') {
         this.apiService.getActorIdByName(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
+          this.searchDescription = 'Actor search results for: "' + params.get('id') + '"';
         });
+
       } else if (params.get('type') == 'actors_movies') {
         this.apiService.getActorMoviesById(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.cast;
+          this.searchDescription = 'Movies with the actor: "' + params.get('actorName') + '"';
         });
-      } else {
+
+      } else {  
         this.apiService.getGenreMoviesById(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
+          this.searchDescription = 'Genre search results for: "' + params.get('id') + '"';
         });
       }
     });
+    
   }
 
 }

@@ -5,7 +5,7 @@
                 <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="Movie Poster">
                 <div id="text_holder">
                     <div id="title_holder">
-                        <h1 id="title">{{movies.original_title}}</h1>
+                        <h1 id="title">{{movies.title}}</h1>
                         <p id="release_date">({{movies.release_date}})</p>
                     </div>
                     <p id="tagline">{{movies.tagline}}</p>
@@ -65,7 +65,7 @@
             <h3>User Reviews</h3>
             <hr>
             <div id="reviewCard" *ngFor="let review of reviews">
-                <button *ngIf="user[0].is_admin == 1" (click) = "deleteReview({ id: review.id  })">Delete</button>
+                <button *ngIf="user[0].is_admin == 1 || currentUserId == review.user_id" (click) = "deleteReview({ id: review.id  })">Delete</button>
                 <button  *ngIf="currentUserId == review.user_id" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, id: review.id})">edit</button>
                 <p>{{review.review_title}} - {{review.rating}} / 5</p>
                 <p>by {{review.username}}</p>

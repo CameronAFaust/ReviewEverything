@@ -46,14 +46,14 @@ export class MoviePageComponent implements OnInit {
         this.movies.revenue = this.movies.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       });
       //Check to see if the user is an Admin
-      this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
-        this.user = res;
-        // console.log(this.user);
-      })
-      // Get user review data from the database
-      this.http.get('http://localhost:3000/review/' + params.get('id') + '').subscribe((res) => {
-        this.reviews = res;
-      })
+      // this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
+      //   this.user = res;
+      //   // console.log(this.user);
+      // })
+      // // Get user review data from the database
+      // this.http.get('http://localhost:3000/review/' + params.get('id') + '').subscribe((res) => {
+      //   this.reviews = res;
+      // })
     });
 
   }
