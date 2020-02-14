@@ -69,3 +69,11 @@ p {
     font-size: 17px;
     margin: 5px;
 }
+
+.star.on{
+    cursor: default !important;
+}
+
+.star{
+    cursor: default !important;
+}

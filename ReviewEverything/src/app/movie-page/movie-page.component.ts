@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StarRatingComponent } from 'ng-starrating';
 import * as Filter from 'bad-words';
 
 @Component({
@@ -22,6 +23,7 @@ export class MoviePageComponent implements OnInit {
   reviewId;
   reviewTitle;
   reviewText;
+  newRating = 5;
   user;
   currentUserId = localStorage.getItem('userId');
   isEditing = false;
@@ -46,20 +48,23 @@ export class MoviePageComponent implements OnInit {
         this.movies.revenue = this.movies.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       });
       //Check to see if the user is an Admin
-      // this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
-      //   this.user = res;
-      //   // console.log(this.user);
-      // })
-      // // Get user review data from the database
-      // this.http.get('http://localhost:3000/review/' + params.get('id') + '').subscribe((res) => {
-      //   this.reviews = res;
-      // })
+      this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {
+        this.user = res;
+        console.log(this.user);
+      })
+      // Get user review data from the database
+      this.http.get('http://localhost:3000/review/movie/' + params.get('id') + '').subscribe((res) => {
+        this.reviews = res;
+      })
     });
 
   }
 
   get reviewEr() { return this.reviewForm.controls; }
 
+  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+    this.newRating = $event.newValue;
+  }
 
   populateEditForm(data) {
     console.log(document);
@@ -93,14 +98,14 @@ export class MoviePageComponent implements OnInit {
       }
       this.http.put('http://localhost:3000/review', {  'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'reviewID': this.reviewId }).subscribe((res) => {
         // Get user review data from the database
-        this.http.get('http://localhost:3000/review/' + this.movies.id + '').subscribe((res) => {
+        this.http.get('http://localhost:3000/review/movie/' + this.movies.id + '').subscribe((res) => {
           this.reviews = res;
         })
       })
     } else {
       this.http.post('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': data.reviewRating, 'userID': localStorage.getItem('userId'), 'username': localStorage.getItem('username')}).subscribe((res) => {
         // Get user review data from the database
-        this.http.get('http://localhost:3000/review/' + this.movies.id + '').subscribe((res) => {
+        this.http.get('http://localhost:3000/review/movie/' + this.movies.id + '').subscribe((res) => {
           this.reviews = res;
         })
       })
