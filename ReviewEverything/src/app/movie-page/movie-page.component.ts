@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StarRatingComponent } from 'ng-starrating';
 import * as Filter from 'bad-words';
 
 @Component({
@@ -22,6 +23,7 @@ export class MoviePageComponent implements OnInit {
   reviewId;
   reviewTitle;
   reviewText;
+  newRating = 5;
   user;
   currentUserId = localStorage.getItem('userId');
   isEditing = false;
@@ -60,6 +62,9 @@ export class MoviePageComponent implements OnInit {
 
   get reviewEr() { return this.reviewForm.controls; }
 
+  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+    this.newRating = $event.newValue;
+  }
 
   populateEditForm(data) {
     console.log(document);

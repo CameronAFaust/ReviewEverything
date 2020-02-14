@@ -58,7 +58,7 @@ router.get('/get/:email/:password', (req, res) => {
 router.get('/getUser/:id', (req, res) => {
   console.log(req)
 
-  connection.query("SELECT * FROM users WHERE id = '" + req.params.id + "'", function (err, result, fields) {
+  connection.query("SELECT * FROM users WHERE id = ?", [req.params.id], function (err, result, fields) {
     console.log(result);
 
     res.send(result);
@@ -78,12 +78,7 @@ router.post('/', (req, res) => {
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(req.body.password, salt, function (err, hash) {
 
-      const subfname = req.body.fname.substring(0, 3).toLowerCase();
-      const sublname = req.body.lname.substring(0, 1).toLowerCase();
-      const username = subfname + sublname;
-      console.log(username);
-
-      let newUser = { username: username, fname: req.body.fname, lname: req.body.lname, email: req.body.email, password: hash };
+      let newUser = { username: req.body.username, fname: req.body.fname, lname: req.body.lname, email: req.body.email, password: hash };
       // connection.query("INSERT INTO users(username,fname,lname,email,password) VALUES('" + req.body.fname + "_" + req.body.lname + "','" + req.body.fname + "','" + req.body.lname + "','" + req.body.email + "','" + hash + "')", function (err, result, fields) {
       connection.query("INSERT INTO users SET ?", newUser, function (err, result, fields) {
 
@@ -104,11 +99,6 @@ router.post('/', (req, res) => {
 
 // edit user
 router.put('/', (req, res) => {
-
-  // const subfname = req.body.fname.substring(0, 3).toLowerCase();
-  // const sublname = req.body.lname.substring(0, 1).toLowerCase();
-  // const username = subfname + sublname;
-  // console.log(username);
 
       let updateUser = {username: req.body.username, email: req.body.email};
 

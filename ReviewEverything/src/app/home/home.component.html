@@ -22,7 +22,13 @@
     
     <h3>Signup</h3>
     <form [formGroup]="signupForm" (ngSubmit) = "onSignup()" >
-        <label for="email">email: </label>
+        <label for="username">Username: </label>
+        <input formControlName='username' type="text" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.username.errors }">
+        <div *ngIf="signupSubmitted && signEr.username.errors" class="invalid-feedback">
+            <div *ngIf="signEr.username.errors.required">Username is required</div>
+        </div>
+        <br/>
+        <label for="email">Email: </label>
         <input formControlName='email' type="email" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.email.errors }">
         <div *ngIf="signupSubmitted && signEr.email.errors" class="invalid-feedback">
             <div *ngIf="signEr.email.errors.required">Email is required</div>

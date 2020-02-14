@@ -23,9 +23,10 @@ export class HomeComponent implements OnInit {
       loginPassword: ['', [Validators.required, Validators.minLength(6)]],
     })
     this.signupForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      fname: ['', [Validators.required, Validators.minLength(6)]],
-      lname: ['', [Validators.required, Validators.minLength(6)]],
+      fname: ['', [Validators.required]],
+      lname: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
       // confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     }, {
@@ -53,7 +54,7 @@ export class HomeComponent implements OnInit {
     //   return;
     // }
     
-    this.http.post('http://localhost:3000/user', { 'fname': this.signupForm.value.fname, 'lname': this.signupForm.value.lname, 'email': this.signupForm.value.email, 'password': this.signupForm.value.password }).subscribe((res) => {
+    this.http.post('http://localhost:3000/user', { 'username': this.signupForm.value.username, 'fname': this.signupForm.value.fname, 'lname': this.signupForm.value.lname, 'email': this.signupForm.value.email, 'password': this.signupForm.value.password }).subscribe((res) => {
     })
   }
 

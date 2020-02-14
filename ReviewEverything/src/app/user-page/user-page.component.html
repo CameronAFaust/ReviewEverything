@@ -29,14 +29,14 @@
   <div id="reviewCard" *ngFor="let review of reviews">
     <form [formGroup]="reviewForm" id="reviewForm" (ngSubmit)="updateReview(review)">
       <label for="reviewTitle">Title: </label>
-      <input formControlName='reviewTitle' value="review.review_title" id="reviewTitle" type="text" maxlength="100"
+      <input formControlName='reviewTitle' value={{review.review_title}} id="reviewTitle" type="text" maxlength="100"
         [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewTitle.errors }">
       <div *ngIf="reviewSubmitted && reviewEr.reviewTitle.errors" class="invalid-feedback">
         <div *ngIf="reviewEr.reviewTitle.errors.required">Title is required</div>
       </div>
       <br />
       <label for="reviewText">Description: </label>
-      <textarea formControlName='reviewText' value="review.review_text" id="reviewText" maxlength="200"
+      <textarea formControlName='reviewText' value={{review.review_text}} id="reviewText" maxlength="200"
         [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewText.errors }"></textarea>
       <div *ngIf="reviewSubmitted && reviewEr.reviewText.errors" class="invalid-feedback">
         <div *ngIf="reviewEr.reviewText.errors.required">Review text is required</div>
@@ -49,10 +49,15 @@
           {{review.rating}}
         </option>
         <option value="0">0</option>
+        <option value="0.5">0.5</option>
         <option value="1">1</option>
+        <option value="1.5">1.5</option>
         <option value="2">2</option>
+        <option value="2.5">2.5</option>
         <option value="3">3</option>
+        <option value="3.5">3.5</option>
         <option value="4">4</option>
+        <option value="4.5">4.5</option>
         <option value="5">5</option>
       </select> / 5
       <div *ngIf="reviewSubmitted && reviewEr.reviewRating.errors" class="invalid-feedback">
