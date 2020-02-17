@@ -23,7 +23,7 @@ export class MoviePageComponent implements OnInit {
   reviewId;
   reviewTitle;
   reviewText;
-  newRating = 5;
+  newRating;
   user;
   currentUserId = localStorage.getItem('userId');
   isEditing = false;
@@ -61,8 +61,10 @@ export class MoviePageComponent implements OnInit {
 
   get reviewEr() { return this.reviewForm.controls; }
 
-  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
-    this.newRating = $event.newValue;
+  updateStarRating() {
+    let data = this.reviewForm.value;
+    console.log(data.reviewRating)
+    this.newRating = data.reviewRating;
   }
 
   // populateEditForm(data) {
