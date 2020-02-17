@@ -1,13 +1,13 @@
 <h2 id="searchText">{{searchDescription}}</h2>
 
-<div *ngIf="searchType == 'title' || searchType == 'actors_movies' || searchType == 'actors_movies' || searchType == 'genre'">
+<div id="movie_search_holder" *ngIf="searchType == 'title' || searchType == 'actors_movies' || searchType == 'actors_movies' || searchType == 'genre'">
     <div *ngFor="let result of searchList">
         <a [routerLink]="['/movie', result.id]">
             <div id="movie_card" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/original/' + result.backdrop_path + ')'}">
                 <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" alt="Movie Poster">
                 <div id="movie_text">
                     <p id="movie_title">{{ result.title }}</p>
-                    <p id="release_date">Released: ({{ result.release_date }})</p>
+                    <p id="release_date">({{ result.release_date }})</p>
                 </div>
             </div>
         </a>

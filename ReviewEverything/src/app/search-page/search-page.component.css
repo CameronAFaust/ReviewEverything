@@ -1,32 +1,38 @@
+#movie_search_holder{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: auto;
+    justify-content: center;
+}
 #movie_card {
     display: flex;
-    margin: auto;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    width: 95%;
-    flex-direction: row;
-    padding: 5px;
-    border: 2px solid burlywood;
-    background-size: cover;
-    background-position: 0px -10px;
+    margin: 10px;
+    width: 200px;
+    flex-direction: column;
+    margin-bottom: 120px;
     height: 300px;
+    -webkit-filter: drop-shadow(5px 5px 5px #000);
+    filter: drop-shadow(5px 5px 5px #000);
 }
 
 #movie_poster {
     height: 100%;
-    filter: drop-shadow(10px 10px 10px #000);
+    min-height: 300px;
+    /* filter: drop-shadow(10px 10px 10px #000); */
 }
 
 #movie_title {
-    font-size: 40px;
+    font-size: 20px;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 #movie_text {
-    /* display: inline-flex; */
-    width: 100%;
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0, 0.4);
+    min-height: 90px;
+    padding: 5px;
+    background-color: rgb(42, 85, 140);
+    background-color: rgba(42, 85, 140, 0.4);
 }
 
 #release_date {

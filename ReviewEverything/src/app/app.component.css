@@ -1,56 +1,99 @@
 #nav {
-    display: flex;
-    justify-content: center;
-    padding: 5px 1; 
-    width: 100%;
-    background-color: #122A40;
-    height: 50px;
+  display: flex;
+  justify-content: center;
+  padding: 5px 1; 
+  width: 100%;
+  background-color: #122A40;
+  height: 55px;
 }
 
 #spacer {
-    flex: 2;
+  flex: 2;
 }
 
 #navHome {
-    flex: 2;
-    font-size: 20px;
-    margin: 0;
-    padding: 10px;
-    color: #D90416;
-    margin: auto;
+  flex: 2;
+  font-size: 20px;
+  margin: 0;
+  padding: 10px;
+  color: #D90416;
+  margin: auto;
 }
 
 #search {
-    display: flex;
-    height: 35px;
-    margin: auto;
+  display: flex;
+  height: 35px;
+  margin: auto;
 }
 
 #searchInput {
-    width: 300px;
-    padding-left: 10px;
-    border-radius: 25px;
+  width: 300px;
+  padding-left: 10px;
+  /* border-radius: 25px; */
 }
 
 #searchButton {
-    width: 15px;
-    height: 15px;
-    margin: auto;
-    margin-left: -30px;
+  width: 15px;
+  height: 15px;
+  margin: auto;
+  margin-left: -30px;
 }
 
 #profileButton {
-    flex: 2;
-    font-size: 20px;
-    margin: 0;
-    padding: 10px;
-    color: #D90416;
-    margin: auto;
-    text-align: right;
+  flex: 2;
+  font-size: 20px;
+  margin: 0;
+  padding: 10px;
+  color: #D90416;
+  margin: auto;
+  text-align: right;
+}
+
+/* Login Modal */
+#login_form{
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  color: #000;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  width: 50%;
+  padding: 16px;
+}
+
+.form_input {
+  margin: 5px 0;
+  padding: 5px 10px;
+}
+
+#btn_holder {
+  display: flex;
+  flex-direction: row;
+}
+
+.form_buttons {
+  width: 100px;
+  padding: 5px;
+  margin: 0 10px 0 0;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  padding-top: 60px;
 }
 
 a {
-    text-decoration: none;
-    color: #D90416;
+  text-decoration: none;
+  color: #D90416;
 }
 

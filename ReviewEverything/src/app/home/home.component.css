@@ -19,11 +19,12 @@
 
 #movie_card {
     display: flex;
-    margin-bottom: 90px;
+    margin: 10px;
     width: 200px;
     flex-direction: column;
-    padding: 10px;
+    margin-bottom: 90px;
     height: 300px;
+    -webkit-filter: drop-shadow(5px 5px 5px #000);
     filter: drop-shadow(5px 5px 5px #000);
 }
 
@@ -34,13 +35,14 @@
 
 #movie_title {
     font-size: 20px;
-    margin-left: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
 }
 
 #movie_text {
-    /* display: inline-flex; */
-    min-height: 80px;
+    min-height: 60px;
+    padding: 5px;
     background-color: rgb(42, 85, 140);
     background-color: rgba(42, 85, 140, 0.4);
 }

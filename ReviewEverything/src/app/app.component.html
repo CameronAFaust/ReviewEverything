@@ -17,4 +17,72 @@
     <div id="profileButton"><a [routerLink]="['/profile']">Profile</a></div>
 </div>
 
+<div id="login_modal" class="modal">
+    <form [formGroup]="loginForm" (ngSubmit) = "onLogin()" >
+        <div id="login_form">
+            <label for="email">email: </label>
+            <input formControlName='loginEmail' type="email" class="form_input" [ngClass]="{ 'is-invalid': loginSubmitted && loginEr.loginEmail.errors }" />
+            <div *ngIf="loginSubmitted && loginEr.loginEmail.errors" class="invalid-feedback">
+                <div *ngIf="loginEr.loginEmail.errors.required">Email is required</div>
+                <div *ngIf="loginEr.loginEmail.errors.loginEmail">Email must be a valid email address</div>
+            </div>
+
+            <label for="password">password: </label>
+            <input formControlName='loginPassword' type="password" class="form_input" [ngClass]="{ 'is-invalid': loginSubmitted && loginEr.loginPassword.errors }"/>
+            <div *ngIf="loginSubmitted && loginEr.loginPassword.errors" class="invalid-feedback">
+                <div *ngIf="loginEr.loginPassword.errors.required">Password is required</div>
+                <div *ngIf="loginEr.loginPassword.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+
+            <div id="btn_holder">
+                <input class="form_buttons" type="button" onclick="document.getElementById('login_modal').style.display='none'" value = "Cancel"/>
+                <input class="form_buttons" type="submit" value = "Login">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="signup_modal" class="modal">
+    <form [formGroup]="signupForm" (ngSubmit) = "onSignup()" >
+        <div id="login_form">
+            <label for="username">Username: </label>
+            <input formControlName='username' type="text" class="form_input" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.username.errors }">
+            <div *ngIf="signupSubmitted && signEr.username.errors" class="invalid-feedback">
+                <div *ngIf="signEr.username.errors.required">Username is required</div>
+            </div>
+            
+            <label for="email">Email: </label>
+            <input formControlName='email' type="email" class="form_input" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.email.errors }">
+            <div *ngIf="signupSubmitted && signEr.email.errors" class="invalid-feedback">
+                <div *ngIf="signEr.email.errors.required">Email is required</div>
+                <div *ngIf="signEr.email.errors.email">Email must be a valid email address</div>
+            </div>
+
+            <label for="fname">First Name: </label>
+            <input formControlName='fname' type="text" class="form_input" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.fname.errors }">
+            <div *ngIf="signupSubmitted && signEr.fname.errors" class="invalid-feedback">
+                <div *ngIf="signEr.fname.errors.required">First Name is required</div>
+            </div>
+
+            <label for="lname">Last Name: </label>
+            <input formControlName='lname' type="text" class="form_input"  [ngClass]="{ 'is-invalid': signupSubmitted && signEr.lname.errors }">
+            <div *ngIf="signupSubmitted && signEr.lname.errors" class="invalid-feedback">
+                <div *ngIf="signEr.lname.errors.required">Last Name is required</div>
+            </div>
+
+            <label for="password">Password: </label>
+            <input formControlName='password' type="password" class="form_input" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.password.errors }">
+            <div *ngIf="signupSubmitted && signEr.password.errors" class="invalid-feedback">
+                <div *ngIf="signEr.password.errors.required">Password is required</div>
+                <div *ngIf="signEr.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+            
+            <div id="btn_holder">
+                <input class="form_buttons" type="button" onclick="document.getElementById('signup_modal').style.display='none'" value = "Cancel"/>
+                <input class="form_buttons" type="submit" value = "Signup">
+            </div>
+        </div>
+    </form>
+</div>
+
 <router-outlet></router-outlet>

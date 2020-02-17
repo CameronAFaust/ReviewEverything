@@ -22,6 +22,12 @@ export class SearchPageComponent implements OnInit {
         this.apiService.getMovieIdByName(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
           this.searchDescription = 'Movies search results for: "' + params.get('id') + '"';
+          this.searchList.forEach(movie => {
+            if (movie.title.length > 25) {
+              movie.title = movie.title.substring(0, 25);
+              movie.title += "...";
+            }
+          });
         });
 
       } else if (params.get('type') == 'actor') {
@@ -43,7 +49,7 @@ export class SearchPageComponent implements OnInit {
         });
       }
     });
-    
+    console.log("Buddy Rich: Jazz Legend: 1917-1987".length);
   }
 
 }

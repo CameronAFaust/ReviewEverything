@@ -10,9 +10,8 @@
                     </div>
                     <p id="tagline">{{movies.tagline}}</p>
                     <p id="description">{{movies.overview}}</p>
-
                     <div id="more_details">
-                        <h2>More details</h2>
+                        <!-- <h2>More details</h2> -->
                         <p id="runtime"><b>Runtime: </b>{{movies.runtime}} minutes</p>
                         <p id="budget"><b>Budget: </b>${{movies.budget}}</p>
                         <p id="revenue"><b>Revenue: </b>${{movies.revenue}}</p>
@@ -30,7 +29,7 @@
 
     <div id="reviewSection">
         <div>
-            <h1>{{movies.original_title}}'s Reviews</h1>
+            <h1>{{movies.title}}'s Reviews</h1>
             <form [formGroup]="reviewForm" id="reviewForm" (ngSubmit) = "onReviewSubmit()" >
                 <label for="reviewTitle">Title: </label>
                 <input formControlName='reviewTitle' id="reviewTitle" type="text" maxlength="100" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewTitle.errors }">

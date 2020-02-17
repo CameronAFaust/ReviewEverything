@@ -39,7 +39,7 @@
     padding: 25px;
     margin: 10px;
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0, 0.5);
+    background-color: rgba(0,0,0, 0.65);
 }
 
 #movie_poster {
@@ -49,6 +49,16 @@
 
 #tagline {
     font-style: italic;
+}
+
+#description {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 19.5px;
+}
+
+#more_details {
+
 }
 
 #reviewSection {
