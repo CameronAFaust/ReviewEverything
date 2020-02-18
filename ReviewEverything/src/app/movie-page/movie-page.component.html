@@ -2,7 +2,12 @@
     <div id="movieHolder">
         <div id="movie_details" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/original/' + movies.backdrop_path + ')'}">
             <div id="details_holder">
-                <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="Movie Poster">
+                <div *ngIf="movies.poster_path">
+                    <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="Movie Poster">
+                </div>
+                <div *ngIf="!movies.poster_path">
+                    <img id="movie_poster" src="../assets/poster-placeholder.jpg" alt="Movie Poster">
+                </div>
                 <div id="text_holder">
                     <div id="title_holder">
                         <h1 id="title">{{movies.title}}</h1>
@@ -11,7 +16,6 @@
                     <p id="tagline">{{movies.tagline}}</p>
                     <p id="description">{{movies.overview}}</p>
                     <div id="more_details">
-                        <!-- <h2>More details</h2> -->
                         <p id="runtime"><b>Runtime: </b>{{movies.runtime}} minutes</p>
                         <p id="budget"><b>Budget: </b>${{movies.budget}}</p>
                         <p id="revenue"><b>Revenue: </b>${{movies.revenue}}</p>
