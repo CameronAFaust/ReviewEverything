@@ -1,4 +1,4 @@
-<div *ngIf="currentId == paramsId">
+<div id="profile" *ngIf="currentId == paramsId">
   <form [formGroup]="usernameForm" (ngSubmit)="updateUsername()">
     <label for="usernameInput">Edit username</label>
     <input formControlName='usernameInput' id='usernameInput' value='{{checkUser[0].username}}' type="text"
@@ -8,6 +8,7 @@
     </div>
     <input type="submit" value="submit">
   </form>
+
   <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
     <label for="emailInput">Edit email</label>
     <input formControlName='emailInput' id='emailInput' type="text" value='{{checkUser[0].email}}'
@@ -17,6 +18,7 @@
     </div>
     <input type="submit" value="submit">
   </form>
+
   <form [formGroup]="passwordForm" (ngSubmit)="updatepassword()">
     <label for="passwordInput">Edit password</label>
     <input formControlName='passwordInput' id='passwordInput' type="password"
@@ -26,6 +28,7 @@
     </div>
     <input type="submit" value="submit">
   </form>
+
   <div id="reviewCard" *ngFor="let review of reviews">
     <form [formGroup]="reviewForm" id="reviewForm" (ngSubmit)="updateReview(review)">
       <label for="reviewTitle">Title: </label>

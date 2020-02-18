@@ -1,6 +1,6 @@
 
 <div id="nav">
-    <div id="navHome"><a [routerLink]="['/home']">Review Everything!</a></div>
+    <div id="navHome" onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';"><a [routerLink]="['/home']">Review Everything!</a></div>
     <form id="search" #search = "ngForm" (ngSubmit) = "onSearchSubmit(search.value, search.typeOfSearch)" >
         <select name="typeOfSearch" value="title" ngModel>
             <option value="" selected disabled hidden> 
@@ -14,7 +14,7 @@
         <br/>
         <input id="searchButton" type="image" src="../assets/search.png" alt="Submit">
     </form>
-    <div id="profileButton"><a [routerLink]="['/user', currentUserId]">Profile</a></div>
+    <div id="profileButton"><a [routerLink]="['/profile']">Profile</a></div>
 </div>
 
 <div id="login_modal" class="modal">
@@ -36,6 +36,7 @@
 
             <div id="btn_holder">
                 <input class="form_buttons" type="button" onclick="document.getElementById('login_modal').style.display='none'" value = "Cancel"/>
+                <input class="form_buttons" type="button" onclick="document.getElementById('signup_modal').style.display='block'; document.getElementById('login_modal').style.display='none'"  value = "Create an account"/>
                 <input class="form_buttons" type="submit" value = "Login">
             </div>
         </div>
@@ -79,6 +80,7 @@
             
             <div id="btn_holder">
                 <input class="form_buttons" type="button" onclick="document.getElementById('signup_modal').style.display='none'" value = "Cancel"/>
+                <input class="form_buttons" type="button" onclick="document.getElementById('login_modal').style.display='block'; document.getElementById('signup_modal').style.display='none'"  value = "Already have an account?"/>
                 <input class="form_buttons" type="submit" value = "Signup">
             </div>
         </div>
