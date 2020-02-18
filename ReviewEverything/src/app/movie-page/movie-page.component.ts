@@ -63,14 +63,14 @@ export class MoviePageComponent implements OnInit {
 
   updateStarRating() {
     let data = this.reviewForm.value;
-    console.log(data.reviewRating)
+    // console.log(data.reviewRating)
     this.newRating = data.reviewRating;
   }
 
   populateEditForm(data) {
-    console.log(document);
-    (<HTMLInputElement>document.getElementById("reviewTitle")).value = data.reviewTitle;
-    (<HTMLInputElement>document.getElementById("reviewText")).value = data.reviewText;
+    document.getElementById('login_modal').style.display='block';
+    (<HTMLInputElement>document.getElementById("editReviewTitle")).value = data.reviewTitle;
+    (<HTMLInputElement>document.getElementById("editReviewText")).value = data.reviewText;
     this.reviewTitle = data.reviewTitle;
     this.reviewText = data.reviewText;
     this.reviewId = data.id;

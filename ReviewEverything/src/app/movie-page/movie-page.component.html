@@ -23,12 +23,7 @@
                 </div>
             </div>
         </div>
-        <!-- 
-        genres
-        vote_average/ vote_count
-        homepage?
-        production_companies? 
-        -->
+        <!-- Recomend movies -->
     </div>
 
     <div id="reviewSection">
@@ -90,3 +85,45 @@
 <ng-template #elseBlock>
     <h1>Loading</h1>
 </ng-template>
+
+<div id="edit_modal" class="modal">
+    <form [formGroup]="reviewForm" id="reviewForm" (ngSubmit) = "onReviewSubmit()" >
+        <div id="edit_form">
+            <label for="reviewTitle">Title: </label>
+            <input formControlName='editReviewTitle' id="reviewTitle" type="text" maxlength="100" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewTitle.errors }">
+            <div *ngIf="reviewSubmitted && reviewEr.reviewTitle.errors" class="invalid-feedback">
+                <div *ngIf="reviewEr.reviewTitle.errors.required">Title is required</div>
+            </div>
+            <br/>
+            <label for="reviewText">Description: </label>
+            <textarea formControlName='editReviewText' id="reviewText"maxlength="200" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewText.errors }"></textarea>
+            <div *ngIf="reviewSubmitted && reviewEr.reviewText.errors" class="invalid-feedback">
+                <div *ngIf="reviewEr.reviewText.errors.required">review text is required</div>
+            </div>
+            <br/>
+            <label for="reviewRating">Rating: </label>
+            <select formControlName='editReviewRating' id="rating" (change)="updateStarRating()" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewRating.errors }">
+                <option value="0">0</option>
+                <option value="0.5">0.5</option>
+                <option value="1">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+                <option value="2.5">2.5</option>
+                <option value="3">3</option>
+                <option value="3.5">3.5</option>
+                <option value="4">4</option>
+                <option value="4.5">4.5</option>
+                <option value="5">5</option>
+            </select> / 5
+            <!-- <star-rating id="newStar" value="{{ newRating }}" totalstars="0" checkedcolor="crimson" uncheckedcolor="black" size="24px" readonly="true"></star-rating> -->
+            <div *ngIf="reviewSubmitted && reviewEr.reviewRating.errors" class="invalid-feedback">
+                <div *ngIf="reviewEr.reviewRating.errors.required">review rating is required</div>
+            </div>
+            <br/>
+            <div id="btn_holder">
+                <input class="form_buttons" type="button" onclick="document.getElementById('edit_modal').style.display='none'" value = "Cancel"/>
+                <input class="form_buttons" type="submit" value = "edit">
+            </div>
+        </div>
+    </form>
+</div>
