@@ -160,4 +160,7 @@ p {
         padding: 7px;
         width: 90%;
     }
+    #reviewSection {
+        margin-bottom: 100px;
+    }
 }

@@ -59,7 +59,10 @@ a {
 }
 
 @media screen and (max-width: 800px) {
-    #popularMovies {
+    #what_to_watch {
         margin-top: 100px;
+    }
+    #popularMovies {
+        margin-bottom: 100px;
     }
 }

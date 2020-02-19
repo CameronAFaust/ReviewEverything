@@ -1,5 +1,5 @@
+<h2 id="searchText">{{searchDescription}}</h2>
 <div id="movie_search_holder" *ngIf="searchType == 'title' || searchType == 'actors_movies' || searchType == 'actors_movies' || searchType == 'genre'">
-    <h2 id="searchText">{{searchDescription}}</h2>
     <div *ngFor="let result of searchList">
         <a [routerLink]="['/movie', result.id]">
             <div id="movie_card" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/original/' + result.backdrop_path + ')'}">
@@ -18,8 +18,8 @@
     </div>
 </div>
 
+<!-- <h2 id="searchText">{{searchDescription}}</h2> -->
 <div id="movie_search_holder" *ngIf="searchType == 'actor'">
-    <h2 id="searchText">{{searchDescription}}</h2>
     <div *ngFor="let result of searchList">
         <a [routerLink]="['/search/actors_movies', result.id, result.name]">
             <div id="movie_card">

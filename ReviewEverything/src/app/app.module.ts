@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { RatingModule } from 'ng-starrating';
-import { NgxStarsModule } from 'ngx-stars';
+// import { NgxStarsModule } from 'ngx-stars';
 
 // import { AboutComponent } from './about/about.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,7 +31,7 @@ import { UserPageComponent } from './user-page/user-page.component';
     FormsModule,
     ReactiveFormsModule,
     RatingModule,
-    NgxStarsModule 
+    // NgxStarsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

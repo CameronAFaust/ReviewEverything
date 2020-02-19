@@ -58,7 +58,10 @@ a {
 }
 
 @media screen and (max-width: 800px) {
-    #movie_search_holder {
+    #searchText {
         margin-top: 100px;
+    }
+    #movie_search_holder {
+        margin-bottom: 100px;
     }
 }
