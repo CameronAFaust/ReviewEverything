@@ -127,3 +127,24 @@ a {
   right: 0px;
   z-index: 1;
 }
+
+
+@media screen and (max-width: 800px) {
+  #navHome { display: none;}
+  #profileButton { display: none;}
+  #spacer { display: none;}
+  #search {
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+  }
+  #typeOfSearch {
+    padding: 10px;
+    width: 80%;
+  }
+  #searchInput {
+    padding: 10px;
+    width: 95%;
+    text-align: center;
+  }
+}

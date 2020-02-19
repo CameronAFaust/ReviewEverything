@@ -2,7 +2,7 @@
 <div id="nav">
     <div id="navHome" onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';"><a [routerLink]="['/home']">Review Everything!</a></div>
     <form id="search" #search = "ngForm" (ngSubmit) = "onSearchSubmit(search.value, search.typeOfSearch)" >
-        <select name="typeOfSearch" value="title" ngModel>
+        <select id="typeOfSearch" name="typeOfSearch" value="title" ngModel>
             <option value="" selected disabled hidden> 
                 Select an Option 
             </option>

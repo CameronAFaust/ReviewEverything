@@ -133,3 +133,12 @@ p {
     background-color: rgba(0,0,0,0.8);
     padding-top: 60px;
 }
+
+@media screen and (max-width: 800px) {
+    #movie_details {
+        /* width: 100%; */
+    }
+    #details_holder {
+        flex-direction: column;
+    }
+}
