@@ -48,7 +48,7 @@
   font-size: 20px;
   margin: 0;
   padding: 10px;
-  color: #D90416;
+  color: rgba(217, 4, 22, .95);
   margin: auto;
   text-align: right;
   cursor: pointer;
@@ -76,6 +76,17 @@
   flex-direction: row;
 }
 
+.profile_modal_button {
+  padding: 5px;
+  margin: 5px 10px 5px 10px;
+  cursor: pointer;
+}
+
+
+.profile_modal_button:hover {
+  background-color: rgba(217, 4, 22, .7);
+}
+
 .form_buttons {
   /* width: 100px; */
   padding: 5px;
@@ -100,19 +111,19 @@
 
 a {
   text-decoration: none;
-  color: #D90416;
+  color: rgba(217, 4, 22, .95);
 }
 
 #profile_modal {
+  position: fixed;
+  height: fit-content;
+  text-align: right;
+  left: inherit;
   width: 20%;
   min-width: 100px;
   max-width: 150px;
-  height: fit-content;
-  text-align: right;
   padding-right: 5px;
   padding-bottom: 5px;
-  position: absolute;
   right: 0px;
-  left: inherit;
   z-index: 1;
 }
