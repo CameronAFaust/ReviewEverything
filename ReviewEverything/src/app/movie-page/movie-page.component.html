@@ -73,15 +73,9 @@
     <h1>Loading</h1>
 </ng-template>
 
-<div id="edit_modal" class="modal">
+<!-- <div id="edit_modal" class="modal">
     <form [formGroup]="reviewForm" id="reviewForm" (ngSubmit) = "onReviewSubmit()" >
         <div id="edit_form">
-            <!-- <label for="reviewTitle">Title: </label>
-            <input formControlName='editReviewTitle' class="form_input" id="reviewTitle" type="text" maxlength="100" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewTitle.errors }">
-            <div *ngIf="reviewSubmitted && reviewEr.reviewTitle.errors" class="invalid-feedback">
-                <div *ngIf="reviewEr.reviewTitle.errors.required">Title is required</div>
-            </div>
-            <br/> -->
             <label for="reviewText">Description: </label>
             <textarea formControlName='editReviewText' class="form_input" id="reviewText"maxlength="200" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewText.errors }"></textarea>
             <div *ngIf="reviewSubmitted && reviewEr.reviewText.errors" class="invalid-feedback">
@@ -102,7 +96,7 @@
                 <option value="4.5">4.5</option>
                 <option value="5">5</option>
             </select> / 5
-            <!-- <star-rating id="newStar" value="{{ newRating }}" totalstars="0" checkedcolor="crimson" uncheckedcolor="black" size="24px" readonly="true"></star-rating> -->
+            <star-rating id="newStar" value="{{ newRating }}" totalstars="0" checkedcolor="crimson" uncheckedcolor="black" size="24px" readonly="true"></star-rating>
             <div *ngIf="reviewSubmitted && reviewEr.reviewRating.errors" class="invalid-feedback">
                 <div *ngIf="reviewEr.reviewRating.errors.required">review rating is required</div>
             </div>
@@ -113,4 +107,4 @@
             </div>
         </div>
     </form>
-</div>
+</div> -->

@@ -1,7 +1,3 @@
-#loginHolder {
-    margin: 10px;
-}
-
 #what_to_watch {
     margin: auto;
     margin-top: 10px;
@@ -30,7 +26,6 @@
 
 #movie_poster {
     height: 100%;
-    /* filter: drop-shadow(10px 10px 10px #000); */
 }
 
 #movie_title {
@@ -61,4 +56,10 @@
 a {
     text-decoration : none;
     color: white;
+}
+
+@media screen and (max-width: 800px) {
+    #popularMovies {
+        margin-top: 100px;
+    }
 }

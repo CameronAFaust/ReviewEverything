@@ -1,6 +1,5 @@
-<h2 id="searchText">{{searchDescription}}</h2>
-
 <div id="movie_search_holder" *ngIf="searchType == 'title' || searchType == 'actors_movies' || searchType == 'actors_movies' || searchType == 'genre'">
+    <h2 id="searchText">{{searchDescription}}</h2>
     <div *ngFor="let result of searchList">
         <a [routerLink]="['/movie', result.id]">
             <div id="movie_card" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/original/' + result.backdrop_path + ')'}">
@@ -19,11 +18,17 @@
     </div>
 </div>
 
-<div *ngIf="searchType == 'actor'">
+<div id="movie_search_holder" *ngIf="searchType == 'actor'">
+    <h2 id="searchText">{{searchDescription}}</h2>
     <div *ngFor="let result of searchList">
         <a [routerLink]="['/search/actors_movies', result.id, result.name]">
             <div id="movie_card">
-                <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.profile_path}}" alt="Actor image">
+                <div *ngIf="result.profile_path">
+                    <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.profile_path}}" alt="Movie Poster">
+                </div>
+                <div *ngIf="!result.profile_path">
+                    <img id="movie_poster" src="../assets/defaultProfile.png" alt="Movie Poster">
+                </div>
                 <div id="movie_text">
                     <p id="movie_title">{{ result.name }}</p>
                     <p *ngIf="result.gender == 1" id="release_date">Female</p>

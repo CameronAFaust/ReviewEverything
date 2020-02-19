@@ -2,7 +2,7 @@
 <div id="nav">
     <div id="navHome" onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';"><a [routerLink]="['/home']">Review Everything!</a></div>
     <form id="search" #search = "ngForm" (ngSubmit) = "onSearchSubmit(search.value, search.typeOfSearch)" >
-        <select name="typeOfSearch" value="title" ngModel>
+        <select id="typeOfSearch" name="typeOfSearch" value="title" ngModel>
             <option value="" selected disabled hidden> 
                 Select an Option 
             </option>
@@ -19,13 +19,14 @@
 
 <div id="profile_modal" class="modal">
     <div *ngIf="!currentUserId">
-        <div class="form_buttons" type="button" onclick="document.getElementById('login_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">Login</div>
-        <div class="form_buttons" type="button" onclick="document.getElementById('signup_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">SignUp</div>
+        <div class="profile_modal_button" type="button" onclick="document.getElementById('login_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">Login</div>
+        <div class="profile_modal_button" type="button" onclick="document.getElementById('signup_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">SignUp</div>
     </div>
     <div *ngIf="currentUserId">
-        <div class="form_buttons" onclick="document.getElementById('profile_modal').style.display='none'"><a [routerLink]="['/profile']">See Profile</a></div>
-        <div class="form_buttons" type="button" (click)="onLogout();" onclick="document.getElementById('profile_modal').style.display='none'">Logout</div>
+        <div class="profile_modal_button" onclick="document.getElementById('profile_modal').style.display='none'"><a [routerLink]="['/profile']">See Profile</a></div>
+        <div class="profile_modal_button" type="button" (click)="onLogout();" onclick="document.getElementById('profile_modal').style.display='none'">Logout</div>
     </div>
+    <div class="profile_modal_button" onclick="document.getElementById('profile_modal').style.display='none'">Close</div>
 </div>
 
 <div id="login_modal" class="modal">

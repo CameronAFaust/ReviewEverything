@@ -1,5 +1,5 @@
-<h2 id="what_to_watch">Popular movies this week:</h2>
 <div id="popularMovies">
+    <h2 id="what_to_watch">Popular movies this week:</h2>
     <div *ngFor="let result of popularMovies">
         <div id="movie_holder">
             <a [routerLink]="['/movie', result.id]">
