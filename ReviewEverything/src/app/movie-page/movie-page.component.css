@@ -135,10 +135,29 @@ p {
 }
 
 @media screen and (max-width: 800px) {
-    #movie_details {
-        /* width: 100%; */
+    #holder {
+        margin-top: 100px;
     }
     #details_holder {
         flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    #reviewForm {
+        width: 100%;
+    }
+    #movie_details {
+        padding: 0;
+        margin: auto;
+    }
+    #title_holder {
+        flex-direction: column;
+    }
+    #review_submit {
+        margin: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding: 7px;
+        width: 90%;
     }
 }

@@ -147,4 +147,7 @@ a {
     width: 95%;
     text-align: center;
   }
+  #searchButton {
+    display: none;
+  }
 }
