@@ -16,6 +16,7 @@ export class UserPageComponent implements OnInit {
     currentId;
     paramsId;
     reviews;
+    newRating;
     usernameForm: FormGroup;
     emailForm: FormGroup;
     passwordForm: FormGroup;
@@ -64,6 +65,10 @@ export class UserPageComponent implements OnInit {
     get emailEr() { return this.emailForm.controls; }
     get passwordEr() { return this.passwordForm.controls; }
 
+
+    onRatingSet(rating) {
+        this.newRating = rating;
+      }
 
     updateUsername() {
         this.usernameSubmitted = true;
@@ -124,13 +129,13 @@ export class UserPageComponent implements OnInit {
         if (data.reviewText == null) {
             data.reviewText = review.review_text;
         }
-        if (data.reviewTitle == null) {
-            data.reviewTitle = review.review_title;
-        }
+        // if (data.reviewTitle == null) {
+        //     data.reviewTitle = review.review_title;
+        // }
         if (data.reviewRating == null) {
             data.reviewRating = review.rating;
         }
-        this.http.put('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': review.movie_id, 'rating': data.reviewRating, 'username': localStorage.getItem('username'), 'reviewID': review.id }).subscribe((res) => {
+        this.http.put('http://localhost:3000/review', { 'review_text': data.reviewText, 'movieID': review.movie_id, 'rating': this.newRating, 'username': localStorage.getItem('username'), 'reviewID': review.id }).subscribe((res) => {
             this.http.get('http://localhost:3000/review/user/' + this.currentUserId).subscribe((res: any) => {
                 this.reviews = res;
             });
