@@ -8,7 +8,7 @@
   width: 100%;
   background-color: #122A40;
   height: 55px;
-  z-index: 10000;
+  z-index: 1000;
 }
 
 #spacer {
@@ -51,6 +51,7 @@
   color: #D90416;
   margin: auto;
   text-align: right;
+  cursor: pointer;
 }
 
 /* Login Modal */
@@ -79,13 +80,14 @@
   /* width: 100px; */
   padding: 5px;
   margin: 0 10px 0 0;
+  cursor: pointer;
 }
 
 /* The Modal (background) */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 1001;
   left: 0;
   top: 0;
   width: 100%;
@@ -101,3 +103,16 @@ a {
   color: #D90416;
 }
 
+#profile_modal {
+  width: 20%;
+  min-width: 100px;
+  max-width: 150px;
+  height: fit-content;
+  text-align: right;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  position: absolute;
+  right: 0px;
+  left: inherit;
+  z-index: 1;
+}

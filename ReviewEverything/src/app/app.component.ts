@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, HostListener } from "@angular/core";
 import {Router} from "@angular/router"
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  currentUserId = localStorage.getItem('userId');
+  currentUserId = localStorage.getItem('userId');  
   loginSubmitted = false;
   signupSubmitted = false;
 
@@ -46,15 +46,27 @@ export class AppComponent {
   }
 
   onLogout(){
+    console.log(this.currentUserId);
     this.loginSubmitted = false;
     this.signupSubmitted = false;
     localStorage.clear();
   }
   title = "ReviewEverything";
-  getSearchInput(formData) {
-    alert(formData);
-  }
   onSearchSubmit(formData) {
     this.router.navigate(['/search', formData.typeOfSearch, formData.movieSearch])
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+      if (event.target == document.getElementById('profile_modal')) {
+        document.getElementById('profile_modal').style.display = "none";
+      }
+      if (event.target == document.getElementById('login_modal')) {
+        document.getElementById('login_modal').style.display = "none";
+      }
+      if (event.target == document.getElementById('signup_modal')) {
+        document.getElementById('signup_modal').style.display = "none";
+      }
   }
 }

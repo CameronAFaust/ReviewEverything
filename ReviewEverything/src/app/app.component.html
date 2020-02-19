@@ -14,7 +14,18 @@
         <br/>
         <input id="searchButton" type="image" src="../assets/search.png" alt="Submit">
     </form>
-    <div id="profileButton"><a [routerLink]="['/profile']">Profile</a></div>
+    <div id="profileButton" onclick="document.getElementById('profile_modal').style.display='block'">Profile</div>
+</div>
+
+<div id="profile_modal" class="modal">
+    <div *ngIf="!currentUserId">
+        <div class="form_buttons" type="button" onclick="document.getElementById('login_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">Login</div>
+        <div class="form_buttons" type="button" onclick="document.getElementById('signup_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">SignUp</div>
+    </div>
+    <div *ngIf="currentUserId">
+        <div class="form_buttons" onclick="document.getElementById('profile_modal').style.display='none'"><a [routerLink]="['/profile']">See Profile</a></div>
+        <div class="form_buttons" type="button" (click)="onLogout();" onclick="document.getElementById('profile_modal').style.display='none'">Logout</div>
+    </div>
 </div>
 
 <div id="login_modal" class="modal">
