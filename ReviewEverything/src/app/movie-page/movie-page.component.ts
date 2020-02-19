@@ -63,6 +63,12 @@ export class MoviePageComponent implements OnInit {
     this.newRating = rating;
   }
 
+  showModal() {
+    document.getElementById('edit_modal').style.display='block';
+    document.getElementById('stars').style.display='none';
+
+  }
+
   populateEditForm(data) {
     console.log(document);
     // (<HTMLInputElement>document.getElementById("reviewTitle")).value = data.reviewTitle;
@@ -85,7 +91,7 @@ export class MoviePageComponent implements OnInit {
     }
 
     let data = this.reviewForm.value;
-    data.reviewTitle = (<HTMLInputElement>document.getElementById("reviewTitle")).value
+    // data.reviewTitle = (<HTMLInputElement>document.getElementById("reviewTitle")).value
     data.reviewText = (<HTMLInputElement>document.getElementById("reviewText")).value
     console.log(data)
     data['movieId'] = this.movies.id;
