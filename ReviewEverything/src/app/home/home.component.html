@@ -1,4 +1,4 @@
-<h2 id="what_to_watch">What to watch next:</h2>
+<h2 id="what_to_watch">Popular movies this week:</h2>
 <div id="popularMovies">
     <div *ngFor="let result of popularMovies">
         <div id="movie_holder">
@@ -7,16 +7,9 @@
                     <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" alt="Movie Poster">
                     <div id="movie_text">
                         <p id="movie_title">{{ result.title }}</p>
-                        <!-- <p id="release_date">Released: ({{ result.release_date }})</p> -->
                     </div>
                 </div>
             </a>
         </div>
     </div>
 </div>
-
-<button onclick="document.getElementById('login_modal').style.display='block'" style="width:auto;">Login</button>
-<button onclick="document.getElementById('signup_modal').style.display='block'" style="width:auto;">Signup</button>
-<form (ngSubmit) = "onLogout()" > 
-    <input type = "submit" value = "logout">
-</form>

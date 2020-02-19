@@ -4,7 +4,12 @@
     <div *ngFor="let result of searchList">
         <a [routerLink]="['/movie', result.id]">
             <div id="movie_card" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/original/' + result.backdrop_path + ')'}">
-                <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" alt="Movie Poster">
+                <div *ngIf="result.poster_path">
+                    <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" alt="Movie Poster">
+                </div>
+                <div *ngIf="!result.poster_path">
+                    <img id="movie_poster" src="../assets/poster-placeholder.jpg" alt="Movie Poster">
+                </div>
                 <div id="movie_text">
                     <p id="movie_title">{{ result.title }}</p>
                     <p id="release_date">({{ result.release_date }})</p>

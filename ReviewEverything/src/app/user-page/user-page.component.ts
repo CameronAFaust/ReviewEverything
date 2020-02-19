@@ -35,7 +35,8 @@ export class UserPageComponent implements OnInit {
             this.paramsId = params.get('userid');
         });
         if (!this.currentUserId) {
-            // this.router.navigate(['/']);
+            document.getElementById('signup_modal').style.display='block'
+            document.getElementById('profile').style.display='none'
         }
         this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
             this.user = res;

@@ -75,6 +75,10 @@ export class MoviePageComponent implements OnInit {
 
   onReviewSubmit() {
     this.reviewSubmitted = true;
+    if (!this.currentUserId) {
+      document.getElementById('signup_modal').style.display='block'
+      document.getElementById('holder').style.display='none'
+    }
     if (this.reviewForm.invalid) {
       return;
     }

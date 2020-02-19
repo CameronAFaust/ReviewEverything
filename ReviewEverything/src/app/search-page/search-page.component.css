@@ -18,8 +18,7 @@
 
 #movie_poster {
     height: 100%;
-    min-height: 300px;
-    /* filter: drop-shadow(10px 10px 10px #000); */
+    height: 300px;
 }
 
 #movie_title {

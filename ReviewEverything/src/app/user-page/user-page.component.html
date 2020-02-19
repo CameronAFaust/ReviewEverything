@@ -1,4 +1,4 @@
-<div *ngIf="currentId == paramsId">
+<div id="profile" *ngIf="currentId == paramsId">
   <form [formGroup]="usernameForm" (ngSubmit)="updateUsername()">
     <label for="usernameInput">Edit username</label>
     <input formControlName='usernameInput' id='usernameInput' value='{{checkUser[0].username}}' type="text"
@@ -8,6 +8,7 @@
     </div>
     <input type="submit" value="submit">
   </form>
+
   <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
     <label for="emailInput">Edit email</label>
     <input formControlName='emailInput' id='emailInput' type="text" value='{{checkUser[0].email}}'
@@ -17,6 +18,7 @@
     </div>
     <input type="submit" value="submit">
   </form>
+
   <form [formGroup]="passwordForm" (ngSubmit)="updatepassword()">
     <label for="passwordInput">Edit password</label>
     <input formControlName='passwordInput' id='passwordInput' type="password"
@@ -26,15 +28,16 @@
     </div>
     <input type="submit" value="submit">
   </form>
+
   <div id="reviewCard" *ngFor="let review of reviews">
     <form [formGroup]="reviewForm" id="reviewForm" (ngSubmit)="updateReview(review)">
-      <label for="reviewTitle">Title: </label>
+      <!-- <label for="reviewTitle">Title: </label>
       <input formControlName='reviewTitle' value={{review.review_title}} id="reviewTitle" type="text" maxlength="100"
         [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewTitle.errors }">
       <div *ngIf="reviewSubmitted && reviewEr.reviewTitle.errors" class="invalid-feedback">
         <div *ngIf="reviewEr.reviewTitle.errors.required">Title is required</div>
-      </div>
-      <br />
+      </div> -->
+      <!-- <br /> -->
       <label for="reviewText">Description: </label>
       <textarea formControlName='reviewText' value={{review.review_text}} id="reviewText" maxlength="200"
         [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewText.errors }"></textarea>
@@ -42,7 +45,7 @@
         <div *ngIf="reviewEr.reviewText.errors.required">Review text is required</div>
       </div>
       <br />
-      <label for="reviewRating">Rating: </label>
+      <!-- <label for="reviewRating">Rating: </label>
       <select formControlName='reviewRating' id="rating"
         [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewRating.errors }">
         <option value="none" selected disabled hidden>
@@ -63,7 +66,7 @@
       <div *ngIf="reviewSubmitted && reviewEr.reviewRating.errors" class="invalid-feedback">
         <div *ngIf="reviewEr.reviewRating.errors.required">review rating is required</div>
       </div>
-      <br />
+      <br /> -->
       <input type="submit" value="submit">
     </form>
   </div>
