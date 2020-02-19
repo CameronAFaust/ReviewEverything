@@ -64,7 +64,7 @@ router.post('/', (req, res) => {
   //   res.redirect('/')
   // }
   // connection.query("INSERT INTO reviews_and_ratings(review_title,review_text,rating,movie_id,username,user_id) VALUES('" + req.body.review_title + "','" + req.body.review_text + "','" + req.body.rating + "','" + req.body.movieID + "','" + req.body.username + "','" + req.body.userID + "')", function (err, result, fields) {
-  let newReview = {review_title: req.body.review_title, review_text: req.body.review_text, rating: req.body.rating, movie_id: req.body.movieID, username: req.body.username, user_id: req.body.userID};
+  let newReview = {review_text: req.body.review_text, rating: req.body.rating, movie_id: req.body.movieID, username: req.body.username, user_id: req.body.userID};
   connection.query("INSERT INTO reviews_and_ratings SET ?", newReview, function (err, result, fields){
     if (err) throw err;
 

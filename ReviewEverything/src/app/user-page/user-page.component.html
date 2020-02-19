@@ -1,3 +1,4 @@
+<div>
 <div id="profile" *ngIf="currentId == paramsId">
   <form [formGroup]="usernameForm" (ngSubmit)="updateUsername()">
     <label for="usernameInput">Edit username</label>
@@ -45,6 +46,7 @@
       </div> -->
       <!-- <br /> -->
       <label for="reviewText">Description: </label>
+      <hr>
       <textarea formControlName='reviewText' value={{review.review_text}} id="reviewText" maxlength="200"
         [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewText.errors }"></textarea>
       <div *ngIf="reviewSubmitted && reviewEr.reviewText.errors" class="invalid-feedback">
@@ -73,7 +75,9 @@
         <div *ngIf="reviewEr.reviewRating.errors.required">review rating is required</div>
       </div>
       <br /> -->
+      <ngx-stars (ratingOutput)="onRatingSet($event)" [initialStars]="review.rating" [maxStars]="5"></ngx-stars>
       <input type="submit" value="submit">
+      <hr>
     </form>
   </div>
 </div>

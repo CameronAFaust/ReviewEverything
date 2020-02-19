@@ -65,7 +65,7 @@ export class MoviePageComponent implements OnInit {
 
   populateEditForm(data) {
     console.log(document);
-    (<HTMLInputElement>document.getElementById("reviewTitle")).value = data.reviewTitle;
+    // (<HTMLInputElement>document.getElementById("reviewTitle")).value = data.reviewTitle;
     (<HTMLInputElement>document.getElementById("reviewText")).value = data.reviewText;
     this.reviewTitle = data.reviewTitle;
     this.reviewText = data.reviewText;
@@ -97,7 +97,7 @@ export class MoviePageComponent implements OnInit {
       if (data.reviewText == "") {
         data.reviewText = this.reviewText;
       }
-      this.http.put('http://localhost:3000/review', { 'review_title': data.reviewTitle, 'review_text': data.reviewText, 'movieID': data.movieId, 'rating': this.newRating, 'reviewID': this.reviewId }).subscribe((res) => {
+      this.http.put('http://localhost:3000/review', {  'review_text': data.reviewText, 'movieID': data.movieId, 'rating': this.newRating, 'reviewID': this.reviewId }).subscribe((res) => {
         //Get user review data from the database
         this.http.get('http://localhost:3000/review/movie/' + this.movies.id + '').subscribe((res) => {
           this.reviews = res;
