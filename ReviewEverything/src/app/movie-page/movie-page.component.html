@@ -43,27 +43,12 @@
                 <div *ngIf="reviewSubmitted && reviewEr.reviewText.errors" class="invalid-feedback">
                     <div *ngIf="reviewEr.reviewText.errors.required">review text is required</div>
                 </div>
-                <!-- <br/> -->
-                <!-- <label for="reviewRating">Rating: </label> -->
-                <!-- <select formControlName='reviewRating' id="rating" (change)="updateStarRating()" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewRating.errors }">
-                    <option value="0">0</option>
-                    <option value="0.5">0.5</option>
-                    <option value="1">1</option>
-                    <option value="1.5">1.5</option>
-                    <option value="2">2</option>
-                    <option value="2.5">2.5</option>
-                    <option value="3">3</option>
-                    <option value="3.5">3.5</option>
-                    <option value="4">4</option>
-                    <option value="4.5">4.5</option>
-                    <option value="5">5</option>
-                </select> / 5 -->
-                <!-- <star-rating id="newStar" value="{{ newRating }}" totalstars="0" checkedcolor="crimson" uncheckedcolor="black" size="24px" readonly="true"></star-rating> -->
-                <div *ngIf="reviewSubmitted && reviewEr.reviewRating.errors" class="invalid-feedback">
-                    <div *ngIf="reviewEr.reviewRating.errors.required">review rating is required</div>
-                </div>
-                <!-- <br/> -->
-                <input type = "submit" id="review_submit" value = "submit">
+                <br/>
+                <label for="reviewRating">Rating: </label>
+                <br/>
+                <ngx-stars (ratingOutput)="onRatingSet($event)" [maxStars]="5"></ngx-stars>
+                <br/>
+                <input type = "submit" value = "submit">
             </form>
         </div>
         <!-- <hr> -->
@@ -73,8 +58,8 @@
             <div id="reviewCard" *ngFor="let review of reviews">
                 <button *ngIf="user[0].is_admin == 1 || currentUserId == review.user_id" (click) = "deleteReview({ id: review.id  })">Delete</button>
                 <button  *ngIf="currentUserId == review.user_id" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, id: review.id})">edit</button>
-                <!-- <p>{{review.review_title}}</p> -->
-                <star-rating value="{{ review.rating }}" totalstars="5" checkedcolor="crimson" uncheckedcolor="black" size="24px" readonly="true"></star-rating>
+                <p>{{review.review_title}}</p>
+                <ngx-stars [readonly]="true" [maxStars]="5" [initialStars]="review.rating"></ngx-stars>
                 <p>by {{review.username}}</p>
                 <p>{{review.review_text}}</p>
                 <hr>
