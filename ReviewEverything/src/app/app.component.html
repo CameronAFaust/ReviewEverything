@@ -100,15 +100,10 @@
 </div>
 
 <div id="mobile_nav">
-    <!-- <div id="mobileNavHome" onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';"> -->
         <a id="mobileNavHome" [routerLink]="['/home']">
             <img onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';" id="navHomeImg" src="../assets/home.png" alt="home">
         </a>
-    <!-- </div> -->
-    <!-- <a id="mobileProfileButton" [routerLink]="['/home']"> -->
         <img onclick="document.getElementById('profile_modal').style.display='block'" id="mobileProfileButton" src="../assets/navDefaultProfile.png" alt="home">
-    <!-- </a> -->
-    <!-- <div id="mobileProfileButton" onclick="document.getElementById('profile_modal').style.display='block'">Profile</div> -->
 </div>
 
 <router-outlet></router-outlet>

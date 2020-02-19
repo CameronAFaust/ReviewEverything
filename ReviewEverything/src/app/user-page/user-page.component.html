@@ -1,6 +1,7 @@
 <div id="profile" *ngIf="currentId == paramsId">
   <form [formGroup]="usernameForm" (ngSubmit)="updateUsername()">
     <label for="usernameInput">Edit username</label>
+    <br>
     <input formControlName='usernameInput' id='usernameInput' value='{{checkUser[0].username}}' type="text"
       [ngClass]="{ 'is-invalid': usernameSubmitted && usernameEr.usernameInput.errors }" />
     <div *ngIf="usernameSubmitted && usernameEr.usernameInput.errors" class="invalid-feedback">
@@ -8,9 +9,11 @@
     </div>
     <input type="submit" value="submit">
   </form>
+  <br>
 
   <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
     <label for="emailInput">Edit email</label>
+    <br>
     <input formControlName='emailInput' id='emailInput' type="text" value='{{checkUser[0].email}}'
       [ngClass]="{ 'is-invalid': emailSubmitted && emailEr.emailInput.errors }" />
     <div *ngIf="emailSubmitted && emailEr.emailInput.errors" class="invalid-feedback">
@@ -18,9 +21,11 @@
     </div>
     <input type="submit" value="submit">
   </form>
+  <br>
 
   <form [formGroup]="passwordForm" (ngSubmit)="updatepassword()">
     <label for="passwordInput">Edit password</label>
+    <br>
     <input formControlName='passwordInput' id='passwordInput' type="password"
       [ngClass]="{ 'is-invalid': passwordSubmitted && passwordEr.passwordInput.errors }" />
     <div *ngIf="passwordSubmitted && passwordEr.passwordInput.errors" class="invalid-feedback">
@@ -28,6 +33,7 @@
     </div>
     <input type="submit" value="submit">
   </form>
+  <br>
 
   <div id="reviewCard" *ngFor="let review of reviews">
     <form [formGroup]="reviewForm" id="reviewForm" (ngSubmit)="updateReview(review)">
