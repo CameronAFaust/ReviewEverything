@@ -66,7 +66,8 @@ export class MoviePageComponent implements OnInit {
   populateEditForm(data) {
     console.log(document);
     // (<HTMLInputElement>document.getElementById("reviewTitle")).value = data.reviewTitle;
-    (<HTMLInputElement>document.getElementById("reviewText")).value = data.reviewText;
+    (<HTMLInputElement>document.getElementById("editReviewText")).value = data.reviewText;
+    (<HTMLInputElement>document.getElementById("editReviewRating")).value = data.reviewRating;
     this.reviewTitle = data.reviewTitle;
     this.reviewText = data.reviewText;
     this.reviewId = data.id;
