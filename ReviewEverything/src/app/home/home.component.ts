@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
         }
       });
       this.popularMovies.length = 6;
+
     });
     this.apiService.getPopularPeople().subscribe((data :any)=>{
       this.popularPeople = data.results;

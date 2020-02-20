@@ -1,8 +1,12 @@
 #what_to_watch {
     margin: auto;
-    margin-top: 10px;
+    width: fit-content;
+    padding: 10px;
     text-align: center;
-    font-size: 1.5em
+    font-size: 28px;
+    background-color: rgba(42, 85, 140, 0.8);
+    -webkit-filter: drop-shadow(5px 5px 5px #000);
+    filter: drop-shadow(5px 5px 5px #000);
 }
 
 #popularMovies {
@@ -11,6 +15,11 @@
     max-width: 1400px;
     margin: auto;
     justify-content: center;
+}
+
+#background {
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #movie_card {
@@ -39,7 +48,7 @@
     min-height: 60px;
     padding: 5px;
     background-color: rgb(42, 85, 140);
-    background-color: rgba(42, 85, 140, 0.4);
+    background-color: rgba(42, 85, 140, 0.6);
 }
 
 #release_date {
