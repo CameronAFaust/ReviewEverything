@@ -91,6 +91,9 @@ export class ApiService {
   public getMovieIdByName(MovieName){
     return this.httpClient.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.API_KEY}&language=en-US&query=${MovieName}&page=1&include_adult=false`);
   }
+  public getActorsInMovie(MovieId){
+    return this.httpClient.get(`https://api.themoviedb.org/3/movie/${MovieId}/credits?api_key=${this.API_KEY}`);
+  }
   // ACTOR
   public getActorIdByName(ActorName){
     return this.httpClient.get(`https://api.themoviedb.org/3/search/person?api_key=${this.API_KEY}&language=en-US&query=${ActorName}&include_adult=false`);
