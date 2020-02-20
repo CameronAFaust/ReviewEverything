@@ -27,29 +27,32 @@ export class SearchPageComponent implements OnInit {
               movie.title = movie.title.substring(0, 25);
               movie.title += "...";
             }
-          });
+          this.searchList.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1)
+        });
         });
 
       } else if (params.get('type') == 'actor') {
         this.apiService.getActorIdByName(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
           this.searchDescription = 'Actor search results for: "' + params.get('id') + '"';
+          this.searchList.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1)
         });
 
       } else if (params.get('type') == 'actors_movies') {
         this.apiService.getActorMoviesById(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.cast;
           this.searchDescription = 'Movies with the actor: "' + params.get('actorName') + '"';
+          this.searchList.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1)
         });
 
       } else {  
         this.apiService.getGenreMoviesById(params.get('id')).subscribe((data :any)=>{
           this.searchList = data.results;
           this.searchDescription = 'Genre search results for: "' + params.get('id') + '"';
+          this.searchList.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1)
         });
-      }
+      }      
     });
-    console.log("Buddy Rich: Jazz Legend: 1917-1987".length);
   }
 
 }

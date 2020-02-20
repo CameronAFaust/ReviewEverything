@@ -113,6 +113,9 @@ export class ApiService {
   public getPopularMovies(){
     return this.httpClient.get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.API_KEY}&language=en-US&page=1`)
   }
-
+  // popular People
+  public getPopularPeople(){
+    return this.httpClient.get(`https://api.themoviedb.org/3/trending/person/week?api_key=${this.API_KEY}&language=en-US&page=1`)
+  }
   constructor(private httpClient: HttpClient) { }
 }
