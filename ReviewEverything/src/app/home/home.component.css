@@ -18,6 +18,7 @@
 }
 
 #background {
+    padding-top: 15px;
     background-size: cover;
     background-repeat: no-repeat;
 }

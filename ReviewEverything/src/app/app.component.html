@@ -30,7 +30,8 @@
 </div>
 
 <div id="login_modal" class="modal">
-    <form [formGroup]="loginForm" (ngSubmit) = "onLogin()" >
+    <!-- onLogin() -->
+    <form [formGroup]="loginForm" (ngSubmit) = "captchaRef.execute()" >
         <div id="login_form">
             <label for="email">email: </label>
             <input formControlName='loginEmail' type="email" class="form_input" [ngClass]="{ 'is-invalid': loginSubmitted && loginEr.loginEmail.errors }" />
@@ -45,6 +46,13 @@
                 <div *ngIf="loginEr.loginPassword.errors.required">Password is required</div>
                 <div *ngIf="loginEr.loginPassword.errors.minlength">Password must be at least 6 characters</div>
             </div>
+
+            <re-captcha
+                #captchaRef="reCaptcha"
+                (resolved)="onLogin($event)"
+                siteKey="6LdZFNsUAAAAAEE6xC0Mlmg661lCyN0TmkWIgtBQ"
+                size="invisible"
+            ></re-captcha>
 
             <div id="btn_holder">
                 <input class="form_buttons" type="button" onclick="document.getElementById('login_modal').style.display='none'" value = "Cancel"/>

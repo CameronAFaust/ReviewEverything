@@ -12,8 +12,9 @@ export class AppComponent {
   currentUserId = localStorage.getItem('userId');  
   loginSubmitted = false;
   signupSubmitted = false;
-
+  
   constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
+  
   loginForm = this.formBuilder.group({
     loginEmail: ['', [Validators.required, Validators.email]],
     loginPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -27,8 +28,16 @@ export class AppComponent {
   });
   get loginEr() { return this.loginForm.controls; }
   get signEr() { return this.signupForm.controls; }
+  
+  public captchaResponse: string = '';
+  public resolved(captchaResponse: string) {
+    const newResponse = captchaResponse
+      ? `${captchaResponse.substr(0, 7)}...${captchaResponse.substr(-7)}`
+      : captchaResponse;
+    // this.captchaResponse += `${JSON.stringify(newResponse)}\n`;
+  }
 
-  onLogin() {
+  onLogin(captcha) {
     this.loginSubmitted = true;
     if (this.loginForm.invalid) {
       return;

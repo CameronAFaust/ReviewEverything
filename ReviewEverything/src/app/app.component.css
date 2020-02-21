@@ -143,6 +143,8 @@ a {
   color: rgba(217, 4, 22, .95);
 }
 
+.grecaptcha-badge { visibility: hidden; }
+
 #profile_modal {
   position: fixed;
   height: fit-content;

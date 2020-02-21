@@ -24,31 +24,56 @@
             </div>
         </div>
     </div>
-    <h2 id="movieCredits">Credits:</h2>
-    <div id="credits">
-        <div *ngFor="let credit of movieCredits">
-            <div id="actor_holder">
-                <a [routerLink]="['/search/actors_movies', credit.id, credit.name]">
-                    <div id="actor_card">
-                        <div *ngIf="credit.profile_path">
-                            <img id="actor_poster" src="https://image.tmdb.org/t/p/original/{{credit.profile_path}}" alt="Movie Poster">
-                        </div>
-                        <div *ngIf="!credit.profile_path">
-                            <img id="actor_poster" src="../assets/defaultProfile.png" alt="Movie Poster">
-                        </div>
-                        <div id="actor_text">
-                            <p id="actor_title">{{ credit.name }}</p>
-                            <div *ngIf="credit.character">
-                                <p id="actor_title">as</p>
-                                <p id="actor_title">{{ credit.character }}</p>
+
+    <div *ngIf="movieCredits.length > 0">
+        <h2 id="movieCredits">Credits:</h2>
+        <div id="credits">
+            <div *ngFor="let credit of movieCredits">
+                <div id="actor_holder">
+                    <a [routerLink]="['/search/actors_movies', credit.id, credit.name]">
+                        <div id="actor_card">
+                            <div *ngIf="credit.profile_path">
+                                <img id="actor_poster" src="https://image.tmdb.org/t/p/original/{{credit.profile_path}}" alt="Movie Poster">
+                            </div>
+                            <div *ngIf="!credit.profile_path">
+                                <img id="actor_poster" src="../assets/defaultProfile.png" alt="Movie Poster">
+                            </div>
+                            <div id="actor_text">
+                                <p id="actor_title">{{ credit.name }}</p>
+                                <div *ngIf="credit.character">
+                                    <p id="actor_title">as</p>
+                                    <p id="actor_title">{{ credit.character }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Recomend movies -->
+
+    <div *ngIf="recommendations.length > 0">
+        <h2 id="movieCredits">What people also liked:</h2>
+        <div id="credits">
+            <div *ngFor="let movie of recommendations">
+                <div id="actor_holder">
+                    <a [routerLink]="['/movie', movie.id]">
+                        <div id="actor_card">
+                            <div *ngIf="movie.poster_path">
+                                <img id="actor_poster" src="https://image.tmdb.org/t/p/original/{{movie.poster_path}}" alt="Movie Poster">
+                            </div>
+                            <div *ngIf="!movie.poster_path">
+                                <img id="actor_poster" src="../assets/poster-placeholder.jpg" alt="Movie Poster">
+                            </div>
+                            <div id="actor_text">
+                                <p id="actor_title">{{ movie.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="reviewSection">
         <div>
