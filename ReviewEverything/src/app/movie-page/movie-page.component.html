@@ -49,7 +49,7 @@
             <hr>
             <div id="reviewCard" *ngFor="let review of reviews">
                 <button *ngIf="user[0].is_admin == 1 || currentUserId == review.user_id" (click) = "deleteReview({ id: review.id  })">Delete</button>
-                <button (click)="showModal()" *ngIf="currentUserId == review.user_id" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, id: review.id})">edit</button>
+                <button *ngIf="currentUserId == review.user_id" (click) = "populateEditForm({reviewTitle: review.review_title, reviewText: review.review_text, reviewRating: review.rating, id: review.id})">edit</button>
                 <p>{{review.review_title}}</p>
                 <ngx-stars id='stars' [readonly]="true" [maxStars]="5" [initialStars]="review.rating"></ngx-stars>
                 <p>by {{review.username}}</p>
@@ -69,13 +69,13 @@
     <form [formGroup]="reviewForm" id="reviewForm" (ngSubmit) = "onReviewSubmit()" >
         <div id="edit_form">
             <label for="editReviewText">Description: </label>
-            <textarea formControlName='editReviewText' class="form_input" id="reviewText"maxlength="200" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewText.errors }"></textarea>
+            <textarea formControlName='editReviewText' class="form_input" id="editReviewText"maxlength="200" [ngClass]="{ 'is-invalid': reviewSubmitted && reviewEr.reviewText.errors }"></textarea>
             <div *ngIf="reviewSubmitted && reviewEr.reviewText.errors" class="invalid-feedback">
                 <div *ngIf="reviewEr.reviewText.errors.required">review text is required</div>
             </div>
             <br/>
             <label for="reviewRating">Rating: </label>
-            <ngx-stars (ratingOutput)="onRatingSet($event)" [maxStars]="5"></ngx-stars>
+            <ngx-stars (ratingOutput)="onRatingSet($event)" [initialStars]="" [maxStars]="5"></ngx-stars>
             <!-- <div *ngIf="reviewSubmitted && reviewEr.reviewRating.errors" class="invalid-feedback">
                 <div *ngIf="reviewEr.reviewRating.errors.required">review rating is required</div>
             </div> -->

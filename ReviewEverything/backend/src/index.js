@@ -16,6 +16,7 @@ app.use(cors());
 
 app.use('/user', routes.user);
 app.use('/review', routes.review);
+app.use('/sendMail', routes.mail)
 
 // app.use(session({
 //   genid: (req) => {

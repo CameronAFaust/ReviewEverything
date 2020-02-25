@@ -1,17 +1,18 @@
-
 <div id="nav">
-    <div id="navHome" onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';"><a [routerLink]="['/home']">Review Everything!</a></div>
-    <form id="search" #search = "ngForm" (ngSubmit) = "onSearchSubmit(search.value, search.typeOfSearch)" >
+    <div id="navHome"
+        onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';">
+        <a [routerLink]="['/home']">Review Everything!</a></div>
+    <form id="search" #search="ngForm" (ngSubmit)="onSearchSubmit(search.value, search.typeOfSearch)">
         <select id="typeOfSearch" name="typeOfSearch" value="title" ngModel>
-            <option value="" selected disabled hidden> 
-                Select an Option 
+            <option value="" selected disabled hidden>
+                Select an Option
             </option>
             <option value="title">Movie Name</option>
             <option value="actor">Actor</option>
             <option value="genre">Genre</option>
         </select>
         <input id="searchInput" type="text" name="movieSearch" placeholder="Search for movie" ngModel>
-        <br/>
+        <br />
         <input id="searchButton" type="image" src="../assets/search.png" alt="Submit">
     </form>
     <div id="profileButton" onclick="document.getElementById('profile_modal').style.display='block'">Profile</div>
@@ -19,91 +20,135 @@
 
 <div id="profile_modal" class="modal">
     <div *ngIf="!currentUserId">
-        <div class="profile_modal_button" type="button" onclick="document.getElementById('login_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">Login</div>
-        <div class="profile_modal_button" type="button" onclick="document.getElementById('signup_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">SignUp</div>
+        <div class="profile_modal_button" type="button"
+            onclick="document.getElementById('login_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">
+            Login</div>
+        <div class="profile_modal_button" type="button"
+            onclick="document.getElementById('signup_modal').style.display='block'; document.getElementById('profile_modal').style.display='none'">
+            SignUp</div>
     </div>
     <div *ngIf="currentUserId">
-        <div class="profile_modal_button" onclick="document.getElementById('profile_modal').style.display='none'"><a [routerLink]="['/user',currentUserId]">See Profile</a></div>
-        <div class="profile_modal_button" type="button" (click)="onLogout();" onclick="document.getElementById('profile_modal').style.display='none'">Logout</div>
+        <div class="profile_modal_button" onclick="document.getElementById('profile_modal').style.display='none'"><a
+                [routerLink]="['/user',currentUserId]">See Profile</a></div>
+        <div class="profile_modal_button" type="button" (click)="onLogout();"
+            onclick="document.getElementById('profile_modal').style.display='none'">Logout</div>
     </div>
-    <div class="profile_modal_button" onclick="document.getElementById('profile_modal').style.display='none'">Close</div>
+    <div class="profile_modal_button" onclick="document.getElementById('profile_modal').style.display='none'">Close
+    </div>
 </div>
 
 <div id="login_modal" class="modal">
-    <form [formGroup]="loginForm" (ngSubmit) = "onLogin()" >
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <div id="login_form">
             <label for="email">email: </label>
-            <input formControlName='loginEmail' type="email" class="form_input" [ngClass]="{ 'is-invalid': loginSubmitted && loginEr.loginEmail.errors }" />
+            <input formControlName='loginEmail' type="email" class="form_input"
+                [ngClass]="{ 'is-invalid': loginSubmitted && loginEr.loginEmail.errors }" />
             <div *ngIf="loginSubmitted && loginEr.loginEmail.errors" class="invalid-feedback">
                 <div *ngIf="loginEr.loginEmail.errors.required">Email is required</div>
                 <div *ngIf="loginEr.loginEmail.errors.loginEmail">Email must be a valid email address</div>
             </div>
 
             <label for="password">password: </label>
-            <input formControlName='loginPassword' type="password" class="form_input" [ngClass]="{ 'is-invalid': loginSubmitted && loginEr.loginPassword.errors }"/>
+            <input formControlName='loginPassword' type="password" class="form_input"
+                [ngClass]="{ 'is-invalid': loginSubmitted && loginEr.loginPassword.errors }" />
             <div *ngIf="loginSubmitted && loginEr.loginPassword.errors" class="invalid-feedback">
                 <div *ngIf="loginEr.loginPassword.errors.required">Password is required</div>
                 <div *ngIf="loginEr.loginPassword.errors.minlength">Password must be at least 6 characters</div>
             </div>
 
             <div id="btn_holder">
-                <input class="form_buttons" type="button" onclick="document.getElementById('login_modal').style.display='none'" value = "Cancel"/>
-                <input class="form_buttons" type="button" onclick="document.getElementById('signup_modal').style.display='block'; document.getElementById('login_modal').style.display='none'"  value = "Create an account"/>
-                <input class="form_buttons" type="submit" value = "Login">
+                <input class="form_buttons" type="button"
+                    onclick="document.getElementById('login_modal').style.display='none'" value="Cancel" />
+                <input class="form_buttons" type="button"
+                    onclick="document.getElementById('signup_modal').style.display='block'; document.getElementById('login_modal').style.display='none'; document.getElementById('forgetPasswrodBtn').style.display='none'"
+                    value="Create an account" />
+                <input class="form_buttons" type="button" id='forgotPasswordBtn'
+                    onclick="document.getElementById('forgot_modal').style.display='block'; document.getElementById('login_modal').style.display='none';" value="Forgot Password" />
+                <input class="form_buttons" type="submit" value="Login">
             </div>
         </div>
     </form>
 </div>
 
 <div id="signup_modal" class="modal">
-    <form [formGroup]="signupForm" (ngSubmit) = "onSignup()" >
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
         <div id="login_form">
             <label for="username">Username: </label>
-            <input formControlName='username' type="text" class="form_input" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.username.errors }">
+            <input formControlName='username' type="text" class="form_input"
+                [ngClass]="{ 'is-invalid': signupSubmitted && signEr.username.errors }">
             <div *ngIf="signupSubmitted && signEr.username.errors" class="invalid-feedback">
                 <div *ngIf="signEr.username.errors.required">Username is required</div>
             </div>
-            
+
             <label for="email">Email: </label>
-            <input formControlName='email' type="email" class="form_input" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.email.errors }">
+            <input formControlName='email' type="email" class="form_input"
+                [ngClass]="{ 'is-invalid': signupSubmitted && signEr.email.errors }">
             <div *ngIf="signupSubmitted && signEr.email.errors" class="invalid-feedback">
                 <div *ngIf="signEr.email.errors.required">Email is required</div>
                 <div *ngIf="signEr.email.errors.email">Email must be a valid email address</div>
             </div>
 
             <label for="fname">First Name: </label>
-            <input formControlName='fname' type="text" class="form_input" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.fname.errors }">
+            <input formControlName='fname' type="text" class="form_input"
+                [ngClass]="{ 'is-invalid': signupSubmitted && signEr.fname.errors }">
             <div *ngIf="signupSubmitted && signEr.fname.errors" class="invalid-feedback">
                 <div *ngIf="signEr.fname.errors.required">First Name is required</div>
             </div>
 
             <label for="lname">Last Name: </label>
-            <input formControlName='lname' type="text" class="form_input"  [ngClass]="{ 'is-invalid': signupSubmitted && signEr.lname.errors }">
+            <input formControlName='lname' type="text" class="form_input"
+                [ngClass]="{ 'is-invalid': signupSubmitted && signEr.lname.errors }">
             <div *ngIf="signupSubmitted && signEr.lname.errors" class="invalid-feedback">
                 <div *ngIf="signEr.lname.errors.required">Last Name is required</div>
             </div>
 
             <label for="password">Password: </label>
-            <input formControlName='password' type="password" class="form_input" [ngClass]="{ 'is-invalid': signupSubmitted && signEr.password.errors }">
+            <input formControlName='password' type="password" class="form_input"
+                [ngClass]="{ 'is-invalid': signupSubmitted && signEr.password.errors }">
             <div *ngIf="signupSubmitted && signEr.password.errors" class="invalid-feedback">
                 <div *ngIf="signEr.password.errors.required">Password is required</div>
                 <div *ngIf="signEr.password.errors.minlength">Password must be at least 6 characters</div>
             </div>
-            
+
             <div id="btn_holder">
-                <input class="form_buttons" type="button" onclick="document.getElementById('signup_modal').style.display='none'" value = "Cancel"/>
-                <input class="form_buttons" type="button" onclick="document.getElementById('login_modal').style.display='block'; document.getElementById('signup_modal').style.display='none'"  value = "Already have an account?"/>
-                <input class="form_buttons" type="submit" value = "Signup">
+                <input class="form_buttons" type="button"
+                    onclick="document.getElementById('signup_modal').style.display='none'" value="Cancel" />
+                <input class="form_buttons" type="button"
+                    onclick="document.getElementById('login_modal').style.display='block'; document.getElementById('signup_modal').style.display='none'"
+                    value="Already have an account?" />
+                <input class="form_buttons" type="submit" value="Signup">
             </div>
         </div>
     </form>
 </div>
 
+<div id="forgot_modal" class="modal">
+    <form [formGroup]="forgotForm" (ngSubmit)="onForgotPassword()">
+        <label for="email">Email: </label>
+        <input formControlName='email' type="email" class="form_input"
+            [ngClass]="{ 'is-invalid': forgotSubmitted && forgotEr.email.errors }">
+        <div *ngIf="forgotSubmitted && forgotEr.email.errors" class="invalid-feedback">
+            <div *ngIf="forgotEr.email.errors.required">Email is required</div>
+            <div *ngIf="forgotEr.email.errors.email">Email must be a valid email address</div>
+            <div *ngIf="!exists">Email doesn't exist as an account</div>
+            <div *ngIf="exists">Check your email</div>
+        </div>
+
+        <div id="btn_holder">
+            <input class="form_buttons" type="button"
+                onclick="document.getElementById('forgot_modal').style.display='none'" value="Cancel" />
+            <input class="form_buttons" type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
 <div id="mobile_nav">
-        <a id="mobileNavHome" [routerLink]="['/home']">
-            <img onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';" id="navHomeImg" src="../assets/home.png" alt="home">
-        </a>
-        <img onclick="document.getElementById('profile_modal').style.display='block'" id="mobileProfileButton" src="../assets/navDefaultProfile.png" alt="home">
+    <a id="mobileNavHome" [routerLink]="['/home']">
+        <img onclick="document.getElementById('signup_modal').style.display='none'; document.getElementById('login_modal').style.display='none';"
+            id="navHomeImg" src="../assets/home.png" alt="home">
+    </a>
+    <img onclick="document.getElementById('profile_modal').style.display='block'" id="mobileProfileButton"
+        src="../assets/navDefaultProfile.png" alt="home">
 </div>
 
 <router-outlet></router-outlet>

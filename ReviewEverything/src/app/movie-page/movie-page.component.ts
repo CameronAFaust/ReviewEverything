@@ -53,6 +53,10 @@ export class MoviePageComponent implements OnInit {
       this.http.get('http://localhost:3000/review/movie/' + params.get('id') + '').subscribe((res) => {
         this.reviews = res;
       })
+      //The test to see if sending emails work
+      // this.http.post('http://localhost:3000/sendMail/lockedMail', {  }).subscribe((res) => {
+      //   this.reviews = res;
+      // })
     });
 
   }
@@ -65,7 +69,7 @@ export class MoviePageComponent implements OnInit {
 
   showModal() {
     document.getElementById('edit_modal').style.display='block';
-    document.getElementById('stars').style.display='none';
+    // document.getElementById('stars').style.display='none';
 
   }
 
@@ -73,11 +77,12 @@ export class MoviePageComponent implements OnInit {
     console.log(document);
     // (<HTMLInputElement>document.getElementById("reviewTitle")).value = data.reviewTitle;
     (<HTMLInputElement>document.getElementById("editReviewText")).value = data.reviewText;
-    (<HTMLInputElement>document.getElementById("editReviewRating")).value = data.reviewRating;
+    // (<HTMLInputElement>document.getElementById("editReviewRating")).value = data.reviewRating;
     this.reviewTitle = data.reviewTitle;
     this.reviewText = data.reviewText;
     this.reviewId = data.id;
     this.isEditing = true;
+    this.showModal();
   }
 
   onReviewSubmit() {
