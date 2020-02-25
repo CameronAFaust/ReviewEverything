@@ -18,9 +18,16 @@
 }
 
 #background {
-    padding-top: 15px;
+    /* padding-top: 15px; */
+    width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+#foreground {
+    /* backdrop-filter: blur(3px); */
 }
 
 #movie_card {

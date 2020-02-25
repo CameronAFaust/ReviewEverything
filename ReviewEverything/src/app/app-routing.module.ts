@@ -8,7 +8,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
-  // { path: 'profile', component: UserPageComponent },
+  { path: 'home/:userid', component: HomeComponent },
   { path: 'user/:userid', component: UserPageComponent },
   { path: 'movie/:id', component: MoviePageComponent },
   { path: 'search/:type/:id', component: SearchPageComponent },

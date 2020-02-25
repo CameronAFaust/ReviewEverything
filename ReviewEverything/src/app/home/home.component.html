@@ -1,32 +1,34 @@
 <div id="background" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/original/' + popularMovies[0].backdrop_path + ')'}">
-    <h2 id="what_to_watch">Popular movies this week:</h2>
-    <div id="popularMovies">
-        <div *ngFor="let result of popularMovies">
-            <div id="movie_holder">
-                <a [routerLink]="['/movie', result.id]">
-                    <div id="movie_card">
-                        <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" alt="Movie Poster">
-                        <div id="movie_text">
-                            <p id="movie_title">{{ result.title }}</p>
+    <div id="foreground">
+        <h2 id="what_to_watch">Popular movies this week:</h2>
+        <div id="popularMovies">
+            <div *ngFor="let result of popularMovies">
+                <div id="movie_holder">
+                    <a [routerLink]="['/movie', result.id]">
+                        <div id="movie_card">
+                            <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" alt="Movie Poster">
+                            <div id="movie_text">
+                                <p id="movie_title">{{ result.title }}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <h2 id="what_to_watch">Popular People this week:</h2>
-    <div id="popularMovies">
-        <div *ngFor="let result of popularPeople">
-            <div id="movie_holder">
-                <a [routerLink]="['/search/actors_movies', result.id, result.name]">
-                    <div id="movie_card">
-                        <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.profile_path}}" alt="Movie Poster">
-                        <div id="movie_text">
-                            <p id="movie_title">{{ result.name }}</p>
+        <h2 id="what_to_watch">Popular People this week:</h2>
+        <div id="popularMovies">
+            <div *ngFor="let result of popularPeople">
+                <div id="movie_holder">
+                    <a [routerLink]="['/search/actors_movies', result.id, result.name]">
+                        <div id="movie_card">
+                            <img id="movie_poster" src="https://image.tmdb.org/t/p/original/{{result.profile_path}}" alt="Movie Poster">
+                            <div id="movie_text">
+                                <p id="movie_title">{{ result.name }}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

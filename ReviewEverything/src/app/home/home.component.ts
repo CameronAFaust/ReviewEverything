@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import {Router} from "@angular/router"
+import {Router, ActivatedRoute} from "@angular/router"
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router, private apiService: ApiService, private http: HttpClient, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private apiService: ApiService, private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute) { }
   loginSubmitted = false;
   signupSubmitted = false;
   popularMovies;
@@ -31,6 +31,11 @@ export class HomeComponent implements OnInit {
     this.apiService.getPopularPeople().subscribe((data :any)=>{
       this.popularPeople = data.results;
       this.popularPeople.length = 6;
+    });
+    this.route.paramMap.subscribe(params => {
+      if(params.get('userid')) {
+        document.getElementById('editPass_modal').style.display='block'
+      }
     });
   }
 
