@@ -12,6 +12,9 @@ export class AppComponent {
   currentUserId = localStorage.getItem('userId');  
   loginSubmitted = false;
   signupSubmitted = false;
+  passwordSubmitted;
+  user;
+  checkUser;
   
   constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
   
@@ -25,6 +28,9 @@ export class AppComponent {
     fname: ['', [Validators.required]],
     lname: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]]
+  });
+  passwordForm = this.formBuilder.group({
+    passwordInput: ['', [Validators.required]]
   });
   get loginEr() { return this.loginForm.controls; }
   get signEr() { return this.signupForm.controls; }
@@ -63,6 +69,24 @@ export class AppComponent {
   title = "ReviewEverything";
   onSearchSubmit(formData) {
     this.router.navigate(['/search', formData.typeOfSearch, formData.movieSearch])
+  }
+
+  updatePassword() {
+    this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
+      this.checkUser = res;
+      this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
+        this.user = res;
+        this.passwordSubmitted = true;
+        if (this.passwordForm.invalid) {
+          return;
+        }
+        let data = this.passwordForm.value;
+        let updatedUser = { 'password': data.passwordInput, id: this.checkUser[0].id }
+        this.http.put('http://localhost:3000/user/', updatedUser).subscribe((res: any) => {
+          this.user = res;
+        });
+      });
+    });
   }
 
   // When the user clicks anywhere outside of the modal, close it
