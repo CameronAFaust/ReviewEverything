@@ -51,6 +51,8 @@
   padding: 10px;
   color: #D90416;
   margin: auto;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #search {
@@ -70,6 +72,7 @@
   height: 15px;
   margin: auto;
   margin-left: -30px;
+  margin-right: 10px;
 }
 
 #profileButton {
@@ -80,7 +83,12 @@
   color: rgba(217, 4, 22, .95);
   margin: auto;
   text-align: right;
+}
+
+#profileText{
   cursor: pointer;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Login Modal */
