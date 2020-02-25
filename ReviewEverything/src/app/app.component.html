@@ -38,7 +38,8 @@
 </div>
 
 <div id="login_modal" class="modal">
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <!-- onLogin() -->
+    <form [formGroup]="loginForm" (ngSubmit) = "captchaRef.execute()" >
         <div id="login_form">
             <label for="email">email: </label>
             <input formControlName='loginEmail' type="email" class="form_input"
@@ -55,6 +56,13 @@
                 <div *ngIf="loginEr.loginPassword.errors.required">Password is required</div>
                 <div *ngIf="loginEr.loginPassword.errors.minlength">Password must be at least 6 characters</div>
             </div>
+
+            <re-captcha
+                #captchaRef="reCaptcha"
+                (resolved)="onLogin($event)"
+                siteKey="6LdZFNsUAAAAAEE6xC0Mlmg661lCyN0TmkWIgtBQ"
+                size="invisible"
+            ></re-captcha>
 
             <div id="btn_holder">
                 <input class="form_buttons" type="button"
@@ -150,5 +158,19 @@
     <img onclick="document.getElementById('profile_modal').style.display='block'" id="mobileProfileButton"
         src="../assets/navDefaultProfile.png" alt="home">
 </div>
+
+<!-- <div id="editPass_modal" class="modal">
+    <form [formGroup]="passwordForm" (ngSubmit)="updatepassword()">
+        <label for="passwordInput">Edit password</label>
+        <br>
+        <input formControlName='passwordInput' id='passwordInput' type="password"
+          [ngClass]="{ 'is-invalid': passwordSubmitted && passwordEr.passwordInput.errors }" />
+        <div *ngIf="passwordSubmitted && passwordEr.passwordInput.errors" class="invalid-feedback">
+          <div *ngIf="passwordEr.passwordInput.errors.required">password must be valid</div>
+        </div>
+        <input type="submit" value="submit">
+    </form>
+    <br>
+</div> -->
 
 <router-outlet></router-outlet>

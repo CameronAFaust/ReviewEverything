@@ -12,13 +12,21 @@ export class AppComponent {
   currentUserId = localStorage.getItem('userId');  
   loginSubmitted = false;
   signupSubmitted = false;
+<<<<<<< HEAD
   forgotSubmitted = false;
   exists = false;
   forgotExists = false;
   passwordCount = 0;
   userId;
 
+=======
+  passwordSubmitted;
+  user;
+  checkUser;
+  
+>>>>>>> master
   constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
+  
   loginForm = this.formBuilder.group({
     loginEmail: ['', [Validators.required, Validators.email]],
     loginPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -30,6 +38,7 @@ export class AppComponent {
     lname: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
+<<<<<<< HEAD
   forgotForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]]
   });
@@ -37,8 +46,23 @@ export class AppComponent {
   get loginEr() { return this.loginForm.controls; }
   get signEr() { return this.signupForm.controls; }
   get forgotEr() { return this.forgotForm.controls; }
+=======
+  passwordForm = this.formBuilder.group({
+    passwordInput: ['', [Validators.required]]
+  });
+  get loginEr() { return this.loginForm.controls; }
+  get signEr() { return this.signupForm.controls; }
+  
+  public captchaResponse: string = '';
+  public resolved(captchaResponse: string) {
+    const newResponse = captchaResponse
+      ? `${captchaResponse.substr(0, 7)}...${captchaResponse.substr(-7)}`
+      : captchaResponse;
+    // this.captchaResponse += `${JSON.stringify(newResponse)}\n`;
+  }
+>>>>>>> master
 
-  onLogin() {
+  onLogin(captcha) {
     this.loginSubmitted = true;
     if (this.loginForm.invalid) {
       return;
@@ -113,6 +137,24 @@ export class AppComponent {
   title = "ReviewEverything";
   onSearchSubmit(formData) {
     this.router.navigate(['/search', formData.typeOfSearch, formData.movieSearch])
+  }
+
+  updatePassword() {
+    this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
+      this.checkUser = res;
+      this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId).subscribe((res: any) => {
+        this.user = res;
+        this.passwordSubmitted = true;
+        if (this.passwordForm.invalid) {
+          return;
+        }
+        let data = this.passwordForm.value;
+        let updatedUser = { 'password': data.passwordInput, id: this.checkUser[0].id }
+        this.http.put('http://localhost:3000/user/', updatedUser).subscribe((res: any) => {
+          this.user = res;
+        });
+      });
+    });
   }
 
   // When the user clicks anywhere outside of the modal, close it

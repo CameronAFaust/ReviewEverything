@@ -16,6 +16,8 @@ export class MoviePageComponent implements OnInit {
   reviewForm: FormGroup;
   reviewSubmitted = false;
   movies;
+  movieCredits;
+  recommendations;
   isLoaded = false;
   movieId;
   reviews;
@@ -42,8 +44,19 @@ export class MoviePageComponent implements OnInit {
       this.apiService.getMovieDetailsById(params.get('id')).subscribe((movie) => {
         this.movies = movie;
         this.isLoaded = true
+        if (!this.movies.runtime) {
+          this.movies.runtime = 0;
+        }
         this.movies.budget = this.movies.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         this.movies.revenue = this.movies.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      });
+      this.apiService.getActorsInMovie(params.get('id')).subscribe((movie : any) => {
+        this.movieCredits = movie.cast
+        if (this.movieCredits.length > 10) { this.movieCredits.length = 10; }
+      });
+      this.apiService.getMovieRecommendations(params.get('id')).subscribe((movie : any) => {
+        this.recommendations = movie.results
+        if (this.recommendations.length > 6) { this.recommendations.length = 6; }
       });
       //Check to see if the user is an Admin
       this.http.get('http://localhost:3000/user/getUser/' + this.currentUserId + '').subscribe((res) => {

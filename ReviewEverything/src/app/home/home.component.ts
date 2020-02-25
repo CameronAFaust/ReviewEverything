@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   loginSubmitted = false;
   signupSubmitted = false;
   popularMovies;
+  popularPeople;
 
   ngOnInit() {
     this.apiService.getPopularMovies().subscribe((data :any)=>{
@@ -25,6 +26,11 @@ export class HomeComponent implements OnInit {
         }
       });
       this.popularMovies.length = 6;
+
+    });
+    this.apiService.getPopularPeople().subscribe((data :any)=>{
+      this.popularPeople = data.results;
+      this.popularPeople.length = 6;
     });
   }
 

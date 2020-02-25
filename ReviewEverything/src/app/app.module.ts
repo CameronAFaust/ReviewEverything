@@ -3,6 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { NgModule } from '@angular/core';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 import { RatingModule } from 'ng-starrating';
 import { NgxStarsModule } from 'ngx-stars';
@@ -31,7 +32,8 @@ import { UserPageComponent } from './user-page/user-page.component';
     FormsModule,
     ReactiveFormsModule,
     RatingModule,
-    NgxStarsModule 
+    NgxStarsModule,
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
