@@ -12,19 +12,15 @@ export class AppComponent {
   currentUserId = localStorage.getItem('userId');  
   loginSubmitted = false;
   signupSubmitted = false;
-<<<<<<< HEAD
   forgotSubmitted = false;
   exists = false;
   forgotExists = false;
   passwordCount = 0;
   userId;
-
-=======
   passwordSubmitted;
   user;
   checkUser;
   
->>>>>>> master
   constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
   
   loginForm = this.formBuilder.group({
@@ -38,7 +34,6 @@ export class AppComponent {
     lname: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
-<<<<<<< HEAD
   forgotForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]]
   });
@@ -46,12 +41,10 @@ export class AppComponent {
   get loginEr() { return this.loginForm.controls; }
   get signEr() { return this.signupForm.controls; }
   get forgotEr() { return this.forgotForm.controls; }
-=======
+  
   passwordForm = this.formBuilder.group({
     passwordInput: ['', [Validators.required]]
   });
-  get loginEr() { return this.loginForm.controls; }
-  get signEr() { return this.signupForm.controls; }
   
   public captchaResponse: string = '';
   public resolved(captchaResponse: string) {
@@ -60,7 +53,6 @@ export class AppComponent {
       : captchaResponse;
     // this.captchaResponse += `${JSON.stringify(newResponse)}\n`;
   }
->>>>>>> master
 
   onLogin(captcha) {
     this.loginSubmitted = true;
