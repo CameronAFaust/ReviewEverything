@@ -80,7 +80,7 @@ router.put('/', (req, res) => {
   
   console.log(req.body.reviewID);
 
-  let updateReview = {review_title: req.body.review_title, review_text: req.body.review_text, rating: req.body.rating, username: req.body.username};
+  let updateReview = {review_text: req.body.review_text, rating: req.body.rating, username: req.body.username};
     
   // connection.query("UPDATE reviews_and_ratings SET review_title = '" + req.body.review_title + "', review_text = '" + req.body.review_text + "', rating = '" + req.body.rating + "' WHERE id = '" + req.body.reviewID + "'", function (err, result, fields) {
   connection.query("UPDATE reviews_and_ratings SET ? WHERE id = '" + req.body.reviewID + "'", updateReview, function (err, result, fields) {

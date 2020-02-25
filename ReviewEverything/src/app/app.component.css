@@ -146,6 +146,10 @@
   padding-top: 60px;
 }
 
+#emailNone {
+  display: none;
+}
+
 a {
   text-decoration: none;
   color: rgba(217, 4, 22, .95);

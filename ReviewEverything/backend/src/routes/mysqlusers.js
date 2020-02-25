@@ -55,6 +55,20 @@ router.get('/get/:email/:password', (req, res) => {
 
 });
 
+router.get('/getEmail/:email/', (req, res) => {
+  console.log(req.params.email);
+
+  // This is a way to prevent SQL injection
+  // "SELECT * FROM users WHERE email = '" + req.params.email + "'",
+  connection.query("SELECT * FROM users WHERE email = ?", [req.params.email], function (err, results, fields) {
+    console.log(results);
+    res.send(results);
+
+    if (err) throw err;
+  });
+
+});
+
 router.get('/getUser/:id', (req, res) => {
   console.log(req)
 
@@ -136,6 +150,22 @@ router.put('/passowrd', (req, res) => {
         console.log("Message from MySQL Server : " + result.message);
       });
     });
+
+  });
+});
+
+router.put('/lockUser', (req, res) => {
+
+      let isLocked = {'is_locked': 1};
+
+      connection.query("UPDATE users SET ? WHERE id = '" + req.body.id + "'", isLocked, function (err, result, fields) {
+
+        if (err) throw err;
+
+        console.log(result);
+        console.log("Number of rows affected : " + result.affectedRows);
+        console.log("Number of records affected with warning : " + result.warningCount);
+        console.log("Message from MySQL Server : " + result.message);
 
   });
 });

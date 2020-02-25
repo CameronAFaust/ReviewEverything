@@ -48,3 +48,7 @@ body {
 	background-color: #122A40;
 	color: rgb(255, 255, 255);
 }
+
+.stars-line {
+    z-index: 1;
+}
