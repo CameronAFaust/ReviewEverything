@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { MoviePageComponent } from './movie-page/movie-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { ApiPageComponent } from './api-page/api-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserPageComponent } from './user-page/user-page.component';
     MoviePageComponent,
     // AboutComponent,
     SearchPageComponent,
-    UserPageComponent
+    UserPageComponent,
+    ApiPageComponent
   ],
   imports: [
     BrowserModule,

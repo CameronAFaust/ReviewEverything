@@ -17,7 +17,7 @@ router.post('/lockedMail', (req,res) => {
         from: 'revieweverymovie@gmail.com',
         to: req.body.email,
         subject: 'Locked Account Reset Your Password',
-        text: "Your account has been locked for someone has failed to log in to your account 10 times in a row. Here's the link for changing your password: http://localhost:4200/user/" + req.body.id
+        text: "Your account has been locked for someone has failed to log in to your account 10 times in a row. Here's the link for changing your password: http://localhost:4200/home/" + req.body.id
       };
       
       transporter.sendMail(mailToSend, function(error, info){
@@ -43,7 +43,7 @@ router.post('/passwordMail', (req,res) => {
       from: 'revieweverymovie@gmail.com',
       to: req.body.email,
       subject: 'Resetting Password',
-      text: "Here's the link for resetting your password: http://localhost:4200/user/" + req.body.id
+      text: "Here's the link for resetting your password: http://localhost:4200/home/" + req.body.id
     };
     
     transporter.sendMail(mailToSend, function(error, info){
