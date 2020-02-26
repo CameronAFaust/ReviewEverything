@@ -128,12 +128,7 @@ router.put('/', (req, res) => {
 
 });
 
-router.put('/passowrd', (req, res) => {
-
-  // const subfname = req.body.fname.substring(0, 3).toLowerCase();
-  // const sublname = req.body.lname.substring(0, 1).toLowerCase();
-  // const username = subfname + sublname;
-  // console.log(username);
+router.put('/password', (req, res) => {
 
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(req.body.password, salt, function (err, hash) {
@@ -168,6 +163,22 @@ router.put('/lockUser', (req, res) => {
         console.log("Message from MySQL Server : " + result.message);
 
   });
+});
+
+router.put('/unlockUser', (req, res) => {
+
+  let isLocked = {'is_locked': 0};
+
+  connection.query("UPDATE users SET ? WHERE id = '" + req.body.id + "'", isLocked, function (err, result, fields) {
+
+    if (err) throw err;
+
+    console.log(result);
+    console.log("Number of rows affected : " + result.affectedRows);
+    console.log("Number of records affected with warning : " + result.warningCount);
+    console.log("Message from MySQL Server : " + result.message);
+
+});
 });
 
 // delete user
