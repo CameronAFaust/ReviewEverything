@@ -119,6 +119,11 @@
   cursor: pointer;
 }
 
+#captcha {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 
 .profile_modal_button:hover {
   background-color: rgba(217, 4, 22, .7);

@@ -58,10 +58,11 @@
             </div>
 
             <re-captcha
+                id="captcha"
                 #captchaRef="reCaptcha"
                 (resolved)="onLogin($event)"
                 siteKey="6LdZFNsUAAAAAEE6xC0Mlmg661lCyN0TmkWIgtBQ"
-                size="invisible"
+                theme="dark light"
             ></re-captcha>
 
             <div id="btn_holder">

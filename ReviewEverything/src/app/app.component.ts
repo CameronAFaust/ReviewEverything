@@ -53,7 +53,7 @@ export class AppComponent {
     const newResponse = captchaResponse
       ? `${captchaResponse.substr(0, 7)}...${captchaResponse.substr(-7)}`
       : captchaResponse;
-    // this.captchaResponse += `${JSON.stringify(newResponse)}\n`;
+    this.captchaResponse += `${JSON.stringify(newResponse)}\n`;
   }
 
   onLogin(captcha) {
