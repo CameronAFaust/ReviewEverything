@@ -86,8 +86,17 @@ p {
     margin: 5px;
 }
 
-<<<<<<< HEAD
-=======
+#edit_form {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+    color: #000;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 50%;
+    padding: 16px;
+}
+
 .star.on{
     cursor: default !important;
 }
@@ -146,7 +155,6 @@ a {
     color: white;
 }
 
->>>>>>> master
 /* Login Modal */
 #edit_form{
     display: flex;
