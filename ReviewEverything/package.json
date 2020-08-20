@@ -21,7 +21,7 @@
     "@angular/router": "~8.2.14",
     "angular-star-rating": "^4.0.0-beta.3",
     "bad-words": "^3.0.3",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "blob": "0.0.5",
     "css-star-rating": "^1.2.4",
     "csv-parser": "^2.3.2",
